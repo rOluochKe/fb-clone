@@ -1,0 +1,5 @@
+<h1 class="text-center mb-5">What's on your mind?</h1>
+<%= form_with(model:  @post) do |f| %>
+  <%= f.text_area :content, class: 'form-control', placeholder: 'Whats on your mind?', autofocus: true %>
+  <%= f.submit class: 'btn btn-primary btn-lg custom-btn text-center' %>
+<% end %>

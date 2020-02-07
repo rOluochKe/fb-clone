@@ -1,0 +1,16 @@
+<a href="#">
+  <p>Facebook Clone</p>
+</a>
+<%= link_to 'Home', root_path, class: "navbar-item"%>
+<%= link_to 'Posts', posts_path, class: "navbar-item"%>
+
+<% if user_signed_in? %>
+    <%= link_to 'Sign out', destroy_user_session_path, class: "button-primary", method: :delete %>
+<% else %>
+    <strong>
+      <%= link_to 'Sign up', new_user_registration_path, class: "button-primary" %>
+    </strong>
+    <strong>
+      <%= link_to 'Sign in', new_user_session_path, class: "button-light" %>
+    </strong>
+<% end %>

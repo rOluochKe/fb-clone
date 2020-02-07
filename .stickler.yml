@@ -1,0 +1,9 @@
+linters:
+  rubocop:
+    fixer: true
+  csslint: {  }
+files:
+  ignore:
+    - 'bower_components/*'
+fixers:
+  enable: true

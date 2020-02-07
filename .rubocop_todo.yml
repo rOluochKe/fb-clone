@@ -1,0 +1,73 @@
+# Offense count: 1
+Metrics/AbcSize:
+  Max: 17
+
+# Offense count: 1
+Metrics/CyclomaticComplexity:
+  Max: 8
+
+# Offense count: 2
+# Configuration parameters: CountComments, ExcludedMethods.
+Metrics/MethodLength:
+  Max: 12
+
+# Offense count: 1
+Metrics/PerceivedComplexity:
+  Max: 8
+
+Metrics/BlockLength:
+  Max: 1071
+
+# Offense count: 2
+# Cop supports --auto-correct.
+# Configuration parameters: AutoCorrect, EnforcedStyle.
+# SupportedStyles: nested, compact
+Style/ClassAndModuleChildren:
+  Exclude:
+    - 'test/channels/application_cable/connection_test.rb'
+    - 'test/test_helper.rb'
+    - 'app/controllers/users/unlocks_controller.rb'
+    - 'app/controllers/users/sessions_controller.rb'
+    - 'app/controllers/users/registrations_controller.rb'
+    - 'app/controllers/users/confirmations_controller.rb'
+    - 'app/controllers/users/omniauth_callbacks_controller.rb'
+    - 'app/controllers/users/passwords_controller.rb'
+
+# Offense count: 4
+Style/Documentation:
+  Exclude:
+    - 'spec/**/*'
+    - 'test/**/*'
+    - 'app/helpers/application_helper.rb'
+    - 'app/mailers/application_mailer.rb'
+    - 'app/models/application_record.rb'
+    - 'config/application.rb'
+
+# Offense count: 1
+# Cop supports --auto-correct.
+Style/IfUnlessModifier:
+  Exclude:
+    - 'bin/bundle'
+
+# Offense count: 40
+# Cop supports --auto-correct.
+# Configuration parameters: AutoCorrect, AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
+# URISchemes: http, https
+Layout/LineLength:
+  Max: 198
+
+Style/Documentation:
+  Include:
+    - app/models/**/*
+    - lib/**/*
+
+Documentation:
+  Enabled: false
+
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - 'spec/models/user_spec.rb'
+    - 'spec/models/post_spec.rb'
+
+Lint/UselessAssignment:
+  Enabled: false

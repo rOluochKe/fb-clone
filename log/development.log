@@ -1,0 +1,73 @@
+Started GET "/" for 127.0.0.1 at 2020-02-07 03:08:00 +0300
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+Completed 401 Unauthorized in 29ms (ActiveRecord: 0.0ms | Allocations: 4167)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2020-02-07 03:08:00 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 2.3ms | Allocations: 642)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 19.9ms | Allocations: 4217)
+[Webpacker] Compiling...
+[Webpacker] Compiled all packs in /home/iamraymond/ROR-Projects/fb-clone/public/packs
+[Webpacker] Hash: 53154d7baad00c6a1252
+Version: webpack 4.41.5
+Time: 1920ms
+Built at: 02/07/2020 3:08:04 AM
+                                     Asset       Size       Chunks                         Chunk Names
+    js/application-0b67a3cc2fcde6055024.js    124 KiB  application  [emitted] [immutable]  application
+js/application-0b67a3cc2fcde6055024.js.map    139 KiB  application  [emitted] [dev]        application
+                             manifest.json  364 bytes               [emitted]              
+Entrypoint application = js/application-0b67a3cc2fcde6055024.js js/application-0b67a3cc2fcde6055024.js.map
+[./app/javascript/channels sync recursive _channel\.js$] ./app/javascript/channels sync _channel\.js$ 160 bytes {application} [built]
+[./app/javascript/channels/index.js] 211 bytes {application} [built]
+[./app/javascript/packs/application.js] 749 bytes {application} [built]
+[./node_modules/webpack/buildin/module.js] (webpack)/buildin/module.js 552 bytes {application} [built]
+    + 3 hidden modules
+
+  Rendered home/_show_page.html.erb (Duration: 0.8ms | Allocations: 435)
+Completed 200 OK in 4315ms (Views: 4280.6ms | ActiveRecord: 10.1ms | Allocations: 114599)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2020-02-07 03:08:08 +0300
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 1.1ms | Allocations: 215)
+  Rendered devise/shared/_links.html.erb (Duration: 0.6ms | Allocations: 124)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 10.6ms | Allocations: 2281)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.4ms | Allocations: 186)
+Completed 200 OK in 31ms (Views: 29.6ms | ActiveRecord: 0.0ms | Allocations: 10654)
+
+
+Started GET "/posts" for 127.0.0.1 at 2020-02-07 03:08:09 +0300
+Processing by PostsController#index as HTML
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms | Allocations: 353)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2020-02-07 03:08:09 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.2ms | Allocations: 134)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 2.7ms | Allocations: 1131)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.4ms | Allocations: 186)
+Completed 200 OK in 19ms (Views: 17.5ms | ActiveRecord: 0.0ms | Allocations: 8803)
+
+
+Started GET "/" for 127.0.0.1 at 2020-02-07 03:08:09 +0300
+Processing by HomeController#index as HTML
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms | Allocations: 286)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2020-02-07 03:08:09 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.3ms | Allocations: 134)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 2.3ms | Allocations: 1122)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.4ms | Allocations: 178)
+Completed 200 OK in 24ms (Views: 22.4ms | ActiveRecord: 0.0ms | Allocations: 8788)
+
+

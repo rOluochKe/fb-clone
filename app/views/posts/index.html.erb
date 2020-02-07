@@ -1,0 +1,8 @@
+<%= render "new" %>
+<h1>Feeds</h1>
+<% @posts.each do |post| %> 
+    <%= post.content %>  <br>
+    <strong><%= User.find(post.user_id).name %></strong>  <br /><br />
+<% end %> 
+
+
