@@ -71,3 +71,136 @@ Processing by Devise::SessionsController#new as HTML
 Completed 200 OK in 24ms (Views: 22.4ms | ActiveRecord: 0.0ms | Allocations: 8788)
 
 
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT pg_try_advisory_lock(333164765143615230)[0m
+  [1m[35m (21.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (17.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (5.8ms)[0m  [1m[34mSELECT pg_advisory_unlock(333164765143615230)[0m
+  [1m[35m (2.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT pg_try_advisory_lock(333164765143615230)[0m
+  [1m[35m (2.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT pg_advisory_unlock(333164765143615230)[0m
+  [1m[35m (2.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for ::1 at 2020-02-07 12:35:17 -0600
+  [1m[35m (3.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+Completed 401 Unauthorized in 90ms (ActiveRecord: 0.0ms | Allocations: 4396)
+
+
+Started GET "/users/sign_in" for ::1 at 2020-02-07 12:35:17 -0600
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 39.2ms | Allocations: 646)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 323.8ms | Allocations: 4218)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 10.8ms | Allocations: 433)
+Completed 200 OK in 5007ms (Views: 4856.2ms | ActiveRecord: 17.2ms | Allocations: 128977)
+
+
+Started POST "/users/sign_in" for ::1 at 2020-02-07 12:52:18 -0600
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"RTozSsvIzdFPt53Q5wYLY/AsFDPUXv3nC9QaVrUNFhorPZX3z9L6OgZnE3HbH8UqS0oap5MVQPeOutqQ4SmSSw==", "user"=>{"email"=>"yellow33@email.com", "password"=>"[FILTERED]", "remember_me"=>"1"}, "commit"=>"Log in"}
+  [1m[36mUser Load (68.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "yellow33@email.com"], ["LIMIT", 1]]
+Completed 401 Unauthorized in 258ms (ActiveRecord: 68.9ms | Allocations: 2819)
+
+
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"authenticity_token"=>"RTozSsvIzdFPt53Q5wYLY/AsFDPUXv3nC9QaVrUNFhorPZX3z9L6OgZnE3HbH8UqS0oap5MVQPeOutqQ4SmSSw==", "user"=>{"email"=>"yellow33@email.com", "password"=>"[FILTERED]", "remember_me"=>"1"}, "commit"=>"Log in"}
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 1.0ms | Allocations: 134)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 18.2ms | Allocations: 1133)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 1.1ms | Allocations: 142)
+Completed 200 OK in 848ms (Views: 293.8ms | ActiveRecord: 0.0ms | Allocations: 10119)
+
+
+Started GET "/users/sign_up" for ::1 at 2020-02-07 12:52:24 -0600
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 1.8ms | Allocations: 215)
+  Rendered devise/shared/_links.html.erb (Duration: 1.4ms | Allocations: 124)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 32.5ms | Allocations: 2284)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 1.6ms | Allocations: 186)
+Completed 200 OK in 111ms (Views: 106.8ms | ActiveRecord: 0.0ms | Allocations: 11056)
+
+
+Started POST "/users" for ::1 at 2020-02-07 12:52:44 -0600
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"authenticity_token"=>"ruFpyR2n4P/cCnhvHRfVT8Wss68n4SgODISeuVWpdIgS4KO4QO0LetdBsTeolgZT2ilEVk1XiDYCV4oIzOFJGg==", "user"=>{"name"=>"Yellow", "email"=>"yellow33@email.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[35m (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "yellow33@email.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (14.9ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "yellow33@email.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (56.7ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "name") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["email", "yellow33@email.com"], ["encrypted_password", "$2a$11$DC0T.qA0E9Ri9ChLcU0sWeZeiSn3p3CpO6ShPuSbc2YsqBxSmHHY2"], ["created_at", "2020-02-07 18:52:44.920209"], ["updated_at", "2020-02-07 18:52:44.920209"], ["name", "Yellow"]]
+  [1m[35m (22.9ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 493ms (ActiveRecord: 136.2ms | Allocations: 11147)
+
+
+Started GET "/" for ::1 at 2020-02-07 12:52:45 -0600
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered posts/_new.html.erb (Duration: 38.7ms | Allocations: 865)
+  [1m[36mPost Load (29.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/_post.html.erb:3
+  Rendered posts/_post.html.erb (Duration: 96.9ms | Allocations: 1979)
+  Rendered home/index.html.erb within layouts/application (Duration: 111.9ms | Allocations: 2333)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.9ms | Allocations: 114)
+Completed 200 OK in 322ms (Views: 125.8ms | ActiveRecord: 46.2ms | Allocations: 16628)
+
+
+Started DELETE "/users/sign_out" for ::1 at 2020-02-07 12:52:58 -0600
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"jzV5r58mT+u8UVx8QzSzRYl4aGjX/39HILrj8IpVa37hMt8Smzx4APWB0t1/LX0MMh5m/JC0wlel1CM23nHvLw=="}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 302 Found in 159ms (ActiveRecord: 0.9ms | Allocations: 5453)
+
+
+Started GET "/" for ::1 at 2020-02-07 12:52:58 -0600
+Processing by HomeController#index as HTML
+Completed 401 Unauthorized in 2ms (ActiveRecord: 0.0ms | Allocations: 504)
+
+
+Started GET "/users/sign_in" for ::1 at 2020-02-07 12:52:58 -0600
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 1.6ms | Allocations: 134)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 10.1ms | Allocations: 1135)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 2.6ms | Allocations: 186)
+Completed 200 OK in 57ms (Views: 53.4ms | ActiveRecord: 0.0ms | Allocations: 9240)
+
+
+Started GET "/posts" for ::1 at 2020-02-07 12:53:01 -0600
+Processing by PostsController#index as HTML
+Completed 401 Unauthorized in 2ms (ActiveRecord: 0.0ms | Allocations: 567)
+
+
+Started GET "/users/sign_in" for ::1 at 2020-02-07 12:53:01 -0600
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.6ms | Allocations: 134)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 5.1ms | Allocations: 1121)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.9ms | Allocations: 178)
+Completed 200 OK in 34ms (Views: 31.1ms | ActiveRecord: 0.0ms | Allocations: 9215)
+
+
+Started GET "/posts" for ::1 at 2020-02-07 12:53:03 -0600
+Processing by PostsController#index as HTML
+Completed 401 Unauthorized in 3ms (ActiveRecord: 0.0ms | Allocations: 501)
+
+
+Started GET "/users/sign_in" for ::1 at 2020-02-07 12:53:03 -0600
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.6ms | Allocations: 134)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 5.8ms | Allocations: 1121)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.9ms | Allocations: 178)
+Completed 200 OK in 36ms (Views: 32.9ms | ActiveRecord: 0.0ms | Allocations: 9214)
+
+
