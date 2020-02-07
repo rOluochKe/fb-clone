@@ -1,5 +1,6 @@
 class LikesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :require_login
+  
   def create
     @post = Post.find(params[:id])
     if @post.present?
