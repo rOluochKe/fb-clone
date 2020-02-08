@@ -18,9 +18,9 @@
     </a>
     <a>
       <span class="icon">
-        <% pre_like = p.likes.find { |like| like.user_id == current_user.id} %>
-        <% if pre_like %>
-          <%= link_to fa_icon("thumbs-down"), post_like_path(p.id, pre_like), method: :delete %>
+        <% post_like = p.likes.find { |like| like.user_id == current_user.id} %>
+        <% if post_like %>
+          <%= link_to fa_icon("thumbs-down"), post_like_path(p.id, post_like), method: :delete %>
         <% else %>
           <%= link_to fa_icon("thumbs-up"), post_likes_path(post_id: p.id), method: :post %>
         <% end %>              
