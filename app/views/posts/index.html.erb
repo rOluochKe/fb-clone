@@ -4,7 +4,7 @@
 <article>
   <figure>
     <p>
-      <%= link_to gravatar_for(current_user, size: 50)%>
+      <%= link_to gravatar_for(current_user, size: 60)%>
     </p>
   </figure>
   <p>
@@ -12,7 +12,6 @@
     <br>
     <%= p.content %>
   </p>
-  <nav>
     <a>
       <span class="icon"><%=fa_icon "reply-all"%></span>
     </a>
@@ -32,7 +31,7 @@
     <% else %>
       <%= link_to fa_icon(" ") %>
     <% end %>
-  </nav>
+
 
   <% @comments.each do |c| %>
     <% if p.id == c.post_id %>      
@@ -49,10 +48,10 @@
         </p>    
         <nav>
             <a>
-              <span class="icon is-small"><%=fa_icon "reply-all"%></span>
+              <span class="icon"><%=fa_icon "reply-all"%></span>
             </a>
             <a>
-              <span class="icon is-small"><%=fa_icon "thumbs-down"%></span>
+              <span class="icon"><%=fa_icon "thumbs-down"%></span>
             </a>    
         </nav>
           <% if c.user.id == current_user.id %>
@@ -67,8 +66,8 @@
     <%= c.hidden_field :user_id, value:current_user.id%>
     <%= c.hidden_field :post_id, value:p.id%>
     <%= c.label :replay, " Comment...", class: "label" %>
-    <%= c.text_area :replay, class: "textarea", rows: "2", placeholder: 'Add a comment...' %>
-    <%= c.submit "Save", class: "button is-dark is-fullwidth" %>
+    <%= c.text_area :replay, class: "textarea", rows: "3", placeholder: 'Add a comment...' %>
+    <%= c.submit "Save", class: "button-primary" %>
 
   <% end %>
 </article>

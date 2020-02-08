@@ -1017,3 +1017,262 @@ ActionView::Template::Error (undefined method `each' for nil:NilClass):
   
 app/views/posts/index.html.erb:37
 app/views/posts/index.html.erb:3
+Started GET "/posts" for ::1 at 2020-02-07 19:48:06 -0600
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (3.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering posts/index.html.erb within layouts/application
+  Rendered posts/_new.html.erb (Duration: 22.5ms | Allocations: 1080)
+  [1m[36mPost Load (2.7ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.erb:3
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:11
+  [1m[36mLike Load (4.6ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/index.html.erb:20
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/index.html.erb:27
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/index.html.erb:27
+  Rendered posts/index.html.erb within layouts/application (Duration: 88.2ms | Allocations: 7032)
+Completed 500 Internal Server Error in 160ms (ActiveRecord: 14.8ms | Allocations: 10048)
+
+
+  
+ActionView::Template::Error (undefined method `each' for nil:NilClass):
+    33:     <% end %>
+    34: 
+    35: 
+    36:   <% @comments.each do |c| %>
+    37:     <% if p.id == c.post_id %>      
+    38:       <article>
+    39:         <figure>
+  
+app/views/posts/index.html.erb:36
+app/views/posts/index.html.erb:3
+Started GET "/posts" for ::1 at 2020-02-07 19:49:59 -0600
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering posts/index.html.erb within layouts/application
+  Rendered posts/index.html.erb within layouts/application (Duration: 6.2ms | Allocations: 1716)
+Completed 500 Internal Server Error in 38ms (ActiveRecord: 1.7ms | Allocations: 4649)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check <%= render "new" %>
+<h1>Timeline</h1>
+<% @posts.each do |p| %>
+<article>
+  <figure>
+    <p>
+      <%= link_to gravatar_for(current_user, size: 60)%>
+    </p>
+  </figure>
+  <p>
+    <strong><%= p.user.name %></strong>
+    <br>
+    <%= p.content %>
+  </p>
+    <a>
+      <span class="icon"><%=fa_icon "reply-all"%></span>
+    </a>
+    <a>
+      <span class="icon">
+        <% post_like = p.likes.find { |like| like.user_id == current_user.id} %>
+        <% if post_like %>
+          <%= link_to fa_icon("thumbs-down"), post_like_path(p.id, post_like), method: :delete %>
+        <% else %>
+          <%= link_to fa_icon("thumbs-up"), post_likes_path(post_id: p.id), method: :post %>
+        <% end %>              
+      </span>
+      <p><%= p.likes.count %> <%= (p.likes.count) == 1 ? 'Like' : 'Likes'%></p>
+    </a>
+    <% if p.user.id == current_user.id %>
+      <%= link_to fa_icon("trash"), p, method: :delete %>
+    <% else %>
+      <%= link_to fa_icon(" ") %>
+    <% end %>
+
+
+  <% @comments.each do |c| %>
+    <% if p.id == c.post_id %>      
+      <article>
+        <figure>
+          <p>
+            <%= link_to gravatar_for(current_user, size: 50)%>
+          </p>
+        </figure>
+        <p>
+          <strong><%= c.user.name %></strong>
+          <br>
+          <%= c.replay %>
+        </p>    
+        <nav>
+            <a>
+              <span class="icon is-small"><%=fa_icon "reply-all"%></span>
+            </a>
+            <a>
+              <span class="icon is-small"><%=fa_icon "thumbs-down"%></span>
+            </a>    
+        </nav>
+          <% if c.user.id == current_user.id %>
+            <%= link_to fa_icon("trash"), c, method: :delete %>
+          <% else %>
+            <%= link_to fa_icon(" ") %>
+          <% end %>
+      </article>
+    <%end%>
+  <%= form_with(model: @comment, local: true) do |c| %>
+    <%= c.hidden_field :user_id, value:current_user.id%>
+    <%= c.hidden_field :post_id, value:p.id%>
+    <%= c.label :replay, " Comment...", class: "label" %>
+    <%= c.text_area :replay, class: "textarea", rows: "2", placeholder: 'Add a comment...' %>
+    <%= c.submit "Save", class: "button is-dark is-fullwidth" %>
+
+  <% end %>
+</article>
+<%end%>
+
+
+
+):
+1:    <%= render "new" %>
+2:    <h1>Timeline</h1>
+3:    <% @posts.each do |p| %>
+4:    <article>
+5:      <figure>
+6:        <p>
+7:          <%= link_to gravatar_for(current_user, size: 60)%>
+8:        </p>
+9:      </figure>
+10:      <p>
+11:        <strong><%= p.user.name %></strong>
+12:        <br>
+13:        <%= p.content %>
+14:      </p>
+15:        <a>
+16:          <span class="icon"><%=fa_icon "reply-all"%></span>
+17:        </a>
+18:        <a>
+19:          <span class="icon">
+20:            <% post_like = p.likes.find { |like| like.user_id == current_user.id} %>
+21:            <% if post_like %>
+22:              <%= link_to fa_icon("thumbs-down"), post_like_path(p.id, post_like), method: :delete %>
+23:            <% else %>
+24:              <%= link_to fa_icon("thumbs-up"), post_likes_path(post_id: p.id), method: :post %>
+25:            <% end %>              
+26:          </span>
+27:          <p><%= p.likes.count %> <%= (p.likes.count) == 1 ? 'Like' : 'Likes'%></p>
+28:        </a>
+29:        <% if p.user.id == current_user.id %>
+30:          <%= link_to fa_icon("trash"), p, method: :delete %>
+31:        <% else %>
+32:          <%= link_to fa_icon(" ") %>
+33:        <% end %>
+34:    
+35:    
+36:      <% @comments.each do |c| %>
+37:        <% if p.id == c.post_id %>      
+38:          <article>
+39:            <figure>
+40:              <p>
+41:                <%= link_to gravatar_for(current_user, size: 50)%>
+42:              </p>
+43:            </figure>
+44:            <p>
+45:              <strong><%= c.user.name %></strong>
+46:              <br>
+47:              <%= c.replay %>
+48:            </p>    
+49:            <nav>
+50:                <a>
+51:                  <span class="icon is-small"><%=fa_icon "reply-all"%></span>
+52:                </a>
+53:                <a>
+54:                  <span class="icon is-small"><%=fa_icon "thumbs-down"%></span>
+55:                </a>    
+56:            </nav>
+57:              <% if c.user.id == current_user.id %>
+58:                <%= link_to fa_icon("trash"), c, method: :delete %>
+59:              <% else %>
+60:                <%= link_to fa_icon(" ") %>
+61:              <% end %>
+62:          </article>
+63:        <%end%>
+64:      <%= form_with(model: @comment, local: true) do |c| %>
+65:        <%= c.hidden_field :user_id, value:current_user.id%>
+66:        <%= c.hidden_field :post_id, value:p.id%>
+67:        <%= c.label :replay, " Comment...", class: "label" %>
+68:        <%= c.text_area :replay, class: "textarea", rows: "2", placeholder: 'Add a comment...' %>
+69:        <%= c.submit "Save", class: "button is-dark is-fullwidth" %>
+70:    
+71:      <% end %>
+72:    </article>
+73:    <%end%>
+  
+app/views/posts/index.html.erb:78: syntax error, unexpected end-of-input, expecting end
+app/views/posts/index.html.erb:78: syntax error, unexpected end-of-input, expecting end
+app/views/posts/index.html.erb:78: syntax error, unexpected end-of-input, expecting end
+app/views/posts/index.html.erb:78: syntax error, unexpected end-of-input, expecting end
+app/views/posts/index.html.erb:78: syntax error, unexpected end-of-input, expecting end
+app/views/posts/index.html.erb:78: syntax error, unexpected end-of-input, expecting end
+Started GET "/posts" for ::1 at 2020-02-07 19:50:29 -0600
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (3.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering posts/index.html.erb within layouts/application
+  Rendered posts/_new.html.erb (Duration: 8.9ms | Allocations: 1081)
+  [1m[36mPost Load (1.7ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.erb:3
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:11
+  [1m[36mLike Load (2.1ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/index.html.erb:20
+  [1m[35m (6.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/index.html.erb:27
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/index.html.erb:27
+  Rendered posts/index.html.erb within layouts/application (Duration: 60.1ms | Allocations: 7015)
+Completed 500 Internal Server Error in 90ms (ActiveRecord: 15.0ms | Allocations: 9947)
+
+
+  
+ActionView::Template::Error (undefined method `each' for nil:NilClass):
+    33:     <% end %>
+    34: 
+    35: 
+    36:   <% @comments.each do |c| %>
+    37:     <% if p.id == c.post_id %>      
+    38:       <article>
+    39:         <figure>
+  
+app/views/posts/index.html.erb:36
+app/views/posts/index.html.erb:3
+Started GET "/posts" for ::1 at 2020-02-07 19:53:01 -0600
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (3.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering posts/index.html.erb within layouts/application
+  Rendered posts/_new.html.erb (Duration: 3.9ms | Allocations: 1082)
+  [1m[36mPost Load (12.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.erb:3
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:11
+  [1m[36mLike Load (1.2ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/index.html.erb:20
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/index.html.erb:27
+  [1m[35mCACHE  (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/index.html.erb:27
+  Rendered posts/index.html.erb within layouts/application (Duration: 89.5ms | Allocations: 7017)
+Completed 500 Internal Server Error in 126ms (ActiveRecord: 18.9ms | Allocations: 9949)
+
+
+  
+ActionView::Template::Error (undefined method `each' for nil:NilClass):
+    33:     <% end %>
+    34: 
+    35: 
+    36:   <% @comments.each do |c| %>
+    37:     <% if p.id == c.post_id %>      
+    38:       <article>
+    39:         <figure>
+  
+app/views/posts/index.html.erb:36
+app/views/posts/index.html.erb:3
