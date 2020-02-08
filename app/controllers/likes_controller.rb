@@ -1,33 +1,38 @@
 class LikesController < ApplicationController
-  before_action :require_login
-  
+  before_action :get_post
+  before_action :likes, only: [:destroy]
+
   def create
-    @post = Post.find(params[:id])
-    if @post.present?
-      @like = Like.new(user_id: current_user.id, post_id: @post.id)
-      if @like.save
-        redirect_to post_redirect(@post), :notice => 'Liked!'
-      else
-        redirect_to post_redirect(@post), :alert => 'An error prevented you from liking this post!'
-      end
+    if liked?
+      flash[:notice] = "You can only like a post once"
     else
-      redirect_to post_redirect(@post), :alert => 'Invalid post!'
+      @post.likes.create(user_id: current_user.id)
     end
+    redirect_to posts_path
   end
 
-
   def destroy
-    @post = Post.find(params[:id])
-    if @post.present?
-      @like = Like.where(user_id: current_user.id, post_id: @post.id).first
-      if @like.destroy
-        redirect_to post_redirect(@post), :notice => 'Unliked!'
-      else
-        redirect_to post_redirect(@post), :alert => 'An error prevented you from unliking this post!'
-      end
+    if !liked?
+      flash[:notice] = 'Cannot unlike'
     else
-      redirect_to p, :alert => 'Invalid post!'
+      @like.destroy
     end
+    redirect_to posts_path
+  end
+
+  private
+
+  def get_post
+    @post = Post.find(params[:post_id])
+  end
+
+  def likes
+    @like = @post.likes.find(params[:id])
+  end
+
+  def liked?
+    Like.where(user_id: current_user.id, post_id:
+    params[:post_id]).exists?
   end
   
 end

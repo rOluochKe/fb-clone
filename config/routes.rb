@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  devise_for :users
-  resources :posts
-  resources :users, only: %i[index show]
-
-  root to: 'home#index'
-  get 'home/index'
+  devise_for :users, controllers: { registrations: 'users/registrations' }
+  root to: "home#index"
+  resources :posts, only: %i[create destroy index show] do
+    resources :likes, only: %i[create destroy]
+  end
+  resources :comments, only: [:create, :destroy, :update, :edit]
 end

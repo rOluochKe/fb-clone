@@ -1,8 +1,77 @@
 <%= render "new" %>
-<h1>Feeds</h1>
-<% @posts.each do |post| %> 
-    <%= post.content %>  <br>
-    <strong><%= User.find(post.user_id).name %></strong>  <br /><br />
-<% end %> 
+<h1>Timeline</h1>
+<% @posts.each do |p| %>
+<article>
+  <figure>
+    <p>
+      <%= link_to gravatar_for(current_user, size: 50)%>
+    </p>
+  </figure>
+  <p>
+    <strong><%= p.user.name %></strong>
+    <br>
+    <%= p.content %>
+  </p>
+  <nav>
+    <a>
+      <span class="icon"><%=fa_icon "reply-all"%></span>
+    </a>
+    <a>
+      <span class="icon">
+        <% pre_like = p.likes.find { |like| like.user_id == current_user.id} %>
+        <% if pre_like %>
+          <%= link_to fa_icon("thumbs-down"), post_like_path(p.id, pre_like), method: :delete %>
+        <% else %>
+          <%= link_to fa_icon("thumbs-up"), post_likes_path(post_id: p.id), method: :post %>
+        <% end %>              
+      </span>
+      <p><%= p.likes.count %> <%= (p.likes.count) == 1 ? 'Like' : 'Likes'%></p>
+    </a>
+    <% if p.user.id == current_user.id %>
+      <%= link_to fa_icon("trash"), p, method: :delete %>
+    <% else %>
+      <%= link_to fa_icon(" ") %>
+    <% end %>
+  </nav>
+
+  <% @comments.each do |c| %>
+    <% if p.id == c.post_id %>      
+      <article>
+        <figure>
+          <p>
+            <%= link_to gravatar_for(current_user, size: 50)%>
+          </p>
+        </figure>
+        <p>
+          <strong><%= c.user.name %></strong>
+          <br>
+          <%= c.replay %>
+        </p>    
+        <nav>
+            <a>
+              <span class="icon is-small"><%=fa_icon "reply-all"%></span>
+            </a>
+            <a>
+              <span class="icon is-small"><%=fa_icon "thumbs-down"%></span>
+            </a>    
+        </nav>
+          <% if c.user.id == current_user.id %>
+            <%= link_to fa_icon("trash"), c, method: :delete %>
+          <% else %>
+            <%= link_to fa_icon(" ") %>
+          <% end %>
+      </article>
+    <%end%>
+  <%end%>
+  <%= form_with(model: @comment, local: true) do |c| %>
+    <%= c.hidden_field :user_id, value:current_user.id%>
+    <%= c.hidden_field :post_id, value:p.id%>
+    <%= c.label :replay, " Comment...", class: "label" %>
+    <%= c.text_area :replay, class: "textarea", rows: "2", placeholder: 'Add a comment...' %>
+    <%= c.submit "Save", class: "button is-dark is-fullwidth" %>
+
+  <% end %>
+</article>
+<%end%>
 
 

@@ -13,6 +13,7 @@ gem 'omniauth-facebook'
 gem 'omniauth-github'
 gem 'pg'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
+gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.2'
 # Use sqlite3 as the database for Active Record
 
 # Use Puma as the app server
