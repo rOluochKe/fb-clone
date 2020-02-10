@@ -1,38 +1,46 @@
+# frozen_string_literal: true
+
 class LikesController < ApplicationController
-  before_action :get_post
-  before_action :likes, only: [:destroy]
+  before_action :find_like, only: [:destroy]
 
   def create
-    if liked?
-      flash[:notice] = "You can only like a post once"
+    if already_liked?
+      destroy
     else
-      @post.likes.create(user_id: current_user.id)
+      if params.include? 'comment_id'
+        @comment = Comment.find(params[:comment_id])
+        @like = @comment.likes.create(user_id: current_user.id)
+      elsif params.include? 'post_id'
+        @post = Post.find(params[:post_id])
+        @like = @post.likes.create(user_id: current_user.id)
+      end
+      redirect_to request.referrer
     end
-    redirect_to posts_path
-  end
-
-  def destroy
-    if !liked?
-      flash[:notice] = 'Cannot unlike'
-    else
-      @like.destroy
-    end
-    redirect_to posts_path
   end
 
   private
 
-  def get_post
-    @post = Post.find(params[:post_id])
+  def already_liked?
+    if params.include? 'post_id'
+      Like.where(user_id: current_user.id, likable_id: params[:post_id]).exists?
+    elsif params.include? 'comment_id'
+      Like.where(user_id: current_user.id, likable_id: params[:comment_id]).exists?
+    end
   end
 
-  def likes
-    @like = @post.likes.find(params[:id])
+  def destroy
+    @like = find_like
+    @like&.destroy
+    redirect_to request.referrer
   end
 
-  def liked?
-    Like.where(user_id: current_user.id, post_id:
-    params[:post_id]).exists?
+  def find_like
+    if params.include? 'post_id'
+      @post = Post.find(params[:post_id])
+      @like = @post.likes.find_by(user_id: current_user.id)
+    elsif params.include? 'comment_id'
+      @comment = Comment.find(params[:comment_id])
+      @like = @comment.likes.find_by(user_id: current_user.id)
+    end
   end
-  
 end

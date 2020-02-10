@@ -1,6 +1,6 @@
-class Like < ApplicationRecord
-  belongs_to :user
-  belongs_to :post
+# frozen_string_literal: true
 
-  validates :user_id, uniqueness: { scope: :post_id }
+class Like < ApplicationRecord
+  belongs_to :likable, polymorphic: true
+  belongs_to :user
 end

@@ -1,31 +1,37 @@
+# frozen_string_literal: true
+
 class CommentsController < ApplicationController
-  before_action :set_post, only: %i[edit update destroy]
-  before_action :authenticate_user!
+  def new
+    @comment = Comment.new
+  end
 
   def create
-    @post = Post.find(params[:comment][:post_id])
-    @comments = @post.comments
+    @post = Post.find_by(id: comment_params[:post_id])
     @comment = @post.comments.build(comment_params)
-    if @comment.save
-      redirect_back(fallback_location: posts_path)
-    else
-      flash[:alert] = 'Check the comment form'
-      redirect_to root_path
-    end
+    @comment.user = current_user
+    @comment.save
+    redirect_to request.referrer
+  end
+
+  def edit
+    @comment = Comment.find_by(id: params[:id])
+  end
+
+  def update
+    @comment = Comment.find_by(id: params[:id])
+    @comment.update(comment_params)
+    redirect_to posts_path
   end
 
   def destroy
-    @comment.destroy
-    redirect_to posts_path
+    @comment = Comment.find_by(id: params[:id])
+    @comment.delete
+    redirect_to request.referrer
   end
 
   private
 
   def comment_params
-    params.require(:comment).permit(:user_id, :post_id, :replay)
-  end
-
-  def set_post
-    @comment = Comment.find(params[:id])
+    params.require(:comment).permit(:content, :post_id)
   end
 end

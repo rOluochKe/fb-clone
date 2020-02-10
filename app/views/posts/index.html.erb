@@ -1,76 +1,44 @@
-<%= render "new" %>
-<h1>Timeline</h1>
-<% @posts.each do |p| %>
-<article>
-  <figure>
-    <p>
-      <%= link_to gravatar_for(current_user, size: 60)%>
-    </p>
-  </figure>
-  <p>
-    <strong><%= p.user.name %></strong>
-    <br>
-    <%= p.content %>
-  </p>
-    <a>
-      <span class="icon"><%=fa_icon "reply-all"%></span>
-    </a>
-    <a>
-      <span class="icon">
-        <% post_like = p.likes.find { |like| like.user_id == current_user.id} %>
-        <% if post_like %>
-          <%= link_to fa_icon("thumbs-down"), post_like_path(p.id, post_like), method: :delete %>
-        <% else %>
-          <%= link_to fa_icon("thumbs-up"), post_likes_path(post_id: p.id), method: :post %>
-        <% end %>              
-      </span>
-      <p><%= p.likes.count %> <%= (p.likes.count) == 1 ? 'Like' : 'Likes'%></p>
-    </a>
-    <% if p.user.id == current_user.id %>
-      <%= link_to fa_icon("trash"), p, method: :delete %>
-    <% else %>
-      <%= link_to fa_icon(" ") %>
-    <% end %>
+<h3>Post Feeds</h3>
 
-
-  <% @comments.each do |c| %>
-    <% if p.id == c.post_id %>      
-      <article>
-        <figure>
-          <p>
-            <%= link_to gravatar_for(current_user, size: 50)%>
-          </p>
-        </figure>
-        <p>
-          <strong><%= c.user.name %></strong>
-          <br>
-          <%= c.replay %>
-        </p>    
-        <nav>
-            <a>
-              <span class="icon"><%=fa_icon "reply-all"%></span>
-            </a>
-            <a>
-              <span class="icon"><%=fa_icon "thumbs-down"%></span>
-            </a>    
-        </nav>
-          <% if c.user.id == current_user.id %>
-            <%= link_to fa_icon("trash"), c, method: :delete %>
-          <% else %>
-            <%= link_to fa_icon(" ") %>
+<%= form_for(@post) do |f| %>
+  <%= f.label :content, 'Create a post' %><br/>
+  <%= f.text_area :content %>
+  <%= f.submit 'Post' %>
+<% end %>
+<% if @posts.empty? %>
+  <h4>You don't have any posts yet!</h4>
+<% else  %>
+  <div>
+    <% @posts.each do |post| %>
+      <small><%= link_to "#{post.user.name}", post_path(post.user) %></small><br>
+      <%= post.content %><br>
+      <%= link_to 'Like', post_likes_path(post), method: :post %> 
+      <%= post.likes.count %> <%= (post.likes.count) > 1 ? 'Like' : 'Likes'%>
+      <% if current_user == post.user %>
+        <small><%= link_to 'Edit', edit_post_path(post) %></small>
+        <small><%= link_to 'Delete', post_path(post), method: :delete %></small><br><br>
+      <% end %><br><br>
+      
+      <div id='comment_div'>
+        <% post.comments.each do |comment| %>
+          <small><%= link_to "#{comment.user.name}", post_path(comment.user) %>:</small>
+          <small><%= comment.content %></small><br>
+          <%= link_to 'Like', comment_likes_path(comment), method: :post %>
+          <small><%= comment.likes.count %> <%= (comment.likes.count) == 1 ? 'Like' : 'Likes'%></small>
+          <% if current_user == comment.user %>
+            <small><%= link_to 'Edit', edit_comment_path(comment) %></small>
+            <small><%= link_to 'Delete', comment_path(comment), method: :delete %></small><br><br>
           <% end %>
-      </article>
-    <%end%>
-  <%end%>
-  <%= form_with(model: @comment, local: true) do |c| %>
-    <%= c.hidden_field :user_id, value:current_user.id%>
-    <%= c.hidden_field :post_id, value:p.id%>
-    <%= c.label :replay, " Comment...", class: "label" %>
-    <%= c.text_area :replay, class: "textarea", rows: "3", placeholder: 'Add a comment...' %>
-    <%= c.submit "Save", class: "button-primary" %>
+        <% end  %>
+      </div><br>
 
-  <% end %>
-</article>
-<%end%>
+      <%= form_for(@comment) do |f| %>
+        <%= f.hidden_field :post_id, value: post.id  %>
+        <%= f.text_field :content %>
+        <%= f.submit 'Comment' %>
+      <% end  %><br>
+      
+    <% end %>
+  </div>
 
-
+<% end %>
