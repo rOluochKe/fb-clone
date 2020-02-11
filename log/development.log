@@ -9131,3 +9131,300 @@ Processing by PostsController#index as HTML
 Completed 200 OK in 148ms (Views: 117.6ms | ActiveRecord: 19.3ms | Allocations: 23453)
 
 
+Started GET "/posts?method=post" for ::1 at 2020-02-11 16:53:20 -0600
+Processing by PostsController#index as HTML
+  Parameters: {"method"=>"post"}
+  [1m[36mUser Load (3.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Exists? (1.6ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:8
+  [1m[36mPost Load (1.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY "posts"."created_at" DESC[0m
+  ↳ app/views/posts/index.html.erb:12
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:13
+  [1m[35m (2.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 4], ["likable_type", "Post"]]
+  ↳ app/views/posts/index.html.erb:17
+  [1m[36mComment Load (1.1ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 4]]
+  ↳ app/views/posts/index.html.erb:22
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:13
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 3], ["likable_type", "Post"]]
+  ↳ app/views/posts/index.html.erb:17
+  [1m[36mComment Load (1.1ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 3]]
+  ↳ app/views/posts/index.html.erb:22
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:13
+  [1m[35m (2.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 2], ["likable_type", "Post"]]
+  ↳ app/views/posts/index.html.erb:17
+  [1m[36mComment Load (0.7ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 2]]
+  ↳ app/views/posts/index.html.erb:22
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:23
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:13
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 1], ["likable_type", "Post"]]
+  ↳ app/views/posts/index.html.erb:17
+  [1m[36mComment Load (1.1ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/index.html.erb:22
+  Rendered posts/index.html.erb within layouts/application (Duration: 107.9ms | Allocations: 12894)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 2.3ms | Allocations: 346)
+Completed 200 OK in 198ms (Views: 169.1ms | ActiveRecord: 18.6ms | Allocations: 24247)
+
+
+Started POST "/comments/1/likes" for ::1 at 2020-02-11 16:53:23 -0600
+Processing by LikesController#create as HTML
+  Parameters: {"authenticity_token"=>"/3PRR+wUZqtJCVaHcXzqbVR/cK6/VRAODmaCxHONkhDFHAymrlsVm6BUqpLvrAag9swjkQFp8gdAKHeZ0N93bw==", "comment_id"=>"1"}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/likes_controller.rb:27:in `already_liked?'
+  [1m[36mLike Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = $1 AND "likes"."likable_id" = $2 LIMIT $3[0m  [["user_id", 1], ["likable_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/likes_controller.rb:27:in `already_liked?'
+  [1m[36mComment Load (0.9ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/likes_controller.rb:11:in `create'
+  [1m[35m (1.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/likes_controller.rb:12:in `create'
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/likes_controller.rb:12:in `create'
+  [1m[35m (1.8ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/likes_controller.rb:12:in `create'
+Redirected to http://localhost:3000/posts?method=post
+Completed 302 Found in 55ms (ActiveRecord: 7.7ms | Allocations: 6410)
+
+
+Started GET "/posts?method=post" for ::1 at 2020-02-11 16:53:23 -0600
+Processing by PostsController#index as HTML
+  Parameters: {"method"=>"post"}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:8
+  [1m[36mPost Load (1.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY "posts"."created_at" DESC[0m
+  ↳ app/views/posts/index.html.erb:12
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:13
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 4], ["likable_type", "Post"]]
+  ↳ app/views/posts/index.html.erb:17
+  [1m[36mComment Load (0.7ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 4]]
+  ↳ app/views/posts/index.html.erb:22
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:13
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 3], ["likable_type", "Post"]]
+  ↳ app/views/posts/index.html.erb:17
+  [1m[36mComment Load (2.5ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 3]]
+  ↳ app/views/posts/index.html.erb:22
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:13
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 2], ["likable_type", "Post"]]
+  ↳ app/views/posts/index.html.erb:17
+  [1m[36mComment Load (0.7ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 2]]
+  ↳ app/views/posts/index.html.erb:22
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:23
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:13
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 1], ["likable_type", "Post"]]
+  ↳ app/views/posts/index.html.erb:17
+  [1m[36mComment Load (0.6ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/index.html.erb:22
+  Rendered posts/index.html.erb within layouts/application (Duration: 95.5ms | Allocations: 12285)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.5ms | Allocations: 108)
+Completed 200 OK in 144ms (Views: 116.5ms | ActiveRecord: 15.3ms | Allocations: 22066)
+
+
+Started GET "/posts?method=post" for ::1 at 2020-02-11 17:01:53 -0600
+Processing by PostsController#index as HTML
+  Parameters: {"method"=>"post"}
+  [1m[36mUser Load (3.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.erb within layouts/application
+  Rendered posts/index.html.erb within layouts/application (Duration: 25.4ms | Allocations: 1559)
+Completed 500 Internal Server Error in 111ms (ActiveRecord: 4.1ms | Allocations: 4616)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check <h3>Post Feeds</h3>
+
+<%= form_for(@post) do |f| %>
+  <%= f.label :content, 'Create a post' %><br/>
+  <%= f.text_area :content %>
+  <%= f.submit 'Post' %>
+<% end %>
+<% if @posts.empty? %>
+  <h4>You don't have any posts yet!</h4>
+<% else  %>
+  <div>
+    <% @posts.each do |post| %>
+      <small><%= link_to "#{post.user.name}", post_path(post.user) %></small><br>
+      <%= post.content %><br> 
+      <% if user_signed_in? && current_user.likes?(post) %>
+        <%= link_to "Unlike", post_like_path(post), method: :delete, remote: true %>
+      <% else %>
+        <%= link_to "Like", post_like_path(post), method: :post, remote: true %>
+      <% end %>
+
+      <%= post.likes.count %>
+          <%end%>
+          <br><br>
+
+      <div id='comment_div'>
+        <% post.comments.each do |comment| %>
+          <small><%= link_to "#{comment.user.name}", post_path(comment.user) %>:</small>
+          <small><%= comment.content %></small><br>
+          <%= link_to 'Like', comment_likes_path(comment), method: :post %>
+          <% if current_user == comment.user %>
+            <small><%= link_to 'Edit', edit_comment_path(comment) %></small>
+            <small><%= link_to 'Delete', comment_path(comment), method: :delete %></small><br><br>
+          <% end %>
+        <% end  %>
+      </div><br>
+
+      <%= form_for(@comment) do |f| %>
+        <%= f.hidden_field :post_id, value: post.id  %>
+        <%= f.text_field :content %>
+        <%= f.submit 'Comment' %>
+      <% end  %><br>
+      
+    <% end %>
+  </div>
+
+<% end %>
+):
+1:    <h3>Post Feeds</h3>
+2:    
+3:    <%= form_for(@post) do |f| %>
+4:      <%= f.label :content, 'Create a post' %><br/>
+5:      <%= f.text_area :content %>
+6:      <%= f.submit 'Post' %>
+7:    <% end %>
+8:    <% if @posts.empty? %>
+9:      <h4>You don't have any posts yet!</h4>
+10:    <% else  %>
+11:      <div>
+12:        <% @posts.each do |post| %>
+13:          <small><%= link_to "#{post.user.name}", post_path(post.user) %></small><br>
+14:          <%= post.content %><br> 
+15:          <% if user_signed_in? && current_user.likes?(post) %>
+16:            <%= link_to "Unlike", post_like_path(post), method: :delete, remote: true %>
+17:          <% else %>
+18:            <%= link_to "Like", post_like_path(post), method: :post, remote: true %>
+19:          <% end %>
+20:    
+21:          <%= post.likes.count %>
+22:              <%end%>
+23:              <br><br>
+24:    
+25:          <div id='comment_div'>
+26:            <% post.comments.each do |comment| %>
+27:              <small><%= link_to "#{comment.user.name}", post_path(comment.user) %>:</small>
+28:              <small><%= comment.content %></small><br>
+29:              <%= link_to 'Like', comment_likes_path(comment), method: :post %>
+30:              <% if current_user == comment.user %>
+31:                <small><%= link_to 'Edit', edit_comment_path(comment) %></small>
+32:                <small><%= link_to 'Delete', comment_path(comment), method: :delete %></small><br><br>
+33:              <% end %>
+34:            <% end  %>
+35:          </div><br>
+36:    
+37:          <%= form_for(@comment) do |f| %>
+38:            <%= f.hidden_field :post_id, value: post.id  %>
+39:            <%= f.text_field :content %>
+40:            <%= f.submit 'Comment' %>
+41:          <% end  %><br>
+42:          
+43:        <% end %>
+44:      </div>
+45:    
+46:    <% end %>
+  
+app/views/posts/index.html.erb:48: syntax error, unexpected end, expecting end-of-input
+app/views/posts/index.html.erb:48: syntax error, unexpected end, expecting end-of-input
+app/views/posts/index.html.erb:48: syntax error, unexpected end, expecting end-of-input
+app/views/posts/index.html.erb:48: syntax error, unexpected end, expecting end-of-input
+app/views/posts/index.html.erb:48: syntax error, unexpected end, expecting end-of-input
+app/views/posts/index.html.erb:48: syntax error, unexpected end, expecting end-of-input
+Started GET "/posts?method=post" for ::1 at 2020-02-11 17:02:27 -0600
+Processing by PostsController#index as HTML
+  Parameters: {"method"=>"post"}
+  [1m[36mUser Load (4.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Exists? (1.7ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:8
+  [1m[36mPost Load (2.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY "posts"."created_at" DESC[0m
+  ↳ app/views/posts/index.html.erb:12
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:13
+  Rendered posts/index.html.erb within layouts/application (Duration: 56.8ms | Allocations: 5887)
+Completed 500 Internal Server Error in 86ms (ActiveRecord: 9.4ms | Allocations: 8844)
+
+
+  
+ActionView::Template::Error (undefined method `likes?' for #<User:0x00007f0bd475b818>
+Did you mean?  likes
+               likes=):
+    12:     <% @posts.each do |post| %>
+    13:       <small><%= link_to "#{post.user.name}", post_path(post.user) %></small><br>
+    14:       <%= post.content %><br> 
+    15:       <% if user_signed_in? && current_user.likes?(post) %>
+    16:         <%= link_to "Unlike", post_like_path(post), method: :delete, remote: true %>
+    17:       <% else %>
+    18:         <%= link_to "Like", post_like_path(post), method: :post, remote: true %>
+  
+app/views/posts/index.html.erb:15
+app/views/posts/index.html.erb:12
+Started GET "/posts?method=post" for ::1 at 2020-02-11 17:04:07 -0600
+Processing by PostsController#index as HTML
+  Parameters: {"method"=>"post"}
+  [1m[36mUser Load (2.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:8
+  [1m[36mPost Load (1.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY "posts"."created_at" DESC[0m
+  ↳ app/views/posts/index.html.erb:12
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:13
+  Rendered posts/index.html.erb within layouts/application (Duration: 39.2ms | Allocations: 5843)
+Completed 500 Internal Server Error in 62ms (ActiveRecord: 5.3ms | Allocations: 8800)
+
+
+  
+ActionView::Template::Error (undefined method `liked?' for #<User:0x000055b04be9cb80>
+Did you mean?  likes
+               likes=):
+    12:     <% @posts.each do |post| %>
+    13:       <small><%= link_to "#{post.user.name}", post_path(post.user) %></small><br>
+    14:       <%= post.content %><br> 
+    15:       <% if user_signed_in? && current_user.liked?(post) %>
+    16:         <%= link_to "Unlike", post_like_path(post), method: :delete, remote: true %>
+    17:       <% else %>
+    18:         <%= link_to "Like", post_like_path(post), method: :post, remote: true %>
+  
+app/views/posts/index.html.erb:15
+app/views/posts/index.html.erb:12
+Started GET "/posts?method=post" for ::1 at 2020-02-11 17:06:22 -0600
+Processing by PostsController#index as HTML
+  Parameters: {"method"=>"post"}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:8
+  [1m[36mPost Load (1.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY "posts"."created_at" DESC[0m
+  ↳ app/views/posts/index.html.erb:12
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:13
+  Rendered posts/index.html.erb within layouts/application (Duration: 37.0ms | Allocations: 3976)
+Completed 500 Internal Server Error in 64ms (ActiveRecord: 5.1ms | Allocations: 6933)
+
+
+  
+ActionView::Template::Error (No route matches {:action=>"show", :controller=>"likes", :post_id=>#<Post id: 4, content: "A new post", created_at: "2020-02-11 22:50:14", updated_at: "2020-02-11 22:50:14", user_id: 2>}, missing required keys: [:id]):
+    13:       <small><%= link_to "#{post.user.name}", post_path(post.user) %></small><br>
+    14:       <%= post.content %><br> 
+    15:       <%= link_to post_likes_path(post), method: :post do%>
+    16:           <%= link_to "Unlike", post_like_path(post), method: :delete, remote: true %>
+    17:           <%= link_to "Like", post_like_path(post), method: :post, remote: true %>
+    18: 
+    19:           <%= post.likes.count %>
+  
+app/views/posts/index.html.erb:16
+app/views/posts/index.html.erb:15
+app/views/posts/index.html.erb:12

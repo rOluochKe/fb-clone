@@ -15,8 +15,8 @@
       <%= link_to post_likes_path(post), method: :post do%>
           <button class="btn btn-warning">Unlike </button>
           <button class="btn btn-success">Like  <%= post.likes.count %></button>
-          <%end%>
-          <br><br>
+      <%end%>
+      <br><br>
 
       <div id='comment_div'>
         <% post.comments.each do |comment| %>
