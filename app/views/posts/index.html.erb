@@ -11,17 +11,12 @@
   <div>
     <% @posts.each do |post| %>
       <small><%= link_to "#{post.user.name}", post_path(post.user) %></small><br>
-      <%= post.content %><br>
-      <%= link_to post_likes_path(post), class: "text-light", method: :post do %>
-        <% if liked_post?(post, 'post') %>
-          <button class="btn btn-warning">Unlike?</button>
-        <% else %>
-          <button class="btn btn-primary">Like?</button>
+      <%= post.content %><br> 
+      <%= link_to post_likes_path(post), method: :post do%>
+          <button class="btn btn-warning">Unlike </button>
+          <button class="btn btn-success">Like  <%= post.likes.count %></button>
           <%end%>
-      <% if current_user == post.user %>
-        <small><%= link_to 'Edit', edit_post_path(post) %></small>
-        <small><%= link_to 'Delete', post_path(post), method: :delete %></small><br><br>
-      <% end %><% end %><br><br>
+          <br><br>
 
       <div id='comment_div'>
         <% post.comments.each do |comment| %>
