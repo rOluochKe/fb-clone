@@ -23,7 +23,6 @@
           <small><%= link_to "#{comment.user.name}", post_path(comment.user) %>:</small>
           <small><%= comment.content %></small><br>
           <%= link_to 'Like', comment_likes_path(comment), method: :post %>
-          <small><%= comment.likes.count %> <%= (comment.likes.count) == 1 ? 'Like' : 'Likes'%></small>
           <% if current_user == comment.user %>
             <small><%= link_to 'Edit', edit_comment_path(comment) %></small>
             <small><%= link_to 'Delete', comment_path(comment), method: :delete %></small><br><br>
