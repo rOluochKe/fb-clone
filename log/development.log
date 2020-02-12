@@ -4247,3 +4247,222 @@ Processing by HomeController#index as HTML
 Completed 200 OK in 35ms (Views: 26.9ms | ActiveRecord: 1.0ms | Allocations: 10800)
 
 
+Started GET "/" for 127.0.0.1 at 2020-02-11 18:56:02 +0300
+  [1m[35m (1.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered posts/_new.html.erb (Duration: 8.4ms | Allocations: 2429)
+  [1m[36mPost Load (3.0ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/_post.html.erb:3
+  Rendered posts/_post.html.erb (Duration: 15.8ms | Allocations: 3450)
+  Rendered home/index.html.erb within layouts/application (Duration: 19.0ms | Allocations: 3927)
+Started GET "/" for 127.0.0.1 at 2020-02-11 18:56:02 +0300
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered posts/_new.html.erb (Duration: 1.2ms | Allocations: 408)
+  [1m[36mPost Load (0.9ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/_post.html.erb:3
+  Rendered posts/_post.html.erb (Duration: 5.2ms | Allocations: 1192)
+  Rendered home/index.html.erb within layouts/application (Duration: 5.8ms | Allocations: 1285)
+[Webpacker] Everything's up-to-date. Nothing to do
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 1.7ms | Allocations: 399)
+Completed 200 OK in 223ms (Views: 214.7ms | ActiveRecord: 2.0ms | Allocations: 71542)
+
+
+  Rendered home/_show_page.html.erb (Duration: 1.9ms | Allocations: 486)
+Completed 200 OK in 395ms (Views: 319.6ms | ActiveRecord: 21.3ms | Allocations: 100098)
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2020-02-11 18:56:06 +0300
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"gjLXtF9h2pmfBaNsJoMNJkExPWQzTFtfLBdz2yar2EMNhRxvk9d1OyNi4fsZeSVPISlfAFZTYFPqIX8WPkGYLg=="}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+Redirected to http://127.0.0.1:3000/
+Completed 302 Found in 13ms (ActiveRecord: 1.1ms | Allocations: 3126)
+
+
+Started GET "/" for 127.0.0.1 at 2020-02-11 18:56:06 +0300
+Processing by HomeController#index as HTML
+Completed 401 Unauthorized in 5ms (ActiveRecord: 0.0ms | Allocations: 385)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2020-02-11 18:56:06 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 2.0ms | Allocations: 641)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 11.2ms | Allocations: 2953)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.7ms | Allocations: 186)
+Completed 200 OK in 40ms (Views: 36.7ms | ActiveRecord: 0.0ms | Allocations: 12533)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2020-02-11 18:56:09 +0300
+Processing by Users::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 1.2ms | Allocations: 215)
+  Rendered devise/shared/_links.html.erb (Duration: 0.4ms | Allocations: 124)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 13.1ms | Allocations: 2279)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 1.8ms | Allocations: 186)
+Completed 200 OK in 40ms (Views: 35.0ms | ActiveRecord: 0.0ms | Allocations: 12269)
+
+
+Started POST "/users" for 127.0.0.1 at 2020-02-11 18:56:30 +0300
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"authenticity_token"=>"HsjWDP+8hzdNw3BMHvkQXA4EEnh3SfQ2TK3p+2x88nQpNI/2C7HU9B3H+UT9FN0VydnVmkabCZQ8m51lwtjxtA==", "user"=>{"name"=>"Jane Doe", "email"=>"jane.doe@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users/registrations_controller.rb:14:in `create'
+  [1m[36mUser Exists? (2.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "jane.doe@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users/registrations_controller.rb:14:in `create'
+  [1m[36mUser Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "jane.doe@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users/registrations_controller.rb:14:in `create'
+  [1m[36mUser Create (1.9ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "name") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["email", "jane.doe@gmail.com"], ["encrypted_password", "$2a$11$bPPJ8I4Yw1F1LUz7DCpyBuoKWlvMOUgMlwB2vTwtNiGQ4A/JwDcqW"], ["created_at", "2020-02-11 15:56:31.030474"], ["updated_at", "2020-02-11 15:56:31.030474"], ["name", "Jane Doe"]]
+  ↳ app/controllers/users/registrations_controller.rb:14:in `create'
+  [1m[35m (1.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users/registrations_controller.rb:14:in `create'
+Redirected to http://127.0.0.1:3000/
+Completed 302 Found in 271ms (ActiveRecord: 12.7ms | Allocations: 10590)
+
+
+Started GET "/" for 127.0.0.1 at 2020-02-11 18:56:31 +0300
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered posts/_new.html.erb (Duration: 2.1ms | Allocations: 410)
+  [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/_post.html.erb:3
+  Rendered posts/_post.html.erb (Duration: 4.9ms | Allocations: 1111)
+  Rendered home/index.html.erb within layouts/application (Duration: 5.4ms | Allocations: 1194)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.5ms | Allocations: 111)
+Completed 200 OK in 45ms (Views: 38.0ms | ActiveRecord: 1.0ms | Allocations: 10834)
+
+
+Started POST "/posts" for 127.0.0.1 at 2020-02-11 18:56:43 +0300
+Processing by PostsController#create as JS
+  Parameters: {"authenticity_token"=>"l68mhdSg20fvwgwV5nAFpeq6kpdAI/+uj6lZiTsr5bWrBXlMe029gNHkHmxasTM9UPdn9ftnVAXBtxhyjJMTOQ==", "post"=>{"content"=>"My first post"}, "commit"=>"Create Post"}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/posts_controller.rb:18:in `create'
+  [1m[36mPost Create (2.8ms)[0m  [1m[32mINSERT INTO "posts" ("content", "created_at", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["content", "My first post"], ["created_at", "2020-02-11 15:56:43.561527"], ["updated_at", "2020-02-11 15:56:43.561527"], ["user_id", 3]]
+  ↳ app/controllers/posts_controller.rb:18:in `create'
+  [1m[35m (2.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/posts_controller.rb:18:in `create'
+Redirected to http://127.0.0.1:3000/
+Completed 200 OK in 31ms (ActiveRecord: 6.2ms | Allocations: 6994)
+
+
+Started GET "/" for 127.0.0.1 at 2020-02-11 18:56:43 +0300
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered posts/_new.html.erb (Duration: 2.0ms | Allocations: 402)
+  [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/_post.html.erb:3
+  Rendered posts/_post.html.erb (Duration: 4.9ms | Allocations: 1119)
+  Rendered home/index.html.erb within layouts/application (Duration: 5.5ms | Allocations: 1200)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.4ms | Allocations: 107)
+Completed 200 OK in 32ms (Views: 25.0ms | ActiveRecord: 1.1ms | Allocations: 10820)
+
+
+Started GET "/posts" for 127.0.0.1 at 2020-02-11 18:56:46 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:8
+  [1m[36mPost Load (1.5ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY "posts"."created_at" DESC[0m
+  ↳ app/views/posts/index.html.erb:12
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:13
+  [1m[35m (2.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 4], ["likable_type", "Post"]]
+  ↳ app/views/posts/index.html.erb:16
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 4], ["likable_type", "Post"]]
+  ↳ app/views/posts/index.html.erb:16
+  [1m[36mComment Load (1.8ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 4]]
+  ↳ app/views/posts/index.html.erb:23
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:13
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 3], ["likable_type", "Post"]]
+  ↳ app/views/posts/index.html.erb:16
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 3], ["likable_type", "Post"]]
+  ↳ app/views/posts/index.html.erb:16
+  [1m[36mComment Load (0.4ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 3]]
+  ↳ app/views/posts/index.html.erb:23
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:13
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 1], ["likable_type", "Post"]]
+  ↳ app/views/posts/index.html.erb:16
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 1], ["likable_type", "Post"]]
+  ↳ app/views/posts/index.html.erb:16
+  [1m[36mComment Load (0.5ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/index.html.erb:23
+  Rendered posts/index.html.erb within layouts/application (Duration: 64.7ms | Allocations: 14260)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.2ms | Allocations: 111)
+Completed 200 OK in 106ms (Views: 64.5ms | ActiveRecord: 21.3ms | Allocations: 29294)
+
+
+Started POST "/posts/3/likes" for 127.0.0.1 at 2020-02-11 18:57:00 +0300
+Processing by LikesController#create as HTML
+  Parameters: {"authenticity_token"=>"CIxsJexWyCp00Heo5h6r/7DByeps09pV7Oy0qV367q40JjPsQ7uu7Ur2ZdFa351nCow8iNeXcf6i8vVS6kIYIg==", "post_id"=>"3"}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/likes_controller.rb:25:in `already_liked?'
+  [1m[36mLike Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = $1 AND "likes"."likable_id" = $2 LIMIT $3[0m  [["user_id", 3], ["likable_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/likes_controller.rb:25:in `already_liked?'
+  [1m[36mPost Load (0.9ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/likes_controller.rb:14:in `create'
+  [1m[35m (0.8ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/likes_controller.rb:15:in `create'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/likes_controller.rb:15:in `create'
+  [1m[36mLike Create (1.4ms)[0m  [1m[32mINSERT INTO "likes" ("likable_type", "likable_id", "created_at", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["likable_type", "Post"], ["likable_id", 3], ["created_at", "2020-02-11 15:57:00.993327"], ["updated_at", "2020-02-11 15:57:00.993327"], ["user_id", 3]]
+  ↳ app/controllers/likes_controller.rb:15:in `create'
+  [1m[35m (1.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/likes_controller.rb:15:in `create'
+Redirected to http://127.0.0.1:3000/posts
+Completed 302 Found in 57ms (ActiveRecord: 10.6ms | Allocations: 10642)
+
+
+Started GET "/posts" for 127.0.0.1 at 2020-02-11 18:57:01 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:8
+  [1m[36mPost Load (0.8ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY "posts"."created_at" DESC[0m
+  ↳ app/views/posts/index.html.erb:12
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:13
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 4], ["likable_type", "Post"]]
+  ↳ app/views/posts/index.html.erb:16
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 4], ["likable_type", "Post"]]
+  ↳ app/views/posts/index.html.erb:16
+  [1m[36mComment Load (0.6ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 4]]
+  ↳ app/views/posts/index.html.erb:23
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:13
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 3], ["likable_type", "Post"]]
+  ↳ app/views/posts/index.html.erb:16
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 3], ["likable_type", "Post"]]
+  ↳ app/views/posts/index.html.erb:16
+  [1m[36mComment Load (0.5ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 3]]
+  ↳ app/views/posts/index.html.erb:23
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/index.html.erb:13
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 1], ["likable_type", "Post"]]
+  ↳ app/views/posts/index.html.erb:16
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 1], ["likable_type", "Post"]]
+  ↳ app/views/posts/index.html.erb:16
+  [1m[36mComment Load (0.4ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/index.html.erb:23
+  Rendered posts/index.html.erb within layouts/application (Duration: 50.1ms | Allocations: 10991)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.5ms | Allocations: 108)
+Completed 200 OK in 83ms (Views: 70.1ms | ActiveRecord: 8.0ms | Allocations: 20638)
+
+
