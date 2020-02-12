@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -12,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_200_207_192_319) do
+ActiveRecord::Schema.define(version: 20_200_211_200_700) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -32,7 +30,9 @@ ActiveRecord::Schema.define(version: 20_200_207_192_319) do
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
     t.bigint 'user_id'
+    t.bigint 'post_id', null: false
     t.index %w[likable_type likable_id], name: 'index_likes_on_likable_type_and_likable_id'
+    t.index ['post_id'], name: 'index_likes_on_post_id'
     t.index ['user_id'], name: 'index_likes_on_user_id'
   end
 
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20_200_207_192_319) do
 
   add_foreign_key 'comments', 'posts'
   add_foreign_key 'comments', 'users'
+  add_foreign_key 'likes', 'posts'
   add_foreign_key 'likes', 'users'
   add_foreign_key 'posts', 'users'
 end
