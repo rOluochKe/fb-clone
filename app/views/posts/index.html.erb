@@ -1,23 +1,20 @@
-<h3>Post Feeds</h3>
-
-<%= form_for(@post) do |f| %>
-  <%= f.label :content, 'Create a post' %><br/>
-  <%= f.text_area :content %>
-  <%= f.submit 'Post' %>
-<% end %>
+<%= render 'posts/new' %>
 <% if @posts.empty? %>
-  <h4>You don't have any posts yet!</h4>
+  <h4>You dont have any posts yet!</h4>
 <% else  %>
   <div>
     <% @posts.each do |post| %>
-      <small><%= link_to "#{post.user.name}", post_path(post.user) %></small><br>
+      <br />
+      <strong><%= link_to "#{post.user.name}", post_path(post.user) %></strong><br>
       <%= post.content %><br> 
+      <p></p>
       <%= link_to post_likes_path(post), method: :post do%>
           <button class="btn btn-warning">Unlike </button>
           <button class="btn btn-success">Like  <%= post.likes.count %></button>
       <%end%>
-      <br><br>
+      <br />
 
+      <h5><strong>Comments</strong></h5>
       <div id='comment_div'>
         <% post.comments.each do |comment| %>
           <small><%= link_to "#{comment.user.name}", post_path(comment.user) %>:</small>
@@ -28,13 +25,14 @@
             <small><%= link_to 'Delete', comment_path(comment), method: :delete %></small><br><br>
           <% end %>
         <% end  %>
-      </div><br>
+      </div>
+      <p></p>
 
       <%= form_for(@comment) do |f| %>
         <%= f.hidden_field :post_id, value: post.id  %>
-        <%= f.text_field :content %>
+        <%= f.text_area :content %>
         <%= f.submit 'Comment' %>
-      <% end  %><br>
+      <% end  %>
       
     <% end %>
   </div>

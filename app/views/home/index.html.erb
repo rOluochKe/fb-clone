@@ -4,6 +4,7 @@
         <span class="heading-primary-main">Welcome </span>
         <span class="heading-primary-sub"><strong><%= current_user.name%></strong></span>
       </h1>
-      <%= render 'posts/post' %>
+
+      <h3><%= link_to "Create Post", posts_path %></h3>
     </div>
 </header>

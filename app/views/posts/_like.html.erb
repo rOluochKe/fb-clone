@@ -1,0 +1,6 @@
+<% if post.likes %>
+<%= pluralize(p.likes.count, 'like')%>
+<% end %>
+<% if liked?(p.id) %>
+<%= button_to 'Like', likes_path(like: {user_id: current_user.id,post_id: p.id}), method: :post %>
+<%end%> 
