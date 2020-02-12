@@ -4466,3 +4466,86 @@ Processing by PostsController#index as HTML
 Completed 200 OK in 83ms (Views: 70.1ms | ActiveRecord: 8.0ms | Allocations: 20638)
 
 
+Started GET "/" for 127.0.0.1 at 2020-02-12 13:31:29 +0300
+  [1m[35m (5.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (2.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered posts/_new.html.erb (Duration: 13.0ms | Allocations: 2429)
+  [1m[36mPost Load (2.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/_post.html.erb:3
+  Rendered posts/_post.html.erb (Duration: 18.8ms | Allocations: 3466)
+  Rendered home/index.html.erb within layouts/application (Duration: 23.9ms | Allocations: 3943)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 4.0ms | Allocations: 367)
+Completed 200 OK in 353ms (Views: 240.9ms | ActiveRecord: 26.8ms | Allocations: 59067)
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2020-02-12 13:31:35 +0300
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"WP4FCRwPf+lwBD0q8c+Q9zL64WS0RrLdqF9EZ2iPST1kVFrAs+IZLk4iL1NNDqZviLcUBg8CGXbmQQWc3ze/sQ=="}
+  [1m[36mUser Load (4.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+Redirected to http://127.0.0.1:3000/
+Completed 302 Found in 19ms (ActiveRecord: 4.7ms | Allocations: 3117)
+
+
+Started GET "/" for 127.0.0.1 at 2020-02-12 13:31:35 +0300
+Processing by HomeController#index as HTML
+Completed 401 Unauthorized in 6ms (ActiveRecord: 0.0ms | Allocations: 385)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2020-02-12 13:31:35 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 2.4ms | Allocations: 641)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 16.4ms | Allocations: 2950)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.5ms | Allocations: 186)
+Completed 200 OK in 45ms (Views: 42.8ms | ActiveRecord: 0.0ms | Allocations: 12523)
+
+
+Started GET "/posts" for 127.0.0.1 at 2020-02-12 13:31:37 +0300
+Processing by PostsController#index as HTML
+Completed 401 Unauthorized in 2ms (ActiveRecord: 0.0ms | Allocations: 428)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2020-02-12 13:31:37 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.5ms | Allocations: 134)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 5.0ms | Allocations: 1126)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.8ms | Allocations: 178)
+Completed 200 OK in 32ms (Views: 30.4ms | ActiveRecord: 0.0ms | Allocations: 9642)
+
+
+Started GET "/" for 127.0.0.1 at 2020-02-12 13:31:39 +0300
+Processing by HomeController#index as HTML
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms | Allocations: 368)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2020-02-12 13:31:39 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.5ms | Allocations: 134)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 24.3ms | Allocations: 1122)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.4ms | Allocations: 178)
+Completed 200 OK in 49ms (Views: 47.3ms | ActiveRecord: 0.0ms | Allocations: 9650)
+
+
+Started GET "/" for 127.0.0.1 at 2020-02-12 13:31:42 +0300
+Processing by HomeController#index as HTML
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms | Allocations: 366)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2020-02-12 13:31:42 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.3ms | Allocations: 134)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 2.9ms | Allocations: 1121)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.5ms | Allocations: 178)
+Completed 200 OK in 22ms (Views: 20.3ms | ActiveRecord: 0.0ms | Allocations: 9628)
+
+
