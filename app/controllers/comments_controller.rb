@@ -6,10 +6,14 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @post = Post.find_by(id: comment_params[:post_id])
-    @comment = @post.comments.build(comment_params)
-    @comment.user = current_user
-    @comment.save
+    @comment = Comment.new(comment_params)
+    @comment.user_id = current_user.id
+
+    if @comment.valid?
+      @comment.save
+    else
+      flash[:alert] = 'You can not create an empty comment!'
+    end
     redirect_to request.referrer
   end
 

@@ -5,13 +5,13 @@ require 'rails_helper'
 RSpec.describe CommentsController, type: :controller do
   before :each do
     @user = User.create(name: 'example', email: 'example@example.com', password: 'foobar')
-    @post = @user.posts.build(content: 'New post')
+    @post = @user.posts.build(content: 'A new post')
     @post.save
   end
 
   describe 'Create a comment' do
     it 'creates a valid comment' do
-      @comment = @post.comments.create(content: 'I have commented', user_id: @user.id)
+      @comment = @post.comments.create(content: 'I commented', user_id: @user.id)
       expect(@comment).to be_valid
     end
 

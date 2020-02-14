@@ -13,19 +13,19 @@ RSpec.describe Comment, type: :model do
     end
 
     it 'should not add an empty post' do
-      @comment.content = ' '
+      @comment.content = ''
       expect(@comment.valid?).to eql(false)
       expect(@comment.errors.messages[:content]).to include("You can't create an empty post")
     end
 
     it 'should belong to user' do
-      @comment.user = nil
+      @comment.user_id = null
       expect(@comment.valid?).to eql(false)
       expect(@comment.errors.messages[:user]).to eql(false)
     end
 
     it 'should belong to a post' do
-      @comment.post = nil
+      @comment.post_id= nil
       expect(@comment.valid?).to eql(false)
     end
   end
