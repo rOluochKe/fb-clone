@@ -25,7 +25,7 @@ RSpec.describe Comment, type: :model do
     end
 
     it 'should belong to a post' do
-      @comment.post_id= nil
+      @comment.post_id = nil
       expect(@comment.valid?).to eql(false)
     end
   end

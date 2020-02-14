@@ -8,9 +8,10 @@ class PostsController < ApplicationController
     @post = Post.new
     @comment = Comment.new
   end
+
   def show
-    @posts= Post.all
-  end;
+    @posts = Post.all
+  end
 
   def new
     @post = Post.new
