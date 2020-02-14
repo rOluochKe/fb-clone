@@ -24,8 +24,8 @@ RSpec.describe Post, type: :model do
   end
 
   context 'When submitting invalid forms' do
-    it "doesn't allow content post with less than 20 characters" do
-      post.content = 'a' * 19
+    it "doesn't allow content post that is empty" do
+      post.content = 'a' * 0
       expect { post.save }.to change { post.errors.full_messages.count }
     end
   end

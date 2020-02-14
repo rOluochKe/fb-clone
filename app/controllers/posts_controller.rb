@@ -8,15 +8,21 @@ class PostsController < ApplicationController
     @post = Post.new
     @comment = Comment.new
   end
+  def show
+    @posts= Post.all
+  end;
 
   def new
     @post = Post.new
   end
 
   def create
-    @post = current_user.posts.build(post_params)
-    flash[:success] = 'Post successfully created' if @post.save
-    redirect_to request.referrer
+    @post = Post.new(post_params)
+    @post.user_id = current_user.id
+    if @post.valid?
+      @post.save
+      redirect_to request.referrer
+    end
   end
 
   def edit

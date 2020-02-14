@@ -60,7 +60,7 @@ RSpec.describe User, type: :model do
   describe 'has posts associated' do
     it 'can create a post' do
       @user = FactoryBot.create(:user)
-      expect { @user.posts.create(content: 'bla' * 100, title: 'When') }.to change { Post.count }
+      expect { @user.posts.create(content: 'bla' * 100) }.to change { Post.count }
     end
   end
 end

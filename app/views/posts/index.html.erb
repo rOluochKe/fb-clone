@@ -1,42 +1,8 @@
-<h3>Post Feeds</h3>
+<div class ='container'>
+  <% if signed_in?%>
+    <h3 class = "text-center">Feeds</h3>
+    <%= render 'posts/new' %>
+    <%= render 'posts/timeline' %>
+    <%end%>
+</div>
 
-<%= form_for(@post) do |f| %>
-  <%= f.label :content, 'Create a post' %><br/>
-  <%= f.text_area :content %>
-  <%= f.submit 'Post' %>
-<% end %>
-<% if @posts.empty? %>
-  <h4>You don't have any posts yet!</h4>
-<% else  %>
-  <div>
-    <% @posts.each do |post| %>
-      <small><%= link_to "#{post.user.name}", post_path(post.user) %></small><br>
-      <%= post.content %><br> 
-      <%= link_to post_likes_path(post), method: :post do%>
-          <button class="btn btn-warning">Unlike </button>
-          <button class="btn btn-success">Like  <%= post.likes.count %></button>
-      <%end%>
-      <br><br>
-
-      <div id='comment_div'>
-        <% post.comments.each do |comment| %>
-          <small><%= link_to "#{comment.user.name}", post_path(comment.user) %>:</small>
-          <small><%= comment.content %></small><br>
-          <%= link_to 'Like', comment_likes_path(comment), method: :post %>
-          <% if current_user == comment.user %>
-            <small><%= link_to 'Edit', edit_comment_path(comment) %></small>
-            <small><%= link_to 'Delete', comment_path(comment), method: :delete %></small><br><br>
-          <% end %>
-        <% end  %>
-      </div><br>
-
-      <%= form_for(@comment) do |f| %>
-        <%= f.hidden_field :post_id, value: post.id  %>
-        <%= f.text_field :content %>
-        <%= f.submit 'Comment' %>
-      <% end  %><br>
-      
-    <% end %>
-  </div>
-
-<% end %>

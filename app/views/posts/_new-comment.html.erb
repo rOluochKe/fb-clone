@@ -1,0 +1,4 @@
+<%= form_with(model:  @comment) do |f| %>
+  <%= f.text_field :content, class: 'form-control', placeholder: 'Comment....', autofocus: true %>
+  <%= f.submit class: 'btn btn-info text-center' %>
+<% end %>

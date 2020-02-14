@@ -4,7 +4,9 @@
  <strong><%= current_user.name %></strong> <br>
   <p><%= p.content %></p>
   <% if current_user == p.user %>
-    <small><%= link_to 'Edit', edit_post_path(p) %></small>
-    <small><%= link_to 'Delete', post_path(p), method: :delete %></small><br><br>
+    <small>
+      <%= link_to 'Edit', edit_post_path(p) %>
+     <%=  link_to 'Delete', post_path(p), method: :delete %>
+    </small>
   <% end %>
 <%end%>
