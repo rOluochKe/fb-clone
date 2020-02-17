@@ -7,5 +7,10 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  def show; end
+  def show
+    @user = User.find_by(id: params[:id])
+    @posts = @user.posts.order(created_at: :DESC)
+    @post = Post.new
+    @comment = Comment.new
+  end
 end
