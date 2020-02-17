@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class Friendship < ApplicationRecord
   validates :status, inclusion: { in: [true, false] }
-  
+
   belongs_to :user
   belongs_to :friend, class_name: 'User'
 
