@@ -2,6 +2,7 @@
   <h4>You don't have any posts yet!</h4>
 <% else  %>
   <div>
+  <h4>Posts Timeline</h4>
     <% @posts.each do |post| %>
       <small><%= link_to "#{post.user.name}", post_path(post.user) %></small><br>
       <%= post.content %><br>
@@ -10,8 +11,10 @@
           <%= pluralize(post.likes.count, "like") %>
         <%end%>
       </div>
-      <br>
-
+      <br />
+      <br />
+      
+      <h4>Comments</h4>
       <div id='comment_div'>
         <% post.comments.each do |comment| %>
           <small>

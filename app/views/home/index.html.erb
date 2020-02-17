@@ -2,8 +2,10 @@
     <div class="text-box">
       <h1 class="heading-primary text-secondary">
         <span class="heading-primary-main">Welcome </span>
-        <span class="heading-primary-sub"><strong><%= current_user.name%></strong></span>
+        <span class="heading-primary-sub"><strong><%= current_user.name%></strong></span> <br />
+        <strong class="center-me">
+          <%= link_to 'Create a New Post', posts_path, class: "button-light" %>
+        </strong>
       </h1>
-      <%= render 'posts/post' %>
     </div>
 </header>
