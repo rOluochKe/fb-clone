@@ -26289,3 +26289,763 @@ ActionView::Template::Error (undefined method `include?' for nil:NilClass):
   
 app/views/users/index.html.erb:6
 app/views/users/index.html.erb:3
+Started GET "/users/sign_in" for ::1 at 2020-02-18 11:14:31 -0600
+Processing by Devise::SessionsController#new as HTML
+  [1m[36mUser Load (2.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 20ms (ActiveRecord: 2.3ms | Allocations: 2130)
+
+
+Started GET "/friendships" for ::1 at 2020-02-18 11:14:38 -0600
+Processing by FriendshipsController#index as HTML
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:9:in `index'
+  Rendering friendships/index.html.erb within layouts/application
+  [1m[36mFriendship Load (34.2ms)[0m  [1m[34mSELECT "friendships".* FROM "friendships" WHERE (user_id = 1 OR friend_id = 1)[0m
+  ↳ app/views/friendships/index.html.erb:3
+  Rendered friendships/index.html.erb within layouts/application (Duration: 64.6ms | Allocations: 1472)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 4.0ms | Allocations: 446)
+Completed 200 OK in 453ms (Views: 358.6ms | ActiveRecord: 46.2ms | Allocations: 13680)
+
+
+Started GET "/users" for ::1 at 2020-02-18 11:14:45 -0600
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:3
+  Rendered users/index.html.erb within layouts/application (Duration: 46.0ms | Allocations: 2264)
+Completed 500 Internal Server Error in 77ms (ActiveRecord: 2.2ms | Allocations: 4988)
+
+
+  
+ActionView::Template::Error (undefined method `include?' for nil:NilClass):
+    2: <ul>
+    3:   <% @users.each do |u| %>
+    4:     <li class='text-dark'><%= u.name %></li><br>
+    5:     <% if @friendships.include?(u)%>
+    6:       <%=button_to 'Cancel request',  {:controller => :friendships, :action => 'destroy',
+    7:                                              :id => (find_friendship(current_user, u) || 
+    8:                                                      find_friendship(u, current_user))} , 
+  
+app/views/users/index.html.erb:5
+app/views/users/index.html.erb:3
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT pg_try_advisory_lock(333164765143615230)[0m
+  [1m[35m (2.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (363.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (2.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(333164765143615230)[0m
+  [1m[35m (2.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (2.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (3.6ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (713.3ms)[0m  [1m[35mDROP DATABASE IF EXISTS "facebook_clone"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP DATABASE IF EXISTS "facebook_clone_test"[0m
+  [1m[35m (1478.9ms)[0m  [1m[35mCREATE DATABASE "facebook_clone" ENCODING = 'utf8'[0m
+  [1m[35m (808.6ms)[0m  [1m[35mCREATE DATABASE "facebook_clone_test" ENCODING = 'utf8'[0m
+  [1m[35mSQL (13.3ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (16.7ms)[0m  [1m[35mDROP TABLE IF EXISTS "comments" CASCADE[0m
+  [1m[35m (101.9ms)[0m  [1m[35mCREATE TABLE "comments" ("id" bigserial primary key, "user_id" bigint NOT NULL, "post_id" bigint NOT NULL, "content" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (47.0ms)[0m  [1m[35mCREATE  INDEX  "index_comments_on_post_id" ON "comments"  ("post_id")[0m
+  [1m[35m (40.6ms)[0m  [1m[35mCREATE  INDEX  "index_comments_on_user_id" ON "comments"  ("user_id")[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "friendships" CASCADE[0m
+  [1m[35m (46.5ms)[0m  [1m[35mCREATE TABLE "friendships" ("id" bigserial primary key, "status" boolean, "user_id" integer, "friend_id" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "likes" CASCADE[0m
+  [1m[35m (87.3ms)[0m  [1m[35mCREATE TABLE "likes" ("id" bigserial primary key, "likable_type" character varying, "likable_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "user_id" bigint, "post_id" bigint NOT NULL)[0m
+  [1m[35m (41.2ms)[0m  [1m[35mCREATE  INDEX  "index_likes_on_likable_type_and_likable_id" ON "likes"  ("likable_type", "likable_id")[0m
+  [1m[35m (49.0ms)[0m  [1m[35mCREATE  INDEX  "index_likes_on_post_id" ON "likes"  ("post_id")[0m
+  [1m[35m (41.6ms)[0m  [1m[35mCREATE  INDEX  "index_likes_on_user_id" ON "likes"  ("user_id")[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "posts" CASCADE[0m
+  [1m[35m (100.4ms)[0m  [1m[35mCREATE TABLE "posts" ("id" bigserial primary key, "content" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "user_id" bigint NOT NULL)[0m
+  [1m[35m (54.9ms)[0m  [1m[35mCREATE  INDEX  "index_posts_on_user_id" ON "posts"  ("user_id")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (103.7ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "name" character varying)[0m
+  [1m[35m (56.4ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  [1m[35m (48.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  [1m[35m (11.9ms)[0m  [1m[35mALTER TABLE "comments" ADD CONSTRAINT "fk_rails_2fd19c0db7"
+FOREIGN KEY ("post_id")
+  REFERENCES "posts" ("id")
+[0m
+  [1m[35m (13.1ms)[0m  [1m[35mALTER TABLE "comments" ADD CONSTRAINT "fk_rails_03de2dc08c"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (12.3ms)[0m  [1m[35mALTER TABLE "likes" ADD CONSTRAINT "fk_rails_87a8aac469"
+FOREIGN KEY ("post_id")
+  REFERENCES "posts" ("id")
+[0m
+  [1m[35m (12.4ms)[0m  [1m[35mALTER TABLE "likes" ADD CONSTRAINT "fk_rails_1e09b5dabf"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (13.4ms)[0m  [1m[35mALTER TABLE "posts" ADD CONSTRAINT "fk_rails_5b5ddfd518"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (82.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (5.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20200217192032)[0m
+  [1m[35m (4.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20200201000137),
+(20200201000413),
+(20200201002128),
+(20200201002855),
+(20200207190342),
+(20200207191625),
+(20200207192319),
+(20200211200700);
+
+[0m
+  [1m[35m (86.8ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.9ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (3.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-02-18 19:53:13.399338"], ["updated_at", "2020-02-18 19:53:13.399338"]]
+  [1m[35m (7.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (3.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[35m (1.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.8ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "bf863545c83d0443cb8c54aab1a4d8ba3c2bf63d"], ["created_at", "2020-02-18 19:53:13.453729"], ["updated_at", "2020-02-18 19:53:13.453729"]]
+  [1m[35m (6.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35mSQL (1.1ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.9ms)[0m  [1m[35mDROP TABLE IF EXISTS "comments" CASCADE[0m
+  [1m[35m (91.2ms)[0m  [1m[35mCREATE TABLE "comments" ("id" bigserial primary key, "user_id" bigint NOT NULL, "post_id" bigint NOT NULL, "content" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (46.3ms)[0m  [1m[35mCREATE  INDEX  "index_comments_on_post_id" ON "comments"  ("post_id")[0m
+  [1m[35m (41.7ms)[0m  [1m[35mCREATE  INDEX  "index_comments_on_user_id" ON "comments"  ("user_id")[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "friendships" CASCADE[0m
+  [1m[35m (75.2ms)[0m  [1m[35mCREATE TABLE "friendships" ("id" bigserial primary key, "status" boolean, "user_id" integer, "friend_id" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "likes" CASCADE[0m
+  [1m[35m (91.9ms)[0m  [1m[35mCREATE TABLE "likes" ("id" bigserial primary key, "likable_type" character varying, "likable_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "user_id" bigint, "post_id" bigint NOT NULL)[0m
+  [1m[35m (42.4ms)[0m  [1m[35mCREATE  INDEX  "index_likes_on_likable_type_and_likable_id" ON "likes"  ("likable_type", "likable_id")[0m
+  [1m[35m (47.9ms)[0m  [1m[35mCREATE  INDEX  "index_likes_on_post_id" ON "likes"  ("post_id")[0m
+  [1m[35m (58.2ms)[0m  [1m[35mCREATE  INDEX  "index_likes_on_user_id" ON "likes"  ("user_id")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "posts" CASCADE[0m
+  [1m[35m (90.5ms)[0m  [1m[35mCREATE TABLE "posts" ("id" bigserial primary key, "content" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "user_id" bigint NOT NULL)[0m
+  [1m[35m (42.8ms)[0m  [1m[35mCREATE  INDEX  "index_posts_on_user_id" ON "posts"  ("user_id")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (87.5ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "name" character varying)[0m
+  [1m[35m (49.1ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  [1m[35m (48.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  [1m[35m (11.8ms)[0m  [1m[35mALTER TABLE "comments" ADD CONSTRAINT "fk_rails_2fd19c0db7"
+FOREIGN KEY ("post_id")
+  REFERENCES "posts" ("id")
+[0m
+  [1m[35m (13.0ms)[0m  [1m[35mALTER TABLE "comments" ADD CONSTRAINT "fk_rails_03de2dc08c"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (11.5ms)[0m  [1m[35mALTER TABLE "likes" ADD CONSTRAINT "fk_rails_87a8aac469"
+FOREIGN KEY ("post_id")
+  REFERENCES "posts" ("id")
+[0m
+  [1m[35m (12.0ms)[0m  [1m[35mALTER TABLE "likes" ADD CONSTRAINT "fk_rails_1e09b5dabf"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (12.7ms)[0m  [1m[35mALTER TABLE "posts" ADD CONSTRAINT "fk_rails_5b5ddfd518"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (80.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (6.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20200217192032)[0m
+  [1m[35m (6.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20200201000137),
+(20200201000413),
+(20200201002128),
+(20200201002855),
+(20200207190342),
+(20200207191625),
+(20200207192319),
+(20200211200700);
+
+[0m
+  [1m[35m (100.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-02-18 19:53:14.870031"], ["updated_at", "2020-02-18 19:53:14.870031"]]
+  [1m[35m (42.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Update (1.1ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = $1, "updated_at" = $2 WHERE "ar_internal_metadata"."key" = $3[0m  [["value", "test"], ["updated_at", "2020-02-18 19:53:14.942117"], ["key", "environment"]]
+  [1m[35m (22.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[35m (1.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.0ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "bf863545c83d0443cb8c54aab1a4d8ba3c2bf63d"], ["created_at", "2020-02-18 19:53:14.990743"], ["updated_at", "2020-02-18 19:53:14.990743"]]
+  [1m[35m (26.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (3.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT pg_try_advisory_lock(333164765143615230)[0m
+  [1m[35m (2.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT pg_advisory_unlock(333164765143615230)[0m
+  [1m[35m (2.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for ::1 at 2020-02-18 13:55:58 -0600
+  [1m[35m (2.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Completed 401 Unauthorized in 38ms (ActiveRecord: 3.0ms | Allocations: 2988)
+
+
+Started GET "/users/sign_in" for ::1 at 2020-02-18 13:56:02 -0600
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 7.0ms | Allocations: 559)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 31.2ms | Allocations: 2028)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 2.8ms | Allocations: 250)
+Completed 200 OK in 336ms (Views: 233.4ms | ActiveRecord: 0.0ms | Allocations: 16837)
+
+
+Started POST "/users/sign_in" for ::1 at 2020-02-18 13:56:10 -0600
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"4caVPgUVuOIER1DLsDO+HkVZkCYrmCCdO9Bk2S7eMd2SLAm4TE9Y4OWI3DlMPoW2ykM7o62Aoh9U4n2DDDh1Xg==", "user"=>{"email"=>"yellow33@email.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (2.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "yellow33@email.com"], ["LIMIT", 1]]
+Completed 401 Unauthorized in 17ms (ActiveRecord: 2.4ms | Allocations: 2046)
+
+
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"authenticity_token"=>"4caVPgUVuOIER1DLsDO+HkVZkCYrmCCdO9Bk2S7eMd2SLAm4TE9Y4OWI3DlMPoW2ykM7o62Aoh9U4n2DDDh1Xg==", "user"=>{"email"=>"yellow33@email.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.7ms | Allocations: 134)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 6.1ms | Allocations: 1127)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 1.1ms | Allocations: 202)
+Completed 200 OK in 351ms (Views: 42.5ms | ActiveRecord: 0.0ms | Allocations: 9507)
+
+
+Started GET "/users/sign_up" for ::1 at 2020-02-18 13:56:16 -0600
+Processing by Users::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 12.0ms | Allocations: 214)
+  Rendered devise/shared/_links.html.erb (Duration: 0.9ms | Allocations: 124)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 32.1ms | Allocations: 2279)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 3.2ms | Allocations: 248)
+Completed 200 OK in 109ms (Views: 100.8ms | ActiveRecord: 0.0ms | Allocations: 12467)
+
+
+Started POST "/users" for ::1 at 2020-02-18 13:56:30 -0600
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"authenticity_token"=>"VQIop4U6ExBl2GDT2a3gNXsFQdnkAgSvlRahK2guAKofuNUdOF1ElWkOv687PRBHzCwpVR7MzrXGChHAq/ANUg==", "user"=>{"name"=>"effie", "email"=>"yellow33@email.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users/registrations_controller.rb:14:in `create'
+  [1m[36mUser Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "yellow33@email.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users/registrations_controller.rb:14:in `create'
+  [1m[36mUser Exists? (3.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "yellow33@email.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users/registrations_controller.rb:14:in `create'
+  [1m[36mUser Create (2.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "name") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["email", "yellow33@email.com"], ["encrypted_password", "$2a$11$1AwomabQnBdj2vEjUNelB.zRGMTW7.jDwS1e5YAkE9ZrxbyRjONTC"], ["created_at", "2020-02-18 19:56:30.468173"], ["updated_at", "2020-02-18 19:56:30.468173"], ["name", "effie"]]
+  ↳ app/controllers/users/registrations_controller.rb:14:in `create'
+  [1m[35m (17.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users/registrations_controller.rb:14:in `create'
+Redirected to http://localhost:3000/
+Completed 302 Found in 339ms (ActiveRecord: 29.8ms | Allocations: 7980)
+
+
+Started GET "/" for ::1 at 2020-02-18 13:56:30 -0600
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 12.1ms | Allocations: 191)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.9ms | Allocations: 167)
+Completed 200 OK in 260ms (Views: 98.0ms | ActiveRecord: 0.9ms | Allocations: 17621)
+
+
+Started GET "/users" for ::1 at 2020-02-18 13:56:34 -0600
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:3
+  Rendered users/index.html.erb within layouts/application (Duration: 14.2ms | Allocations: 1851)
+Completed 500 Internal Server Error in 97ms (ActiveRecord: 2.8ms | Allocations: 4132)
+
+
+  
+ActionView::Template::Error (undefined method `include?' for nil:NilClass):
+    2: <ul>
+    3:   <% @users.each do |u| %>
+    4:     <li class='text-dark'><%= u.name %></li><br>
+    5:     <% if @friendships.include?(u)%>
+    6:       <%=button_to 'Cancel request',  {:controller => :friendships, :action => 'destroy',
+    7:                                              :id => (find_friendship(current_user, u) || 
+    8:                                                      find_friendship(u, current_user))} , 
+  
+app/views/users/index.html.erb:5
+app/views/users/index.html.erb:3
+Started GET "/users" for ::1 at 2020-02-18 14:10:32 -0600
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (2.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:3
+  Rendered users/index.html.erb within layouts/application (Duration: 38.8ms | Allocations: 2231)
+Completed 500 Internal Server Error in 111ms (ActiveRecord: 3.8ms | Allocations: 11202)
+
+
+  
+ActionView::Template::Error (undefined method `include?' for nil:NilClass):
+    2: <ul>
+    3:   <% @users.each do |u| %>
+    4:     <li class='text-dark'><%= u.name %></li><br>
+    5:     <% if @pending_friends.include?(u)%>
+    6:       <%=button_to 'Cancel request',  {:controller => :friendships, :action => 'destroy',
+    7:                                              :id => (find_friendship(current_user, u) || 
+    8:                                                      find_friendship(u, current_user))} , 
+  
+app/views/users/index.html.erb:5
+app/views/users/index.html.erb:3
+Started GET "/users" for ::1 at 2020-02-18 14:10:55 -0600
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" LIMIT $1[0m  [["LIMIT", 11]]
+  Rendered users/index.html.erb within layouts/application (Duration: 1638.0ms | Allocations: 227596)
+Completed 500 Internal Server Error in 1660ms (ActiveRecord: 2.7ms | Allocations: 230498)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `users' for #<#<Class:0x00007fc9ec85edb0>:0x00007fc9ec85c448>
+Did you mean?  @users):
+    1: <h3>Find Friends</h3>
+    2: <ul>
+    3:   <% users.each do |u| %>
+    4:     <li class='text-dark'><%= u.name %></li><br>
+    5:     <% if @pending_friends.include?(u)%>
+    6:       <%=button_to 'Cancel request',  {:controller => :friendships, :action => 'destroy',
+  
+app/views/users/index.html.erb:3
+Started GET "/users" for ::1 at 2020-02-18 14:12:05 -0600
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (3.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:3
+  Rendered users/index.html.erb within layouts/application (Duration: 1521.3ms | Allocations: 215919)
+Completed 500 Internal Server Error in 1550ms (ActiveRecord: 5.0ms | Allocations: 218823)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `pending_friends' for #<#<Class:0x00007fc9ec482980>:0x00007fc9ec4801d0>):
+    2: <ul>
+    3:   <% @users.each do |u| %>
+    4:     <li class='text-dark'><%= u.name %></li><br>
+    5:     <% if pending_friends.include?(u)%>
+    6:       <%=button_to 'Cancel request',  {:controller => :friendships, :action => 'destroy',
+    7:                                              :id => (find_friendship(current_user, u) || 
+    8:                                                      find_friendship(u, current_user))} , 
+  
+app/views/users/index.html.erb:5
+app/views/users/index.html.erb:3
+Started GET "/users" for ::1 at 2020-02-18 14:23:29 -0600
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (2.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:3
+  Rendered users/index.html.erb within layouts/application (Duration: 47.7ms | Allocations: 2227)
+Completed 500 Internal Server Error in 119ms (ActiveRecord: 7.5ms | Allocations: 11216)
+
+
+  
+ActionView::Template::Error (undefined method `include?' for nil:NilClass):
+    2: <ul>
+    3:   <% @users.each do |u| %>
+    4:     <li class='text-dark'><%= u.name %></li><br>
+    5:     <% if @pending_friends.include?(u)%>
+    6:       <%=button_to 'Cancel request',  {:controller => :friendships, :action => 'destroy',
+    7:                                              :id => (find_friendship(current_user, u) || 
+    8:                                                      find_friendship(u, current_user))} , 
+  
+app/views/users/index.html.erb:5
+app/views/users/index.html.erb:3
+Started GET "/users" for ::1 at 2020-02-18 14:28:35 -0600
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (5.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:7:in `index'
+Completed 500 Internal Server Error in 177ms (ActiveRecord: 28.9ms | Allocations: 11166)
+
+
+  
+NoMethodError (undefined method `pending_friends' for #<User:0x000055f448417660>):
+  
+app/controllers/users_controller.rb:8:in `index'
+Started GET "/users" for ::1 at 2020-02-18 14:32:23 -0600
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (3.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:7:in `index'
+Completed 500 Internal Server Error in 124ms (ActiveRecord: 16.2ms | Allocations: 11279)
+
+
+  
+NoMethodError (undefined method `friends' for #<User:0x00007fc9ecc92990>
+Did you mean?  friendships):
+  
+app/controllers/users_controller.rb:8:in `index'
+Started GET "/users" for ::1 at 2020-02-18 14:32:56 -0600
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (6.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (4.0ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:7:in `index'
+Completed 500 Internal Server Error in 277ms (ActiveRecord: 22.5ms | Allocations: 12702)
+
+
+  
+NoMethodError (undefined method `friend_requests' for #<User:0x00007fc9fd29d320>
+Did you mean?  friendships):
+  
+app/controllers/users_controller.rb:9:in `index'
+Started GET "/users" for ::1 at 2020-02-18 14:33:22 -0600
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (5.8ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:7:in `index'
+  Rendering users/index.html.erb within layouts/application
+  Rendered users/index.html.erb within layouts/application (Duration: 32.9ms | Allocations: 381)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 11.0ms | Allocations: 448)
+Completed 200 OK in 431ms (Views: 274.2ms | ActiveRecord: 17.9ms | Allocations: 20072)
+
+
+Started GET "/users" for ::1 at 2020-02-18 14:33:35 -0600
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (6.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:7:in `index'
+  Rendering users/index.html.erb within layouts/application
+  Rendered users/index.html.erb within layouts/application (Duration: 0.1ms | Allocations: 4)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.9ms | Allocations: 170)
+Completed 200 OK in 70ms (Views: 50.9ms | ActiveRecord: 7.0ms | Allocations: 10447)
+
+
+Started DELETE "/users/sign_out" for ::1 at 2020-02-18 14:33:40 -0600
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"jVug8KR8te9st7+6rrjbbJZrE3mn/H0P/S04v6Ga8Wj+sTx27SZV7Y14M0hSteDEGXG4/CHk/42SHyHlg3y16w=="}
+  [1m[36mUser Load (2.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 302 Found in 21ms (ActiveRecord: 2.1ms | Allocations: 2710)
+
+
+Started GET "/" for ::1 at 2020-02-18 14:33:41 -0600
+Processing by HomeController#index as HTML
+Completed 401 Unauthorized in 7ms (ActiveRecord: 0.0ms | Allocations: 576)
+
+
+Started GET "/users/sign_in" for ::1 at 2020-02-18 14:33:41 -0600
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 6.0ms | Allocations: 559)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 35.8ms | Allocations: 2027)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 1.3ms | Allocations: 248)
+Completed 200 OK in 92ms (Views: 88.6ms | ActiveRecord: 0.0ms | Allocations: 11803)
+
+
+Started GET "/users/sign_up" for ::1 at 2020-02-18 14:33:45 -0600
+Processing by Users::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 2.9ms | Allocations: 206)
+  Rendered devise/shared/_links.html.erb (Duration: 0.9ms | Allocations: 90)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 33.9ms | Allocations: 2115)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 4.0ms | Allocations: 248)
+Completed 200 OK in 89ms (Views: 84.2ms | ActiveRecord: 0.0ms | Allocations: 12308)
+
+
+Started POST "/users" for ::1 at 2020-02-18 14:34:18 -0600
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"authenticity_token"=>"rSBYrkzjuSqP4LQslej10KJ1J49vPPGbt/6/BzKggW7UY7Iqlri3xA5w6Qyame76ikJgqJvfV+sCkfbXYtIZZg==", "user"=>{"name"=>"example", "email"=>"example@example.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[35m (2.8ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users/registrations_controller.rb:14:in `create'
+  [1m[36mUser Exists? (1.9ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "example@example.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users/registrations_controller.rb:14:in `create'
+  [1m[36mUser Exists? (15.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "example@example.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users/registrations_controller.rb:14:in `create'
+  [1m[36mUser Create (24.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "name") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["email", "example@example.com"], ["encrypted_password", "$2a$11$s3Q4hgn7WcKLsWEYMKVnnO5SvxAG/NOWVMsi9YOxtp6kl4/8NWHam"], ["created_at", "2020-02-18 20:34:19.119879"], ["updated_at", "2020-02-18 20:34:19.119879"], ["name", "example"]]
+  ↳ app/controllers/users/registrations_controller.rb:14:in `create'
+  [1m[35m (25.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users/registrations_controller.rb:14:in `create'
+Redirected to http://localhost:3000/
+Completed 302 Found in 363ms (ActiveRecord: 73.1ms | Allocations: 7826)
+
+
+Started GET "/" for ::1 at 2020-02-18 14:34:19 -0600
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 16.4ms | Allocations: 191)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 2.6ms | Allocations: 166)
+Completed 200 OK in 170ms (Views: 69.8ms | ActiveRecord: 9.7ms | Allocations: 17812)
+
+
+Started GET "/users" for ::1 at 2020-02-18 14:34:23 -0600
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:7:in `index'
+  Rendering users/index.html.erb within layouts/application
+  Rendered users/index.html.erb within layouts/application (Duration: 9.4ms | Allocations: 191)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.8ms | Allocations: 168)
+Completed 200 OK in 70ms (Views: 49.8ms | ActiveRecord: 2.0ms | Allocations: 10649)
+
+
+Started POST "/friendships?friendship%5Bfriend_id%5D=1" for ::1 at 2020-02-18 14:34:31 -0600
+Processing by FriendshipsController#create as HTML
+  Parameters: {"authenticity_token"=>"D8iyRVuijkxd9ZZM6JTRX6/OuWVHNYr+QUQ4l5SWynm4T5SGjmLtQDFNk+7Mbd49kZWJpyqUu//3WbmZbIm2dA==", "friendship"=>{"friend_id"=>"1"}}
+  [1m[35m (7.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/friendships_controller.rb:15:in `create'
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:15:in `create'
+  [1m[36mFriendship Exists? (9.6ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" IS NULL AND "friendships"."friend_id" = $1 LIMIT $2[0m  [["friend_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:15:in `create'
+  [1m[35m (0.8ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/friendships_controller.rb:15:in `create'
+Redirected to http://localhost:3000/users
+Completed 302 Found in 81ms (ActiveRecord: 27.8ms | Allocations: 9566)
+
+
+Started GET "/users" for ::1 at 2020-02-18 14:34:31 -0600
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (2.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (3.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:7:in `index'
+  Rendering users/index.html.erb within layouts/application
+  Rendered users/index.html.erb within layouts/application (Duration: 1.2ms | Allocations: 184)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 4.5ms | Allocations: 161)
+Completed 200 OK in 63ms (Views: 46.2ms | ActiveRecord: 5.7ms | Allocations: 10641)
+
+
+Started DELETE "/users/sign_out" for ::1 at 2020-02-18 14:34:38 -0600
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"tMWrz9PFuC0BRa9oh5/T+B3Y0uMHlFa+lbWzrjjy5xufyCAc+U33You14bX8AGXjPtUJQRMmWGPukGaBioBu2A=="}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 302 Found in 15ms (ActiveRecord: 0.8ms | Allocations: 2330)
+
+
+Started GET "/" for ::1 at 2020-02-18 14:34:38 -0600
+Processing by HomeController#index as HTML
+Completed 401 Unauthorized in 2ms (ActiveRecord: 0.0ms | Allocations: 500)
+
+
+Started GET "/users/sign_in" for ::1 at 2020-02-18 14:34:38 -0600
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 1.4ms | Allocations: 134)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 8.2ms | Allocations: 1134)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 1.7ms | Allocations: 248)
+Completed 200 OK in 54ms (Views: 49.6ms | ActiveRecord: 0.0ms | Allocations: 9848)
+
+
+Started POST "/users/sign_in" for ::1 at 2020-02-18 14:34:49 -0600
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"k6zp2e1D5inXEZGpG5lEqMt2vmIsSIJVRFHybxlDka2zf/ectoffdcpWqmWIGIB7QRSCRosG0BaZRpZjZMns6g==", "user"=>{"email"=>"effie@email.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "effie@email.com"], ["LIMIT", 1]]
+Completed 401 Unauthorized in 18ms (ActiveRecord: 1.1ms | Allocations: 2044)
+
+
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"authenticity_token"=>"k6zp2e1D5inXEZGpG5lEqMt2vmIsSIJVRFHybxlDka2zf/ectoffdcpWqmWIGIB7QRSCRosG0BaZRpZjZMns6g==", "user"=>{"email"=>"effie@email.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 1.0ms | Allocations: 134)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 10.8ms | Allocations: 1121)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 1.0ms | Allocations: 202)
+Completed 200 OK in 269ms (Views: 54.8ms | ActiveRecord: 0.0ms | Allocations: 9490)
+
+
+Started POST "/users/sign_in" for ::1 at 2020-02-18 14:35:05 -0600
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"5Tm4YNMmVwzAKWiujDLww5TVkuwoJcCiydKOC13LQiHF6qYliOJuUN1uU2IfszQQHreuyI9rkuEUxeoHIEE/Zg==", "user"=>{"email"=>"yellow@email.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "yellow@email.com"], ["LIMIT", 1]]
+Completed 401 Unauthorized in 18ms (ActiveRecord: 1.2ms | Allocations: 2027)
+
+
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"authenticity_token"=>"5Tm4YNMmVwzAKWiujDLww5TVkuwoJcCiydKOC13LQiHF6qYliOJuUN1uU2IfszQQHreuyI9rkuEUxeoHIEE/Zg==", "user"=>{"email"=>"yellow@email.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.8ms | Allocations: 134)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 6.9ms | Allocations: 1120)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 1.3ms | Allocations: 202)
+Completed 200 OK in 262ms (Views: 41.8ms | ActiveRecord: 0.0ms | Allocations: 9488)
+
+
+Started POST "/users/sign_in" for ::1 at 2020-02-18 14:35:19 -0600
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"mLaKDiKnrOviNBJkjrbNgbHt7lBbgV2D6z9mgI/X9ui4ZZRLeWOVt/9zKagdNwlSO4/SdPzPD8A2KAKM8l2Lrw==", "user"=>{"email"=>"effie@email.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (8.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "effie@email.com"], ["LIMIT", 1]]
+Completed 401 Unauthorized in 17ms (ActiveRecord: 8.4ms | Allocations: 2028)
+
+
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"authenticity_token"=>"mLaKDiKnrOviNBJkjrbNgbHt7lBbgV2D6z9mgI/X9ui4ZZRLeWOVt/9zKagdNwlSO4/SdPzPD8A2KAKM8l2Lrw==", "user"=>{"email"=>"effie@email.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.9ms | Allocations: 134)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 6.4ms | Allocations: 1120)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 1.0ms | Allocations: 202)
+Completed 200 OK in 275ms (Views: 42.9ms | ActiveRecord: 0.0ms | Allocations: 9488)
+
+
+Started GET "/users/sign_up" for ::1 at 2020-02-18 14:35:29 -0600
+Processing by Users::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.1ms | Allocations: 15)
+  Rendered devise/shared/_links.html.erb (Duration: 0.5ms | Allocations: 79)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 10.7ms | Allocations: 1367)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 1.3ms | Allocations: 248)
+Completed 200 OK in 65ms (Views: 61.6ms | ActiveRecord: 0.0ms | Allocations: 10057)
+
+
+Started POST "/users" for ::1 at 2020-02-18 14:35:52 -0600
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"authenticity_token"=>"sWmpEptgggNAS8Le7iPoAoWp3Xkfmb8mmBP1y3So7H6XLTSN/QOTCZlwT8jkYQ2Xc7pI33Dm0kQaLkfZK1TRrQ==", "user"=>{"name"=>"effie", "email"=>"effie@email.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[35m (0.9ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users/registrations_controller.rb:14:in `create'
+  [1m[36mUser Exists? (1.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "effie@email.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users/registrations_controller.rb:14:in `create'
+  [1m[36mUser Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "effie@email.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users/registrations_controller.rb:14:in `create'
+  [1m[36mUser Create (1.5ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "name") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["email", "effie@email.com"], ["encrypted_password", "$2a$11$POzYVYb0jFyMFk5VZ.SokO.F1Lce8Pp8JEGOxSkshKi3lcSlDq6wy"], ["created_at", "2020-02-18 20:35:52.904188"], ["updated_at", "2020-02-18 20:35:52.904188"], ["name", "effie"]]
+  ↳ app/controllers/users/registrations_controller.rb:14:in `create'
+  [1m[35m (12.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users/registrations_controller.rb:14:in `create'
+Redirected to http://localhost:3000/
+Completed 302 Found in 338ms (ActiveRecord: 17.5ms | Allocations: 5869)
+
+
+Started GET "/" for ::1 at 2020-02-18 14:35:52 -0600
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.6ms | Allocations: 58)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.8ms | Allocations: 161)
+Completed 200 OK in 50ms (Views: 38.9ms | ActiveRecord: 0.8ms | Allocations: 9872)
+
+
+Started GET "/users" for ::1 at 2020-02-18 14:35:57 -0600
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (4.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:7:in `index'
+  Rendering users/index.html.erb within layouts/application
+  Rendered users/index.html.erb within layouts/application (Duration: 1.8ms | Allocations: 354)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 2.4ms | Allocations: 161)
+Completed 200 OK in 69ms (Views: 43.8ms | ActiveRecord: 5.1ms | Allocations: 10807)
+
+
+Started POST "/friendships?friendship%5Bfriend_id%5D=2" for ::1 at 2020-02-18 14:36:01 -0600
+Processing by FriendshipsController#create as HTML
+  Parameters: {"authenticity_token"=>"7fQg/Tb8nU+XRTr3Vp7HEW8pIUzH59k/abP0wbQedNZFZKzJ7vQciQlytSpfBZHKCixIxaQ/YlS+EE/V/xH+9w==", "friendship"=>{"friend_id"=>"2"}}
+  [1m[35m (1.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/friendships_controller.rb:15:in `create'
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:15:in `create'
+  [1m[36mFriendship Exists? (1.9ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" IS NULL AND "friendships"."friend_id" = $1 LIMIT $2[0m  [["friend_id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:15:in `create'
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/friendships_controller.rb:15:in `create'
+Redirected to http://localhost:3000/users
+Completed 302 Found in 48ms (ActiveRecord: 5.3ms | Allocations: 4979)
+
+
+Started GET "/users" for ::1 at 2020-02-18 14:36:01 -0600
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:7:in `index'
+  Rendering users/index.html.erb within layouts/application
+  Rendered users/index.html.erb within layouts/application (Duration: 2.6ms | Allocations: 354)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 1.5ms | Allocations: 161)
+Completed 200 OK in 64ms (Views: 46.8ms | ActiveRecord: 2.4ms | Allocations: 10827)
+
+
+Started DELETE "/users/sign_out" for ::1 at 2020-02-18 14:36:06 -0600
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"LfRHmbJ1+Nn+Au2m7jB5QuxGRZRp7uou2Wshrhoi+0wNJ1nc6bHBheNF1mp9sb2RZiR5sM6guG0EfEWiZ6iGCw=="}
+  [1m[36mUser Load (5.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 302 Found in 20ms (ActiveRecord: 5.1ms | Allocations: 2335)
+
+
+Started GET "/" for ::1 at 2020-02-18 14:36:06 -0600
+Processing by HomeController#index as HTML
+Completed 401 Unauthorized in 3ms (ActiveRecord: 0.0ms | Allocations: 502)
+
+
+Started GET "/users/sign_in" for ::1 at 2020-02-18 14:36:06 -0600
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.6ms | Allocations: 134)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 8.8ms | Allocations: 1125)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 1.2ms | Allocations: 238)
+Completed 200 OK in 72ms (Views: 62.4ms | ActiveRecord: 0.0ms | Allocations: 9822)
+
+
+Started POST "/users/sign_in" for ::1 at 2020-02-18 14:36:22 -0600
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"XaGhNU9rrVLXelNqqSW/1OP/PuDX35YmmlmxQ4zq/0ADOmGVeYHCBh5h5BcKn28Zs/gNhBbKps8WUR+j8ZjL9A==", "user"=>{"email"=>"example@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (2.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "example@example.com"], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 302 Found in 265ms (ActiveRecord: 2.5ms | Allocations: 3196)
+
+
+Started GET "/" for ::1 at 2020-02-18 14:36:22 -0600
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (2.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.5ms | Allocations: 58)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 1.1ms | Allocations: 161)
+Completed 200 OK in 60ms (Views: 45.3ms | ActiveRecord: 2.7ms | Allocations: 9867)
+
+
+Started GET "/friendships" for ::1 at 2020-02-18 14:36:26 -0600
+Processing by FriendshipsController#index as HTML
+  [1m[36mUser Load (2.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:9:in `index'
+  Rendering friendships/index.html.erb within layouts/application
+  [1m[36mFriendship Load (1.9ms)[0m  [1m[34mSELECT "friendships".* FROM "friendships" WHERE (user_id = 2 OR friend_id = 2)[0m
+  ↳ app/views/friendships/index.html.erb:3
+  Rendered friendships/index.html.erb within layouts/application (Duration: 20.6ms | Allocations: 1070)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 5.2ms | Allocations: 180)
+Completed 200 OK in 95ms (Views: 77.7ms | ActiveRecord: 3.9ms | Allocations: 11028)
+
+
+Started GET "/friendships" for ::1 at 2020-02-18 14:36:27 -0600
+Processing by FriendshipsController#index as HTML
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:9:in `index'
+  Rendering friendships/index.html.erb within layouts/application
+  [1m[36mFriendship Load (3.1ms)[0m  [1m[34mSELECT "friendships".* FROM "friendships" WHERE (user_id = 2 OR friend_id = 2)[0m
+  ↳ app/views/friendships/index.html.erb:3
+  Rendered friendships/index.html.erb within layouts/application (Duration: 11.0ms | Allocations: 855)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.9ms | Allocations: 170)
+Completed 200 OK in 73ms (Views: 54.2ms | ActiveRecord: 4.6ms | Allocations: 10125)
+
+

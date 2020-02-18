@@ -5,6 +5,7 @@ class Friendship < ApplicationRecord
 
   belongs_to :user
   belongs_to :friend, class_name: 'User'
+  validates_uniqueness_of :user_id, scope: [:friend_id]
 
   scope :already, ->(user, friend) { where('user_id = (?)', user).where('friend_id = (?)', friend) }
   scope :invitation_requests, ->(user, friend) { where('status = (?)', false).where('friend_id = (?)', user.id).where('user_id = (?)', friend.id) }

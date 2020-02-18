@@ -2,7 +2,7 @@
 <ul>
   <% @users.each do |u| %>
     <li class='text-dark'><%= u.name %></li><br>
-    <% if @friendships.include?(u)%>
+    <% if @friends.include?(u)%>
       <%=button_to 'Cancel request',  {:controller => :friendships, :action => 'destroy',
                                              :id => (find_friendship(current_user, u) || 
                                                      find_friendship(u, current_user))} , 
@@ -35,6 +35,7 @@
                                              :class => 'btn btn-primary mt-1',
                                               data: { confirm: "Are you sure?" } %>
     <%end%>
-    <br><br>
+    <br>
+    <br>
   <%end%>
 </ul>
