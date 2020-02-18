@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   def index
     @posts = Post.all.order(created_at: :DESC)
     @users = User.all
-    @friends = current_user.friendships
+    @friends = current_user.friends
     @post = Post.new
     @comment = Comment.new
   end

@@ -1,13 +1,13 @@
 <h3 class='text-dark'>Friend requests</h3>
 <ul>
   <% @requests.each do |request|%>
-    <li class='text-dark'><%=p.name%></li>
+    <li class='text-dark'><%=request.name%></li>
     <%=button_to 'Accept',  {:controller => :friendships, :action => 'update',
                                             :id => (find_friendship(current_user, request) || find_friendship(request, current_user))} , 
                                             :method => :patch, :class => 'btn btn-info mt-1', data: { confirm: "Confirmed" } %>
       
     <%=button_to 'Decline',  {:controller => :friendships, :action => 'destroy', :id => (find_friendship(current_user, request) || 
                                             find_friendship(request, current_user)) },:method => :delete,
-                                            :class => 'btn btn-danger mt-1',data: { confirm: "Are you sure?" } %>
+                                            :class => 'btn btn-danger mt-1',data: { confirm: "Cancel this request?" } %>
 <%end%>
 </ul>
