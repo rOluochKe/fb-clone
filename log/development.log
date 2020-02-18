@@ -24808,3 +24808,1484 @@ Processing by Devise::SessionsController#new as HTML
 Completed 200 OK in 42ms (Views: 39.3ms | ActiveRecord: 0.0ms | Allocations: 9734)
 
 
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT pg_try_advisory_lock(333164765143615230)[0m
+  [1m[35m (35.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateFriendships (20200217192032)
+  [1m[35m (11.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (406.6ms)[0m  [1m[35mCREATE TABLE "friendships" ("id" bigserial primary key, "status" boolean, "user_id" integer, "friend_id" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (1.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200217192032"]]
+  [1m[35m (18.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (25.9ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT pg_advisory_unlock(333164765143615230)[0m
+  [1m[35m (2.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for ::1 at 2020-02-17 15:24:10 -0600
+  [1m[35m (2.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (34.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 13.3ms | Allocations: 341)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 7.3ms | Allocations: 357)
+Completed 200 OK in 4310ms (Views: 4020.9ms | ActiveRecord: 76.5ms | Allocations: 158158)
+
+
+Started GET "/posts" for ::1 at 2020-02-17 15:24:55 -0600
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.erb within layouts/application
+  Rendered posts/_new.html.erb (Duration: 164.7ms | Allocations: 3020)
+  [1m[36mPost Exists? (36.0ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:1
+  [1m[36mPost Load (1.6ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY "posts"."created_at" DESC[0m
+  ↳ app/views/posts/_timeline.html.erb:6
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:7
+  [1m[35m (31.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 2], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:11
+  [1m[36mComment Load (13.5ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 2]]
+  ↳ app/views/posts/_timeline.html.erb:19
+  Rendered posts/_new-comment.html.erb (Duration: 4.0ms | Allocations: 569)
+  Rendered posts/_timeline.html.erb (Duration: 308.5ms | Allocations: 10437)
+  Rendered posts/index.html.erb within layouts/application (Duration: 477.0ms | Allocations: 14059)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.6ms | Allocations: 114)
+Completed 200 OK in 585ms (Views: 425.4ms | ActiveRecord: 100.3ms | Allocations: 29312)
+
+
+Started POST "/posts/2/likes" for ::1 at 2020-02-17 15:25:04 -0600
+Processing by LikesController#create as HTML
+  Parameters: {"authenticity_token"=>"A0J15/mE5DMLtnAcbOIBo+eI+md3OM/muMY9PbjMASzyGFSyVey2PdQR1Khgh4XAeAgSAMdrGfVUBaj+Q+cKhw==", "post_id"=>"2"}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/likes_controller.rb:25:in `already_liked?'
+  [1m[36mLike Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = $1 AND "likes"."likable_id" = $2 LIMIT $3[0m  [["user_id", 1], ["likable_id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/likes_controller.rb:25:in `already_liked?'
+  [1m[36mPost Load (1.5ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/likes_controller.rb:14:in `create'
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/likes_controller.rb:15:in `create'
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/likes_controller.rb:15:in `create'
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/likes_controller.rb:15:in `create'
+Redirected to http://localhost:3000/posts
+Completed 302 Found in 122ms (ActiveRecord: 16.0ms | Allocations: 12061)
+
+
+Started GET "/posts" for ::1 at 2020-02-17 15:25:04 -0600
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (3.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.erb within layouts/application
+  Rendered posts/_new.html.erb (Duration: 3.5ms | Allocations: 402)
+  [1m[36mPost Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:1
+  [1m[36mPost Load (2.8ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY "posts"."created_at" DESC[0m
+  ↳ app/views/posts/_timeline.html.erb:6
+  [1m[36mUser Load (3.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:7
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 2], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:11
+  [1m[36mComment Load (1.1ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 2]]
+  ↳ app/views/posts/_timeline.html.erb:19
+  Rendered posts/_new-comment.html.erb (Duration: 7.4ms | Allocations: 391)
+  Rendered posts/_timeline.html.erb (Duration: 61.5ms | Allocations: 4218)
+  Rendered posts/index.html.erb within layouts/application (Duration: 66.7ms | Allocations: 4767)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 2.4ms | Allocations: 109)
+Completed 200 OK in 129ms (Views: 105.1ms | ActiveRecord: 13.4ms | Allocations: 14469)
+
+
+Started GET "/" for ::1 at 2020-02-17 15:25:14 -0600
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.6ms | Allocations: 65)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 1.7ms | Allocations: 104)
+Completed 200 OK in 73ms (Views: 56.2ms | ActiveRecord: 1.1ms | Allocations: 9749)
+
+
+Started GET "/posts" for ::1 at 2020-02-17 15:25:16 -0600
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (4.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.erb within layouts/application
+  Rendered posts/_new.html.erb (Duration: 2.9ms | Allocations: 402)
+  [1m[36mPost Exists? (1.8ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:1
+  [1m[36mPost Load (2.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY "posts"."created_at" DESC[0m
+  ↳ app/views/posts/_timeline.html.erb:6
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:7
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 2], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:11
+  [1m[36mComment Load (1.4ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 2]]
+  ↳ app/views/posts/_timeline.html.erb:19
+  Rendered posts/_new-comment.html.erb (Duration: 2.3ms | Allocations: 391)
+  Rendered posts/_timeline.html.erb (Duration: 41.3ms | Allocations: 4215)
+  Rendered posts/index.html.erb within layouts/application (Duration: 51.8ms | Allocations: 4764)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.7ms | Allocations: 109)
+Completed 200 OK in 114ms (Views: 87.6ms | ActiveRecord: 12.4ms | Allocations: 14491)
+
+
+Started GET "/" for ::1 at 2020-02-18 09:23:01 -0600
+  [1m[35m (26.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (40.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 13.2ms | Allocations: 341)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 153.8ms | Allocations: 3685)
+Completed 500 Internal Server Error in 1249ms (ActiveRecord: 149.6ms | Allocations: 58733)
+
+
+  
+ActionView::Template::Error (undefined method `received_requests' for #<User:0x000055f4482e4e50>):
+    4: <%= link_to 'Home', root_path, class: "navbar-item"%>
+    5: <%= link_to 'Posts', posts_path, class: "navbar-item"%>
+    6: <div class = "pull-right">
+    7:   <li> <%= link_to pluralize(current_user.received_requests.length, 'Friend Request'), friendships_path %> </li>
+    8:   <li> <%= link_to 'Find Users', users_path%> </li>
+    9: </div>
+   10: <% if user_signed_in? %>
+  
+app/views/home/_show_page.html.erb:7
+app/views/layouts/application.html.erb:17
+Started GET "/" for ::1 at 2020-02-18 09:25:19 -0600
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.8ms | Allocations: 68)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 45.4ms | Allocations: 3048)
+Completed 500 Internal Server Error in 246ms (ActiveRecord: 36.1ms | Allocations: 23653)
+
+
+  
+ActionView::Template::Error (undefined method `received_requests' for #<User:0x00007fc9fc17af98>):
+    4: <%= link_to 'Home', root_path, class: "navbar-item"%>
+    5: <%= link_to 'Posts', posts_path, class: "navbar-item"%>
+    6: <div class = "pull-right">
+    7:   <li> <%= link_to pluralize(current_user.received_requests.length, 'Friend Request'), friendships_path %> </li>
+    8:   <li> <%= link_to 'Find Users', users_path%> </li>
+    9: </div>
+   10: <% if user_signed_in? %>
+  
+app/views/home/_show_page.html.erb:7
+app/views/layouts/application.html.erb:17
+Started GET "/" for ::1 at 2020-02-18 09:25:25 -0600
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (4.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.7ms | Allocations: 58)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 55.8ms | Allocations: 3009)
+Completed 500 Internal Server Error in 115ms (ActiveRecord: 4.2ms | Allocations: 12669)
+
+
+  
+ActionView::Template::Error (undefined method `received_requests' for #<User:0x000055f447f0fd20>):
+    4: <%= link_to 'Home', root_path, class: "navbar-item"%>
+    5: <%= link_to 'Posts', posts_path, class: "navbar-item"%>
+    6: <div class = "pull-right">
+    7:   <li> <%= link_to pluralize(current_user.received_requests.length, 'Friend Request'), friendships_path %> </li>
+    8:   <li> <%= link_to 'Find Users', users_path%> </li>
+    9: </div>
+   10: <% if user_signed_in? %>
+  
+app/views/home/_show_page.html.erb:7
+app/views/layouts/application.html.erb:17
+Started GET "/" for ::1 at 2020-02-18 09:32:07 -0600
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 2.6ms | Allocations: 199)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 2.9ms | Allocations: 1216)
+Completed 500 Internal Server Error in 170ms (ActiveRecord: 3.5ms | Allocations: 22736)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check <a href="#">
+  <p>Facebook Clone</p>
+</a>
+<%= link_to 'Home', root_path, class: "navbar-item"%>
+<%= link_to 'Posts', posts_path, class: "navbar-item"%>
+<div class = "pull-right">
+  <%= link_to "Accept Request", create_friendship_path(user.id, current_user.id), method: :put, class:"button  is-link is-fullwidth" %>
+  <%= link_to "Cancel request", delete_friendship_path((user.id, current_user.id), method: :delete, class:"button  is-danger is-link is-fullwidth" %>
+    </div>
+    </div>
+    <% end%>
+</div>
+
+  <li> <%= link_to 'Find Users', users_path%> </li>
+</div>
+<% if user_signed_in? %>
+    <%= link_to('Logout', destroy_user_session_path, method: :delete) %>  
+<% else %>
+    <strong>
+      <%= link_to 'Sign up', new_user_registration_path, class: "button-primary" %>
+    </strong>
+    <strong>
+      <%= link_to 'Sign in', new_user_session_path, class: "button-light" %>
+    </strong>
+<% end %>
+
+):
+1:    <a href="#">
+2:      <p>Facebook Clone</p>
+3:    </a>
+4:    <%= link_to 'Home', root_path, class: "navbar-item"%>
+5:    <%= link_to 'Posts', posts_path, class: "navbar-item"%>
+6:    <div class = "pull-right">
+7:      <%= link_to "Accept Request", create_friendship_path(user.id, current_user.id), method: :put, class:"button  is-link is-fullwidth" %>
+8:      <%= link_to "Cancel request", delete_friendship_path((user.id, current_user.id), method: :delete, class:"button  is-danger is-link is-fullwidth" %>
+9:        </div>
+10:        </div>
+11:        <% end%>
+12:    </div>
+13:    
+14:      <li> <%= link_to 'Find Users', users_path%> </li>
+15:    </div>
+16:    <% if user_signed_in? %>
+17:        <%= link_to('Logout', destroy_user_session_path, method: :delete) %>  
+18:    <% else %>
+19:        <strong>
+20:          <%= link_to 'Sign up', new_user_registration_path, class: "button-primary" %>
+21:        </strong>
+22:        <strong>
+23:          <%= link_to 'Sign in', new_user_session_path, class: "button-light" %>
+24:        </strong>
+25:    <% end %>
+  
+app/views/home/_show_page.html.erb:8: syntax error, unexpected ')', expecting '='
+app/views/home/_show_page.html.erb:8: syntax error, unexpected ';', expecting ')'
+app/views/home/_show_page.html.erb:11: syntax error, unexpected end, expecting ')'
+app/views/home/_show_page.html.erb:27: syntax error, unexpected end, expecting ')'
+app/views/home/_show_page.html.erb:8: syntax error, unexpected ')', expecting '='
+app/views/home/_show_page.html.erb:8: syntax error, unexpected ';', expecting ')'
+app/views/home/_show_page.html.erb:11: syntax error, unexpected end, expecting ')'
+app/views/home/_show_page.html.erb:27: syntax error, unexpected end, expecting ')'
+app/views/home/_show_page.html.erb:8: syntax error, unexpected ')', expecting '='
+app/views/home/_show_page.html.erb:8: syntax error, unexpected ';', expecting ')'
+app/views/home/_show_page.html.erb:11: syntax error, unexpected end, expecting ')'
+app/views/home/_show_page.html.erb:27: syntax error, unexpected end, expecting ')'
+app/views/home/_show_page.html.erb:8: syntax error, unexpected ')', expecting '='
+app/views/home/_show_page.html.erb:8: syntax error, unexpected ';', expecting ')'
+app/views/home/_show_page.html.erb:11: syntax error, unexpected end, expecting ')'
+app/views/home/_show_page.html.erb:27: syntax error, unexpected end, expecting ')'
+app/views/home/_show_page.html.erb:8: syntax error, unexpected ')', expecting '='
+app/views/home/_show_page.html.erb:8: syntax error, unexpected ';', expecting ')'
+app/views/home/_show_page.html.erb:11: syntax error, unexpected end, expecting ')'
+app/views/home/_show_page.html.erb:27: syntax error, unexpected end, expecting ')'
+app/views/home/_show_page.html.erb:8: syntax error, unexpected ')', expecting '='
+app/views/home/_show_page.html.erb:8: syntax error, unexpected ';', expecting ')'
+app/views/home/_show_page.html.erb:11: syntax error, unexpected end, expecting ')'
+app/views/home/_show_page.html.erb:27: syntax error, unexpected end, expecting ')'
+app/views/layouts/application.html.erb:17
+Started GET "/" for ::1 at 2020-02-18 09:32:37 -0600
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 2.1ms | Allocations: 190)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 2.8ms | Allocations: 1210)
+Completed 500 Internal Server Error in 55ms (ActiveRecord: 0.9ms | Allocations: 12335)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check <a href="#">
+  <p>Facebook Clone</p>
+</a>
+<%= link_to 'Home', root_path, class: "navbar-item"%>
+<%= link_to 'Posts', posts_path, class: "navbar-item"%>
+<div class = "pull-right">
+  <%= link_to "Accept Request", create_friendship_path(user.id, current_user.id), method: :put, class:"button  is-link is-fullwidth" %>
+  <%= link_to "Cancel request", delete_friendship_path((user.id, current_user.id), method: :delete, class:"button  is-danger is-link is-fullwidth" %>
+</div>
+    <% end%>
+</div>
+
+  <li> <%= link_to 'Find Users', users_path%> </li>
+</div>
+<% if user_signed_in? %>
+    <%= link_to('Logout', destroy_user_session_path, method: :delete) %>  
+<% else %>
+    <strong>
+      <%= link_to 'Sign up', new_user_registration_path, class: "button-primary" %>
+    </strong>
+    <strong>
+      <%= link_to 'Sign in', new_user_session_path, class: "button-light" %>
+    </strong>
+<% end %>
+
+):
+1:    <a href="#">
+2:      <p>Facebook Clone</p>
+3:    </a>
+4:    <%= link_to 'Home', root_path, class: "navbar-item"%>
+5:    <%= link_to 'Posts', posts_path, class: "navbar-item"%>
+6:    <div class = "pull-right">
+7:      <%= link_to "Accept Request", create_friendship_path(user.id, current_user.id), method: :put, class:"button  is-link is-fullwidth" %>
+8:      <%= link_to "Cancel request", delete_friendship_path((user.id, current_user.id), method: :delete, class:"button  is-danger is-link is-fullwidth" %>
+9:    </div>
+10:        <% end%>
+11:    </div>
+12:    
+13:      <li> <%= link_to 'Find Users', users_path%> </li>
+14:    </div>
+15:    <% if user_signed_in? %>
+16:        <%= link_to('Logout', destroy_user_session_path, method: :delete) %>  
+17:    <% else %>
+18:        <strong>
+19:          <%= link_to 'Sign up', new_user_registration_path, class: "button-primary" %>
+20:        </strong>
+21:        <strong>
+22:          <%= link_to 'Sign in', new_user_session_path, class: "button-light" %>
+23:        </strong>
+24:    <% end %>
+  
+app/views/home/_show_page.html.erb:8: syntax error, unexpected ')', expecting '='
+app/views/home/_show_page.html.erb:8: syntax error, unexpected ';', expecting ')'
+app/views/home/_show_page.html.erb:10: syntax error, unexpected end, expecting ')'
+app/views/home/_show_page.html.erb:26: syntax error, unexpected end, expecting ')'
+app/views/home/_show_page.html.erb:8: syntax error, unexpected ')', expecting '='
+app/views/home/_show_page.html.erb:8: syntax error, unexpected ';', expecting ')'
+app/views/home/_show_page.html.erb:10: syntax error, unexpected end, expecting ')'
+app/views/home/_show_page.html.erb:26: syntax error, unexpected end, expecting ')'
+app/views/home/_show_page.html.erb:8: syntax error, unexpected ')', expecting '='
+app/views/home/_show_page.html.erb:8: syntax error, unexpected ';', expecting ')'
+app/views/home/_show_page.html.erb:10: syntax error, unexpected end, expecting ')'
+app/views/home/_show_page.html.erb:26: syntax error, unexpected end, expecting ')'
+app/views/home/_show_page.html.erb:8: syntax error, unexpected ')', expecting '='
+app/views/home/_show_page.html.erb:8: syntax error, unexpected ';', expecting ')'
+app/views/home/_show_page.html.erb:10: syntax error, unexpected end, expecting ')'
+app/views/home/_show_page.html.erb:26: syntax error, unexpected end, expecting ')'
+app/views/home/_show_page.html.erb:8: syntax error, unexpected ')', expecting '='
+app/views/home/_show_page.html.erb:8: syntax error, unexpected ';', expecting ')'
+app/views/home/_show_page.html.erb:10: syntax error, unexpected end, expecting ')'
+app/views/home/_show_page.html.erb:26: syntax error, unexpected end, expecting ')'
+app/views/home/_show_page.html.erb:8: syntax error, unexpected ')', expecting '='
+app/views/home/_show_page.html.erb:8: syntax error, unexpected ';', expecting ')'
+app/views/home/_show_page.html.erb:10: syntax error, unexpected end, expecting ')'
+app/views/home/_show_page.html.erb:26: syntax error, unexpected end, expecting ')'
+app/views/layouts/application.html.erb:17
+Started GET "/" for ::1 at 2020-02-18 09:34:02 -0600
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (2.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 1.6ms | Allocations: 190)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 2.7ms | Allocations: 1192)
+Completed 500 Internal Server Error in 72ms (ActiveRecord: 2.2ms | Allocations: 12317)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check <a href="#">
+  <p>Facebook Clone</p>
+</a>
+<%= link_to 'Home', root_path, class: "navbar-item"%>
+<%= link_to 'Posts', posts_path, class: "navbar-item"%>
+<div class = "pull-right">
+  <%= link_to "Accept Request", create_friendship_path(user.id, current_user.id), method: :put, class:"btn btn-success" %>
+  <%= link_to "Cancel request", delete_friendship_path((user.id, current_user.id), method: :delete, class:"btn btn-danger" %>
+</div>
+</div>
+
+  <li> <%= link_to 'Find Users', users_path%> </li>
+</div>
+<% if user_signed_in? %>
+    <%= link_to('Logout', destroy_user_session_path, method: :delete) %>  
+<% else %>
+    <strong>
+      <%= link_to 'Sign up', new_user_registration_path, class: "button-primary" %>
+    </strong>
+    <strong>
+      <%= link_to 'Sign in', new_user_session_path, class: "button-light" %>
+    </strong>
+<% end %>
+
+):
+1:    <a href="#">
+2:      <p>Facebook Clone</p>
+3:    </a>
+4:    <%= link_to 'Home', root_path, class: "navbar-item"%>
+5:    <%= link_to 'Posts', posts_path, class: "navbar-item"%>
+6:    <div class = "pull-right">
+7:      <%= link_to "Accept Request", create_friendship_path(user.id, current_user.id), method: :put, class:"btn btn-success" %>
+8:      <%= link_to "Cancel request", delete_friendship_path((user.id, current_user.id), method: :delete, class:"btn btn-danger" %>
+9:    </div>
+10:    </div>
+11:    
+12:      <li> <%= link_to 'Find Users', users_path%> </li>
+13:    </div>
+14:    <% if user_signed_in? %>
+15:        <%= link_to('Logout', destroy_user_session_path, method: :delete) %>  
+16:    <% else %>
+17:        <strong>
+18:          <%= link_to 'Sign up', new_user_registration_path, class: "button-primary" %>
+19:        </strong>
+20:        <strong>
+21:          <%= link_to 'Sign in', new_user_session_path, class: "button-light" %>
+22:        </strong>
+23:    <% end %>
+  
+app/views/home/_show_page.html.erb:8: syntax error, unexpected ')', expecting '='
+app/views/home/_show_page.html.erb:8: syntax error, unexpected ';', expecting ')'
+app/views/home/_show_page.html.erb:25: syntax error, unexpected end, expecting ')'
+app/views/home/_show_page.html.erb:8: syntax error, unexpected ')', expecting '='
+app/views/home/_show_page.html.erb:8: syntax error, unexpected ';', expecting ')'
+app/views/home/_show_page.html.erb:25: syntax error, unexpected end, expecting ')'
+app/views/home/_show_page.html.erb:8: syntax error, unexpected ')', expecting '='
+app/views/home/_show_page.html.erb:8: syntax error, unexpected ';', expecting ')'
+app/views/home/_show_page.html.erb:25: syntax error, unexpected end, expecting ')'
+app/views/home/_show_page.html.erb:8: syntax error, unexpected ')', expecting '='
+app/views/home/_show_page.html.erb:8: syntax error, unexpected ';', expecting ')'
+app/views/home/_show_page.html.erb:25: syntax error, unexpected end, expecting ')'
+app/views/home/_show_page.html.erb:8: syntax error, unexpected ')', expecting '='
+app/views/home/_show_page.html.erb:8: syntax error, unexpected ';', expecting ')'
+app/views/home/_show_page.html.erb:25: syntax error, unexpected end, expecting ')'
+app/views/home/_show_page.html.erb:8: syntax error, unexpected ')', expecting '='
+app/views/home/_show_page.html.erb:8: syntax error, unexpected ';', expecting ')'
+app/views/home/_show_page.html.erb:25: syntax error, unexpected end, expecting ')'
+app/views/layouts/application.html.erb:17
+Started GET "/" for ::1 at 2020-02-18 09:34:27 -0600
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 3.4ms | Allocations: 190)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mPost Load (52.7ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.0ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.0ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  Rendered home/_show_page.html.erb (Duration: 1749.0ms | Allocations: 222296)
+Completed 500 Internal Server Error in 1806ms (ActiveRecord: 54.1ms | Allocations: 233421)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `user' for #<#<Class:0x00007fc9ec52e960>:0x00007fc9ec52cfc0>
+Did you mean?  super):
+    4: <%= link_to 'Home', root_path, class: "navbar-item"%>
+    5: <%= link_to 'Posts', posts_path, class: "navbar-item"%>
+    6: <div class = "pull-right">
+    7:   <%= link_to "Accept Request", create_friendship_path(user.id, current_user.id), method: :put, class:"btn btn-success" %>
+    8:   <%= link_to "Cancel request", delete_friendship_path(user.id, current_user.id), method: :delete, class:"btn btn-danger" %>
+    9: </div>
+   10: </div>
+  
+app/views/home/_show_page.html.erb:7
+app/views/layouts/application.html.erb:17
+Started GET "/" for ::1 at 2020-02-18 09:35:01 -0600
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (6.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 1.4ms | Allocations: 190)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 8.6ms | Allocations: 1637)
+Completed 500 Internal Server Error in 110ms (ActiveRecord: 6.1ms | Allocations: 12762)
+
+
+  
+ActionView::Template::Error (undefined method `id' for nil:NilClass):
+    4: <%= link_to 'Home', root_path, class: "navbar-item"%>
+    5: <%= link_to 'Posts', posts_path, class: "navbar-item"%>
+    6: <div class = "pull-right">
+    7:   <%= link_to "Accept Request", create_friendship_path(@user.id, current_user.id), method: :put, class:"btn btn-success" %>
+    8:   <%= link_to "Cancel request", delete_friendship_path(@user.id, current_user.id), method: :delete, class:"btn btn-danger" %>
+    9: </div>
+   10: </div>
+  
+app/views/home/_show_page.html.erb:7
+app/views/layouts/application.html.erb:17
+Started GET "/" for ::1 at 2020-02-18 09:58:15 -0600
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (3.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 1.4ms | Allocations: 191)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 2.3ms | Allocations: 336)
+Completed 200 OK in 74ms (Views: 51.2ms | ActiveRecord: 4.5ms | Allocations: 11624)
+
+
+Started GET "/" for ::1 at 2020-02-18 09:58:19 -0600
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.6ms | Allocations: 59)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.6ms | Allocations: 101)
+Completed 200 OK in 52ms (Views: 40.3ms | ActiveRecord: 1.6ms | Allocations: 9804)
+
+
+Started GET "/posts" for ::1 at 2020-02-18 09:58:21 -0600
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.erb within layouts/application
+  Rendered posts/_new.html.erb (Duration: 128.5ms | Allocations: 2402)
+  [1m[36mPost Exists? (1.5ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:1
+  [1m[36mPost Load (2.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY "posts"."created_at" DESC[0m
+  ↳ app/views/posts/_timeline.html.erb:6
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:7
+  [1m[35m (37.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 2], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:11
+  [1m[36mComment Load (11.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 2]]
+  ↳ app/views/posts/_timeline.html.erb:19
+  Rendered posts/_new-comment.html.erb (Duration: 20.1ms | Allocations: 569)
+  Rendered posts/_timeline.html.erb (Duration: 273.7ms | Allocations: 10406)
+  Rendered posts/index.html.erb within layouts/application (Duration: 418.7ms | Allocations: 13410)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.7ms | Allocations: 114)
+Completed 200 OK in 511ms (Views: 394.4ms | ActiveRecord: 72.3ms | Allocations: 28756)
+
+
+Started GET "/" for ::1 at 2020-02-18 09:58:28 -0600
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.8ms | Allocations: 64)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.7ms | Allocations: 104)
+Completed 200 OK in 58ms (Views: 43.8ms | ActiveRecord: 1.6ms | Allocations: 9813)
+
+
+Started GET "/" for ::1 at 2020-02-18 10:02:33 -0600
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 1.2ms | Allocations: 190)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mPost Load (1.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  Rendered home/_show_page.html.erb (Duration: 837.8ms | Allocations: 112806)
+Completed 500 Internal Server Error in 900ms (ActiveRecord: 2.8ms | Allocations: 123932)
+
+
+  
+ActionView::Template::Error (undefined method `users_friends_path' for #<#<Class:0x000055f44802b3a8>:0x000055f448046ae0>
+Did you mean?  user_session_path):
+     5: <%= link_to 'Posts', posts_path, class: "navbar-item"%>
+     6: 
+     7: <% if user_signed_in? %>
+     8:   <%= link_to 'Friends List', users_friends_path(current_user), class: "navbar-item"%>
+     9: <%end%>
+    10: 
+    11: <%= link_to 'Users',users_path, class: "navbar-item"%>
+  
+app/views/home/_show_page.html.erb:8
+app/views/layouts/application.html.erb:17
+Started GET "/" for ::1 at 2020-02-18 10:03:09 -0600
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (2.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 1.5ms | Allocations: 190)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mPost Load (0.9ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  Rendered home/_show_page.html.erb (Duration: 803.7ms | Allocations: 112680)
+Completed 500 Internal Server Error in 870ms (ActiveRecord: 3.2ms | Allocations: 123804)
+
+
+  
+ActionView::Template::Error (undefined method `friendship_path' for #<#<Class:0x00007fc9ec8f1728>:0x00007fc9ec8fa6c0>):
+     5: <%= link_to 'Posts', posts_path, class: "navbar-item"%>
+     6: 
+     7: <% if user_signed_in? %>
+     8:   <%= link_to 'Friends List', friendship_path(current_user), class: "navbar-item"%>
+     9: <%end%>
+    10: 
+    11: <%= link_to 'Users',users_path, class: "navbar-item"%>
+  
+app/views/home/_show_page.html.erb:8
+app/views/layouts/application.html.erb:17
+Started GET "/" for ::1 at 2020-02-18 10:06:35 -0600
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 1.4ms | Allocations: 190)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mPost Load (1.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  Rendered home/_show_page.html.erb (Duration: 897.7ms | Allocations: 112677)
+Completed 500 Internal Server Error in 970ms (ActiveRecord: 2.4ms | Allocations: 123801)
+
+
+  
+ActionView::Template::Error (undefined method `friendships_path' for #<#<Class:0x00007fc9ecc9f118>:0x00007fc9ecc9d778>):
+     5: <%= link_to 'Posts', posts_path, class: "navbar-item"%>
+     6: 
+     7: <% if user_signed_in? %>
+     8:   <%= link_to 'Friends List', friendships_path(current_user), class: "navbar-item"%>
+     9: <%end%>
+    10: 
+    11: <%= link_to 'Users',users_path, class: "navbar-item"%>
+  
+app/views/home/_show_page.html.erb:8
+app/views/layouts/application.html.erb:17
+Started GET "/" for ::1 at 2020-02-18 10:08:05 -0600
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (2.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 2.7ms | Allocations: 198)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mPost Load (1.7ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.0ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.0ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.0ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.0ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  Rendered home/_show_page.html.erb (Duration: 1796.2ms | Allocations: 222250)
+Completed 500 Internal Server Error in 2003ms (ActiveRecord: 29.8ms | Allocations: 244123)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `users_path' for #<#<Class:0x00007fc9fc09a1f0>:0x00007fc9fc0afac8>
+Did you mean?  user_session_path):
+     8:   <%= link_to 'Friends List', friendship_path(current_user), class: "navbar-item"%>
+     9: <%end%>
+    10: 
+    11: <%= link_to 'Users',users_path, class: "navbar-item"%>
+    12: 
+    13: <% if user_signed_in? %>
+    14:   <a class="navbar-item" href="<%=user_friend_requests_path%>">
+  
+app/views/home/_show_page.html.erb:11
+app/views/layouts/application.html.erb:17
+Started GET "/" for ::1 at 2020-02-18 10:10:22 -0600
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 1.4ms | Allocations: 190)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mPost Load (1.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.0ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.0ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.0ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  Rendered home/_show_page.html.erb (Duration: 1807.5ms | Allocations: 222259)
+Completed 500 Internal Server Error in 2092ms (ActiveRecord: 2.4ms | Allocations: 233383)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `user_friend_requests_path' for #<#<Class:0x000055f44806bcc8>:0x000055f448069220>
+Did you mean?  user_registration_path):
+    11: <%= link_to 'Users', user_session_path, class: "navbar-item"%>
+    12: 
+    13: <% if user_signed_in? %>
+    14:   <a class="navbar-item" href="<%=user_friend_requests_path%>">
+    15:     <p>Notifications</p>
+    16:     &nbsp;<span class="tag is-danger is-rounded"> <%=current_user.friend_requests.count%></span>
+    17:   </a>
+  
+app/views/home/_show_page.html.erb:14
+app/views/layouts/application.html.erb:17
+Started GET "/" for ::1 at 2020-02-18 10:10:56 -0600
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (2.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 2.2ms | Allocations: 190)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 3.8ms | Allocations: 1429)
+Completed 500 Internal Server Error in 75ms (ActiveRecord: 2.6ms | Allocations: 12553)
+
+
+  
+ActionView::Template::Error (No route matches {:action=>"show", :controller=>"friendship"}, missing required keys: [:id]):
+    11: <%= link_to 'Users', user_session_path, class: "navbar-item"%>
+    12: 
+    13: <% if user_signed_in? %>
+    14:   <a class="navbar-item" href="<%=friendship_path%>">
+    15:     <p>Notifications</p>
+    16:     &nbsp;<span class="tag is-danger is-rounded"> <%=current_user.friend_requests.count%></span>
+    17:   </a>
+  
+app/views/home/_show_page.html.erb:14
+app/views/layouts/application.html.erb:17
+Started GET "/" for ::1 at 2020-02-18 10:33:59 -0600
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (3.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 2.3ms | Allocations: 195)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mPost Load (1.6ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  Rendered home/_show_page.html.erb (Duration: 1587.7ms | Allocations: 222104)
+Completed 500 Internal Server Error in 1669ms (ActiveRecord: 6.5ms | Allocations: 233332)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `friendships_path' for #<#<Class:0x000055f447c60020>:0x000055f447c7d210>
+Did you mean?  friendship_path):
+    4: <%= link_to 'Home', root_path, class: "navbar-item"%>
+    5: <%= link_to 'Posts', posts_path, class: "navbar-item"%>
+    6: 
+    7:  <%= link_to 'Friends Request',friendships_path, class:'navbar-item' %>
+    8: 
+    9: 
+   10: <% if user_signed_in? %>
+  
+app/views/home/_show_page.html.erb:7
+app/views/layouts/application.html.erb:17
+Started GET "/" for ::1 at 2020-02-18 10:34:18 -0600
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (2.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 5.0ms | Allocations: 190)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 4.0ms | Allocations: 1248)
+Completed 500 Internal Server Error in 89ms (ActiveRecord: 2.5ms | Allocations: 12372)
+
+
+  
+ActionView::Template::Error (No route matches {:action=>"show", :controller=>"friendship"}, missing required keys: [:id]):
+    4: <%= link_to 'Home', root_path, class: "navbar-item"%>
+    5: <%= link_to 'Posts', posts_path, class: "navbar-item"%>
+    6: 
+    7:  <%= link_to 'Friends Request',friendship_path, class:'navbar-item' %>
+    8: 
+    9: 
+   10: <% if user_signed_in? %>
+  
+app/views/home/_show_page.html.erb:7
+app/views/layouts/application.html.erb:17
+Started GET "/" for ::1 at 2020-02-18 10:35:48 -0600
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.8ms | Allocations: 67)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 1.9ms | Allocations: 997)
+Completed 500 Internal Server Error in 289ms (ActiveRecord: 50.2ms | Allocations: 21647)
+
+
+  
+ActionView::Template::Error (No route matches {:action=>"update", :controller=>"friendship"}, missing required keys: [:id]):
+    4: <%= link_to 'Home', root_path, class: "navbar-item"%>
+    5: <%= link_to 'Posts', posts_path, class: "navbar-item"%>
+    6: 
+    7:  <%= link_to 'Friends Request',friendship_path, class:'navbar-item' %>
+    8: 
+    9: 
+   10: <% if user_signed_in? %>
+  
+app/views/home/_show_page.html.erb:7
+app/views/layouts/application.html.erb:17
+Started GET "/" for ::1 at 2020-02-18 10:36:57 -0600
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 1.1ms | Allocations: 67)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 2.2ms | Allocations: 997)
+Completed 500 Internal Server Error in 227ms (ActiveRecord: 26.1ms | Allocations: 21566)
+
+
+  
+ActionView::Template::Error (No route matches {:action=>"destroy", :controller=>"friendship"}, missing required keys: [:id]):
+    4: <%= link_to 'Home', root_path, class: "navbar-item"%>
+    5: <%= link_to 'Posts', posts_path, class: "navbar-item"%>
+    6: 
+    7:  <%= link_to 'Friends Request',friendship_path, class:'navbar-item' %>
+    8: 
+    9: 
+   10: <% if user_signed_in? %>
+  
+app/views/home/_show_page.html.erb:7
+app/views/layouts/application.html.erb:17
+Started GET "/" for ::1 at 2020-02-18 10:37:23 -0600
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.9ms | Allocations: 67)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mPost Load (1.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.7ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  Rendered home/_show_page.html.erb (Duration: 2757.0ms | Allocations: 221815)
+Completed 500 Internal Server Error in 3008ms (ActiveRecord: 39.5ms | Allocations: 242351)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `friendship_path' for #<#<Class:0x000055f44878e6b8>:0x000055f44878c2a0>
+Did you mean?  friendship_index_path):
+    4: <%= link_to 'Home', root_path, class: "navbar-item"%>
+    5: <%= link_to 'Posts', posts_path, class: "navbar-item"%>
+    6: 
+    7:  <%= link_to 'Friends Request',friendship_path, class:'navbar-item' %>
+    8: 
+    9: 
+   10: <% if user_signed_in? %>
+  
+app/views/home/_show_page.html.erb:7
+app/views/layouts/application.html.erb:17
+Started GET "/" for ::1 at 2020-02-18 10:38:26 -0600
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 2.1ms | Allocations: 190)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 2.9ms | Allocations: 388)
+Completed 200 OK in 82ms (Views: 61.9ms | ActiveRecord: 1.1ms | Allocations: 11550)
+
+
+Started GET "/friendship" for ::1 at 2020-02-18 10:38:31 -0600
+  
+ActionController::RoutingError (uninitialized constant FriendshipController
+Did you mean?  FriendshipsController):
+  
+activesupport (6.0.2.1) lib/active_support/inflector/methods.rb:282:in `const_get'
+activesupport (6.0.2.1) lib/active_support/inflector/methods.rb:282:in `block in constantize'
+activesupport (6.0.2.1) lib/active_support/inflector/methods.rb:280:in `each'
+activesupport (6.0.2.1) lib/active_support/inflector/methods.rb:280:in `inject'
+activesupport (6.0.2.1) lib/active_support/inflector/methods.rb:280:in `constantize'
+activesupport (6.0.2.1) lib/active_support/dependencies/zeitwerk_integration.rb:19:in `constantize'
+actionpack (6.0.2.1) lib/action_dispatch/http/request.rb:88:in `controller_class_for'
+actionpack (6.0.2.1) lib/action_dispatch/http/request.rb:81:in `controller_class'
+actionpack (6.0.2.1) lib/action_dispatch/routing/route_set.rb:45:in `controller'
+actionpack (6.0.2.1) lib/action_dispatch/routing/route_set.rb:31:in `serve'
+actionpack (6.0.2.1) lib/action_dispatch/journey/router.rb:49:in `block in serve'
+actionpack (6.0.2.1) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (6.0.2.1) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (6.0.2.1) lib/action_dispatch/routing/route_set.rb:837:in `call'
+warden (1.2.8) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.8) lib/warden/manager.rb:34:in `catch'
+warden (1.2.8) lib/warden/manager.rb:34:in `call'
+rack (2.1.2) lib/rack/tempfile_reaper.rb:17:in `call'
+rack (2.1.2) lib/rack/etag.rb:27:in `call'
+rack (2.1.2) lib/rack/conditional_get.rb:27:in `call'
+rack (2.1.2) lib/rack/head.rb:14:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/http/content_security_policy.rb:18:in `call'
+rack (2.1.2) lib/rack/session/abstract/id.rb:269:in `context'
+rack (2.1.2) lib/rack/session/abstract/id.rb:263:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/cookies.rb:648:in `call'
+activerecord (6.0.2.1) lib/active_record/migration.rb:567:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.0.2.1) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:32:in `call'
+web-console (4.0.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.2.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.2.1) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.2.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.2.1) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.2.1) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.1.2) lib/rack/method_override.rb:24:in `call'
+rack (2.1.2) lib/rack/runtime.rb:24:in `call'
+activesupport (6.0.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.1.2) lib/rack/sendfile.rb:113:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+webpacker (4.2.2) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.2.1) lib/rails/engine.rb:526:in `call'
+puma (4.3.1) lib/puma/configuration.rb:228:in `call'
+puma (4.3.1) lib/puma/server.rb:681:in `handle_request'
+puma (4.3.1) lib/puma/server.rb:472:in `process_client'
+puma (4.3.1) lib/puma/server.rb:328:in `block in run'
+puma (4.3.1) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/" for ::1 at 2020-02-18 10:41:20 -0600
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 2.1ms | Allocations: 193)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mPost Load (1.0ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  Rendered home/_show_page.html.erb (Duration: 2239.7ms | Allocations: 222059)
+Completed 500 Internal Server Error in 2439ms (ActiveRecord: 30.1ms | Allocations: 243909)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `friendships_index_path' for #<#<Class:0x00007fc9ec6c8c80>:0x00007fc9ec6d7258>
+Did you mean?  friendships_path):
+    4: <%= link_to 'Home', root_path, class: "navbar-item"%>
+    5: <%= link_to 'Posts', posts_path, class: "navbar-item"%>
+    6: 
+    7: <%= link_to 'Friend Requests',friendships_index_path, class:'navbar-item' %>
+    8: 
+    9: 
+   10: <% if user_signed_in? %>
+  
+app/views/home/_show_page.html.erb:7
+app/views/layouts/application.html.erb:17
+Started GET "/" for ::1 at 2020-02-18 10:41:44 -0600
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 2.5ms | Allocations: 190)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 3.8ms | Allocations: 387)
+Completed 200 OK in 102ms (Views: 78.1ms | ActiveRecord: 1.2ms | Allocations: 11547)
+
+
+Started GET "/friendships" for ::1 at 2020-02-18 10:41:47 -0600
+  
+AbstractController::ActionNotFound (The action 'index' could not be found for FriendshipsController):
+  
+actionpack (6.0.2.1) lib/abstract_controller/base.rb:131:in `process'
+actionview (6.0.2.1) lib/action_view/rendering.rb:39:in `process'
+actionpack (6.0.2.1) lib/action_controller/metal.rb:191:in `dispatch'
+actionpack (6.0.2.1) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (6.0.2.1) lib/action_dispatch/routing/route_set.rb:51:in `dispatch'
+actionpack (6.0.2.1) lib/action_dispatch/routing/route_set.rb:33:in `serve'
+actionpack (6.0.2.1) lib/action_dispatch/journey/router.rb:49:in `block in serve'
+actionpack (6.0.2.1) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (6.0.2.1) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (6.0.2.1) lib/action_dispatch/routing/route_set.rb:837:in `call'
+warden (1.2.8) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.8) lib/warden/manager.rb:34:in `catch'
+warden (1.2.8) lib/warden/manager.rb:34:in `call'
+rack (2.1.2) lib/rack/tempfile_reaper.rb:17:in `call'
+rack (2.1.2) lib/rack/etag.rb:27:in `call'
+rack (2.1.2) lib/rack/conditional_get.rb:27:in `call'
+rack (2.1.2) lib/rack/head.rb:14:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/http/content_security_policy.rb:18:in `call'
+rack (2.1.2) lib/rack/session/abstract/id.rb:269:in `context'
+rack (2.1.2) lib/rack/session/abstract/id.rb:263:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/cookies.rb:648:in `call'
+activerecord (6.0.2.1) lib/active_record/migration.rb:567:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.0.2.1) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:32:in `call'
+web-console (4.0.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.2.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.2.1) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.2.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.2.1) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.2.1) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.1.2) lib/rack/method_override.rb:24:in `call'
+rack (2.1.2) lib/rack/runtime.rb:24:in `call'
+activesupport (6.0.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.1.2) lib/rack/sendfile.rb:113:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+webpacker (4.2.2) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.2.1) lib/rails/engine.rb:526:in `call'
+puma (4.3.1) lib/puma/configuration.rb:228:in `call'
+puma (4.3.1) lib/puma/server.rb:681:in `handle_request'
+puma (4.3.1) lib/puma/server.rb:472:in `process_client'
+puma (4.3.1) lib/puma/server.rb:328:in `block in run'
+puma (4.3.1) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/friendships" for ::1 at 2020-02-18 10:42:57 -0600
+Processing by FriendshipsController#index as HTML
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:9:in `index'
+Completed 500 Internal Server Error in 229ms (ActiveRecord: 20.7ms | Allocations: 10008)
+
+
+  
+NoMethodError (undefined method `friend_requests' for #<User:0x000055f445a54210>
+Did you mean?  friendships):
+  
+app/controllers/friendships_controller.rb:9:in `index'
+Started GET "/friendships" for ::1 at 2020-02-18 10:45:36 -0600
+Processing by FriendshipsController#index as HTML
+  [1m[36mUser Load (2.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:9:in `index'
+Completed 406 Not Acceptable in 226ms (ActiveRecord: 25.6ms | Allocations: 11227)
+
+
+  
+ActionController::MissingExactTemplate (FriendshipsController#index is missing a template for request formats: text/html):
+  
+actionpack (6.0.2.1) lib/action_controller/metal/implicit_render.rb:45:in `default_render'
+actionpack (6.0.2.1) lib/action_controller/metal/basic_implicit_render.rb:6:in `block in send_action'
+actionpack (6.0.2.1) lib/action_controller/metal/basic_implicit_render.rb:6:in `tap'
+actionpack (6.0.2.1) lib/action_controller/metal/basic_implicit_render.rb:6:in `send_action'
+actionpack (6.0.2.1) lib/abstract_controller/base.rb:196:in `process_action'
+actionpack (6.0.2.1) lib/action_controller/metal/rendering.rb:30:in `process_action'
+actionpack (6.0.2.1) lib/abstract_controller/callbacks.rb:42:in `block in process_action'
+activesupport (6.0.2.1) lib/active_support/callbacks.rb:135:in `run_callbacks'
+actionpack (6.0.2.1) lib/abstract_controller/callbacks.rb:41:in `process_action'
+actionpack (6.0.2.1) lib/action_controller/metal/rescue.rb:22:in `process_action'
+actionpack (6.0.2.1) lib/action_controller/metal/instrumentation.rb:33:in `block in process_action'
+activesupport (6.0.2.1) lib/active_support/notifications.rb:180:in `block in instrument'
+activesupport (6.0.2.1) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (6.0.2.1) lib/active_support/notifications.rb:180:in `instrument'
+actionpack (6.0.2.1) lib/action_controller/metal/instrumentation.rb:32:in `process_action'
+actionpack (6.0.2.1) lib/action_controller/metal/params_wrapper.rb:245:in `process_action'
+activerecord (6.0.2.1) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (6.0.2.1) lib/abstract_controller/base.rb:136:in `process'
+actionview (6.0.2.1) lib/action_view/rendering.rb:39:in `process'
+actionpack (6.0.2.1) lib/action_controller/metal.rb:191:in `dispatch'
+actionpack (6.0.2.1) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (6.0.2.1) lib/action_dispatch/routing/route_set.rb:51:in `dispatch'
+actionpack (6.0.2.1) lib/action_dispatch/routing/route_set.rb:33:in `serve'
+actionpack (6.0.2.1) lib/action_dispatch/journey/router.rb:49:in `block in serve'
+actionpack (6.0.2.1) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (6.0.2.1) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (6.0.2.1) lib/action_dispatch/routing/route_set.rb:837:in `call'
+warden (1.2.8) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.8) lib/warden/manager.rb:34:in `catch'
+warden (1.2.8) lib/warden/manager.rb:34:in `call'
+rack (2.1.2) lib/rack/tempfile_reaper.rb:17:in `call'
+rack (2.1.2) lib/rack/etag.rb:27:in `call'
+rack (2.1.2) lib/rack/conditional_get.rb:27:in `call'
+rack (2.1.2) lib/rack/head.rb:14:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/http/content_security_policy.rb:18:in `call'
+rack (2.1.2) lib/rack/session/abstract/id.rb:269:in `context'
+rack (2.1.2) lib/rack/session/abstract/id.rb:263:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/cookies.rb:648:in `call'
+activerecord (6.0.2.1) lib/active_record/migration.rb:567:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.0.2.1) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:32:in `call'
+web-console (4.0.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.2.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.2.1) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.2.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.2.1) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.2.1) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.1.2) lib/rack/method_override.rb:24:in `call'
+rack (2.1.2) lib/rack/runtime.rb:24:in `call'
+activesupport (6.0.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.1.2) lib/rack/sendfile.rb:113:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+webpacker (4.2.2) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.2.1) lib/rails/engine.rb:526:in `call'
+puma (4.3.1) lib/puma/configuration.rb:228:in `call'
+puma (4.3.1) lib/puma/server.rb:681:in `handle_request'
+puma (4.3.1) lib/puma/server.rb:472:in `process_client'
+puma (4.3.1) lib/puma/server.rb:328:in `block in run'
+puma (4.3.1) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/friendships" for ::1 at 2020-02-18 10:48:59 -0600
+Processing by FriendshipsController#index as HTML
+  [1m[36mUser Load (2.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:9:in `index'
+  Rendering friendships/index.html.erb within layouts/application
+  [1m[36mFriendship Load (53.7ms)[0m  [1m[34mSELECT "friendships".* FROM "friendships" WHERE (user_id = 1 OR friend_id = 1)[0m
+  ↳ app/views/friendships/index.html.erb:3
+  Rendered friendships/index.html.erb within layouts/application (Duration: 127.0ms | Allocations: 1463)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 15.8ms | Allocations: 402)
+Completed 200 OK in 324ms (Views: 202.1ms | ActiveRecord: 107.6ms | Allocations: 12305)
+
+
+Started GET "/friendships" for ::1 at 2020-02-18 10:49:09 -0600
+Processing by FriendshipsController#index as HTML
+  [1m[36mUser Load (3.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:9:in `index'
+  Rendering friendships/index.html.erb within layouts/application
+  [1m[36mFriendship Load (3.6ms)[0m  [1m[34mSELECT "friendships".* FROM "friendships" WHERE (user_id = 1 OR friend_id = 1)[0m
+  ↳ app/views/friendships/index.html.erb:3
+  Rendered friendships/index.html.erb within layouts/application (Duration: 8.2ms | Allocations: 855)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.7ms | Allocations: 140)
+Completed 200 OK in 60ms (Views: 43.5ms | ActiveRecord: 7.3ms | Allocations: 10098)
+
+
+Started GET "/posts" for ::1 at 2020-02-18 10:49:11 -0600
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.erb within layouts/application
+  Rendered posts/_new.html.erb (Duration: 4.0ms | Allocations: 623)
+  [1m[36mPost Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:1
+  [1m[36mPost Load (1.9ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY "posts"."created_at" DESC[0m
+  ↳ app/views/posts/_timeline.html.erb:6
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:7
+  [1m[35m (42.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 2], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:11
+  [1m[36mComment Load (1.8ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 2]]
+  ↳ app/views/posts/_timeline.html.erb:19
+  Rendered posts/_new-comment.html.erb (Duration: 3.6ms | Allocations: 549)
+  Rendered posts/_timeline.html.erb (Duration: 100.2ms | Allocations: 8324)
+  Rendered posts/index.html.erb within layouts/application (Duration: 125.4ms | Allocations: 9547)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.7ms | Allocations: 145)
+Completed 200 OK in 253ms (Views: 104.2ms | ActiveRecord: 72.1ms | Allocations: 29252)
+
+
+Started GET "/friendships" for ::1 at 2020-02-18 10:49:13 -0600
+Processing by FriendshipsController#index as HTML
+  [1m[36mUser Load (2.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:9:in `index'
+  Rendering friendships/index.html.erb within layouts/application
+  [1m[36mFriendship Load (4.2ms)[0m  [1m[34mSELECT "friendships".* FROM "friendships" WHERE (user_id = 1 OR friend_id = 1)[0m
+  ↳ app/views/friendships/index.html.erb:3
+  Rendered friendships/index.html.erb within layouts/application (Duration: 8.9ms | Allocations: 855)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 3.5ms | Allocations: 149)
+Completed 200 OK in 73ms (Views: 52.1ms | ActiveRecord: 6.9ms | Allocations: 10112)
+
+
+Started GET "/posts" for ::1 at 2020-02-18 10:49:15 -0600
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (5.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.erb within layouts/application
+  Rendered posts/_new.html.erb (Duration: 4.6ms | Allocations: 402)
+  [1m[36mPost Exists? (2.0ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:1
+  [1m[36mPost Load (0.9ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY "posts"."created_at" DESC[0m
+  ↳ app/views/posts/_timeline.html.erb:6
+  [1m[36mUser Load (3.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:7
+  [1m[35m (2.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 2], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:11
+  [1m[36mComment Load (2.0ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 2]]
+  ↳ app/views/posts/_timeline.html.erb:19
+  Rendered posts/_new-comment.html.erb (Duration: 2.3ms | Allocations: 391)
+  Rendered posts/_timeline.html.erb (Duration: 40.8ms | Allocations: 4218)
+  Rendered posts/index.html.erb within layouts/application (Duration: 47.4ms | Allocations: 4767)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.7ms | Allocations: 139)
+Completed 200 OK in 104ms (Views: 74.4ms | ActiveRecord: 15.5ms | Allocations: 14578)
+
+
+Started GET "/" for ::1 at 2020-02-18 10:49:17 -0600
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (3.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 1.5ms | Allocations: 191)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.7ms | Allocations: 135)
+Completed 200 OK in 66ms (Views: 53.1ms | ActiveRecord: 3.6ms | Allocations: 10665)
+
+
+Started GET "/posts" for ::1 at 2020-02-18 10:49:18 -0600
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (8.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/index.html.erb within layouts/application
+  Rendered posts/_new.html.erb (Duration: 9.4ms | Allocations: 410)
+  [1m[36mPost Exists? (2.6ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:1
+  [1m[36mPost Load (2.8ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY "posts"."created_at" DESC[0m
+  ↳ app/views/posts/_timeline.html.erb:6
+  [1m[36mUser Load (2.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:7
+  [1m[35m (2.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 2], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:11
+  [1m[36mComment Load (4.9ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 2]]
+  ↳ app/views/posts/_timeline.html.erb:19
+  Rendered posts/_new-comment.html.erb (Duration: 2.1ms | Allocations: 391)
+  Rendered posts/_timeline.html.erb (Duration: 41.7ms | Allocations: 4219)
+  Rendered posts/index.html.erb within layouts/application (Duration: 52.2ms | Allocations: 4776)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 1.1ms | Allocations: 143)
+Completed 200 OK in 195ms (Views: 157.6ms | ActiveRecord: 22.7ms | Allocations: 14601)
+
+
+Started GET "/friendships" for ::1 at 2020-02-18 10:49:19 -0600
+Processing by FriendshipsController#index as HTML
+  [1m[36mUser Load (2.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:9:in `index'
+  Rendering friendships/index.html.erb within layouts/application
+  [1m[36mFriendship Load (2.9ms)[0m  [1m[34mSELECT "friendships".* FROM "friendships" WHERE (user_id = 1 OR friend_id = 1)[0m
+  ↳ app/views/friendships/index.html.erb:3
+  Rendered friendships/index.html.erb within layouts/application (Duration: 9.3ms | Allocations: 855)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 1.0ms | Allocations: 149)
+Completed 200 OK in 69ms (Views: 54.5ms | ActiveRecord: 5.6ms | Allocations: 10108)
+
+
+Started DELETE "/users/sign_out" for ::1 at 2020-02-18 10:49:20 -0600
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"N+GHcb4snE6W+fePFsOAXzZPFRc7/c2gzDSYiCLnsBbGu6YkEkTOQEleUzsapgQ8qc/9cIuuG7Mg9w1L2cy7vQ=="}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 302 Found in 242ms (ActiveRecord: 0.9ms | Allocations: 3549)
+
+
+Started GET "/" for ::1 at 2020-02-18 10:49:21 -0600
+Processing by HomeController#index as HTML
+Completed 401 Unauthorized in 14ms (ActiveRecord: 0.0ms | Allocations: 517)
+
+
+Started GET "/users/sign_in" for ::1 at 2020-02-18 10:49:21 -0600
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 4.6ms | Allocations: 640)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 179.0ms | Allocations: 2837)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 1.3ms | Allocations: 217)
+Completed 200 OK in 232ms (Views: 226.2ms | ActiveRecord: 0.0ms | Allocations: 12579)
+
+
+Started POST "/users/sign_in" for ::1 at 2020-02-18 10:49:25 -0600
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"cgoKApvWtkrtTpJ2CeordJyzzsOvi9H9muxyH9nix8eU/+JlmnqQ51/fkcOeWhGM9eFqviIsZG43MOX5lFjivA==", "user"=>{"email"=>"yellow33@email.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (15.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "yellow33@email.com"], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 302 Found in 677ms (ActiveRecord: 15.5ms | Allocations: 4612)
+
+
+Started GET "/" for ::1 at 2020-02-18 10:49:25 -0600
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.9ms | Allocations: 64)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 2.6ms | Allocations: 135)
+Completed 200 OK in 70ms (Views: 56.5ms | ActiveRecord: 1.3ms | Allocations: 9853)
+
+
+Started GET "/" for ::1 at 2020-02-18 10:55:31 -0600
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (2.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 6.9ms | Allocations: 190)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mPost Load (5.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  [1m[36mCACHE Post Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/layouts/application.html.erb:17
+  Rendered home/_show_page.html.erb (Duration: 2793.3ms | Allocations: 222134)
+Completed 500 Internal Server Error in 2944ms (ActiveRecord: 11.7ms | Allocations: 233353)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `users_path' for #<#<Class:0x00007fc9ec903e50>:0x00007fc9ec901d58>
+Did you mean?  user_session_path):
+    3: </a>
+    4: <%= link_to 'Home', root_path, class: "navbar-item"%>
+    5: <%= link_to 'Posts', posts_path, class: "navbar-item"%>
+    6:  <%= link_to 'Users',users_path, class:'navbar-item' %>
+    7: 
+    8: <%= link_to 'Friend Requests',friendships_path, class:'navbar-item' %>
+    9: 
+  
+app/views/home/_show_page.html.erb:6
+app/views/layouts/application.html.erb:17
+Started GET "/" for ::1 at 2020-02-18 10:58:15 -0600
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (4.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 2.4ms | Allocations: 67)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 3.0ms | Allocations: 168)
+Completed 200 OK in 747ms (Views: 244.9ms | ActiveRecord: 160.3ms | Allocations: 20845)
+
+
+Started GET "/users" for ::1 at 2020-02-18 10:58:49 -0600
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (2.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (2.8ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:3
+  Rendered users/index.html.erb within layouts/application (Duration: 216.1ms | Allocations: 2241)
+Completed 500 Internal Server Error in 288ms (ActiveRecord: 5.6ms | Allocations: 5034)
+
+
+  
+ActionView::Template::Error (undefined method `include?' for nil:NilClass):
+    2: <ul>
+    3:   <% @users.each do |u| %>
+    4:     <li class='text-dark'><%= u.name %></li><br>
+    5:     <% if @pending_friends.include?(u)%>
+    6:       <%=button_to 'Cancel request',  {:controller => :friendships, :action => 'destroy',
+    7:                                              :id => (find_friendship(current_user, u) || 
+    8:                                                      find_friendship(u, current_user))} , 
+  
+app/views/users/index.html.erb:5
+app/views/users/index.html.erb:3
+Started GET "/users" for ::1 at 2020-02-18 11:09:22 -0600
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (2.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (5.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:3
+  Rendered users/index.html.erb within layouts/application (Duration: 89.6ms | Allocations: 2264)
+Completed 500 Internal Server Error in 131ms (ActiveRecord: 14.0ms | Allocations: 5265)
+
+
+  
+ActionView::Template::Error (undefined method `include?' for nil:NilClass):
+    2: <ul>
+    3:   <% @users.each do |u| %>
+    4:     <li class='text-dark'><%= u.name %></li><br>
+    5:     <% if @friends.include?(u)%>
+    6:       <%=button_to 'Cancel request',  {:controller => :friendships, :action => 'destroy',
+    7:                                              :id => (find_friendship(current_user, u) || 
+    8:                                                      find_friendship(u, current_user))} , 
+  
+app/views/users/index.html.erb:5
+app/views/users/index.html.erb:3
+Started GET "/users" for ::1 at 2020-02-18 11:10:48 -0600
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (4.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (6.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:3
+  Rendered users/index.html.erb within layouts/application (Duration: 71.5ms | Allocations: 2266)
+Completed 500 Internal Server Error in 97ms (ActiveRecord: 10.5ms | Allocations: 5169)
+
+
+  
+ActionView::Template::Error (undefined method `include?' for nil:NilClass):
+    2: <ul>
+    3:   <% @users.each do |u| %>
+    4:     <li class='text-dark'><%= u.name %></li><br>
+    5:     <% if @friendships.include?(u)%>
+    6:       <%=button_to 'Cancel request',  {:controller => :friendships, :action => 'destroy',
+    7:                                              :id => (find_friendship(current_user, u) || 
+    8:                                                      find_friendship(u, current_user))} , 
+  
+app/views/users/index.html.erb:5
+app/views/users/index.html.erb:3
+Started GET "/users" for ::1 at 2020-02-18 11:11:42 -0600
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (2.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:3
+  Rendered users/index.html.erb within layouts/application (Duration: 78.7ms | Allocations: 2221)
+Completed 500 Internal Server Error in 119ms (ActiveRecord: 4.1ms | Allocations: 5124)
+
+
+  
+ActionView::Template::Error (undefined method `include?' for nil:NilClass):
+    3:   <% @users.each do |u| %>
+    4:     <li class='text-dark'><%= u.name %></li><br>
+    5:    
+    6:     <%if @requests.include?(u)%>
+    7:       <%=button_to 'Accept',  {:controller => :friendships, :action => 'update',
+    8:                                              :id => (find_friendship(current_user, u) || 
+    9:                                                      find_friendship(u, current_user))} , 
+  
+app/views/users/index.html.erb:6
+app/views/users/index.html.erb:3

@@ -5,6 +5,10 @@ class FriendshipsController < ApplicationController
     @friendship = Friendship.new
   end
 
+  def index
+    @requests = current_user.friendships
+  end
+
   def create
     @friendship = Friendship.new(friendship_params)
 
