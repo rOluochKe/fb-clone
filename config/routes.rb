@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations' }
   root to: 'home#index'
   resources :users
-  resources :friendships, except: [:new, :edit, :show, :update, :destroy]
+  resources :friendships, except: %i[new edit show update destroy]
   resources :posts, only: %i[create destroy index show update edit] do
     resources :likes, only: %i[create destroy]
   end
