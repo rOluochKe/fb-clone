@@ -33222,3 +33222,77 @@ Processing by PostsController#index as HTML
 Completed 200 OK in 63ms (Views: 47.2ms | ActiveRecord: 7.6ms | Allocations: 26347)
 
 
+Started GET "/users" for 127.0.0.1 at 2020-02-19 23:21:54 +0300
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:11:in `index'
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2 AND "users"."id" = $3 LIMIT $4[0m  [["user_id", 1], ["status", true], ["id", 2], ["LIMIT", 1]]
+  ↳ app/models/user.rb:28:in `friend?'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."user_id" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2[0m  [["friend_id", 1], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  Rendered users/index.html.erb within layouts/application (Duration: 30.2ms | Allocations: 9280)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.9ms | Allocations: 463)
+Completed 200 OK in 206ms (Views: 160.2ms | ActiveRecord: 7.7ms | Allocations: 60470)
+
+
+Started GET "/users" for 127.0.0.1 at 2020-02-19 23:21:58 +0300
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:11:in `index'
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2 AND "users"."id" = $3 LIMIT $4[0m  [["user_id", 1], ["status", true], ["id", 2], ["LIMIT", 1]]
+  ↳ app/models/user.rb:28:in `friend?'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."user_id" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2[0m  [["friend_id", 1], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  Rendered users/index.html.erb within layouts/application (Duration: 13.1ms | Allocations: 3309)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.2ms | Allocations: 161)
+Completed 200 OK in 44ms (Views: 35.0ms | ActiveRecord: 2.5ms | Allocations: 13650)
+
+
+Started GET "/users/2" for 127.0.0.1 at 2020-02-19 23:22:00 +0300
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:7:in `show'
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (Duration: 248.4ms | Allocations: 109559)
+Completed 500 Internal Server Error in 258ms (ActiveRecord: 1.0ms | Allocations: 110952)
+
+
+  
+ActionView::Template::Error (undefined method `user_gravatar' for #<#<Class:0x000055ce618a6c38>:0x000055ce61fc5000>
+Did you mean?  user_path):
+    3:   <aside class="col-md-4">
+    4:     <section class="user_info">
+    5:       <h1>
+    6:         <%= user_gravatar @user %>
+    7:         <%= @user.name %>
+    8:       </h1>
+    9:     </section>
+  
+app/views/users/show.html.erb:6
+Started GET "/users/2" for 127.0.0.1 at 2020-02-19 23:24:21 +0300
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:7:in `show'
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (Duration: 0.7ms | Allocations: 251)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/_show_page.html.erb:11
+  Rendered home/_show_page.html.erb (Duration: 8.4ms | Allocations: 1488)
+Completed 200 OK in 141ms (Views: 117.2ms | ActiveRecord: 5.2ms | Allocations: 51099)
+
+
