@@ -4,18 +4,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :posts
-  has_many :comments
-  has_many :likes
-
-  has_many :active_friendships, class_name: 'Friendship', foreign_key: 'user_id'
-  has_many :passive_friendships, class_name: 'Friendship', foreign_key: 'friend_id'
-
-  has_many :friendships, lambda { |user|
-    unscope(:where).where('user_id = :id OR friend_id = :id', id: user.id)
-  }, class_name: :Friendship, dependent: :destroy
-  has_many :inverse_friendships, class_name: 'Friendship', foreign_key: 'friend_id'
-
   before_save { self.email = email.downcase }
   validates :name, presence: true, length: { maximum: 20 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
@@ -25,21 +13,28 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6 }
   validates :password_confirmation, presence: true, length: { minimum: 6 }
 
-  def friends
-    friends_array = friendships.map { |friendship| friendship.friend if friendship.confirmed }
-    friends_array += inverse_friendships.map { |friendship| friendship.user if friendship.confirmed }
-    friends_array.compact
-  end
-
-  def unconfirmed_friend_requests
-    friendships.map { |friendship| friendship.friend unless friendship.confirmed }.compact
-  end
-
-  def friend_requests
-    inverse_friendships.map { |friendship| friendship.user unless friendship.confirmed }.compact
-  end
+  has_many :posts
+  has_many :comments
+  has_many :likes
+  has_many :friendships
+  has_many :accepted_friendships, -> { accepted }, class_name: 'Friendship'
+  has_many :unaccepted_friendships, -> { unaccepted }, class_name: 'Friendship'
+  has_many :friends, through: :accepted_friendships
+  has_many :received_requests, -> { unaccepted }, foreign_key: :friend_id, class_name: 'Friendship'
+  has_many :received_requests_users, through: :received_requests, source: :user
+  has_many :sent_requests, through: :unaccepted_friendships, source: :friend
 
   def friend?(user)
     friends.include?(user)
+  end
+
+  def request_sent?(user)
+    (received_requests_users + sent_requests).include?(user)
+  end
+
+  def self.from_omniauth(auth)
+    user = find_by(email: auth.info.email)
+    user || User.create(name: auth.info.name, password: Devise.friendly_token[0, 20],
+                        email: auth.info.email, birth_date: DateTime.now, gender: 'non-binary')
   end
 end
