@@ -33708,3 +33708,1882 @@ Processing by FriendshipsController#index as HTML
 Completed 200 OK in 48ms (Views: 37.6ms | ActiveRecord: 5.0ms | Allocations: 16686)
 
 
+Started GET "/friendships" for 127.0.0.1 at 2020-02-20 19:26:33 +0300
+  [1m[35m (2.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by FriendshipsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:5:in `index'
+  Rendering friendships/index.html.erb within layouts/application
+  [1m[36mFriendship Load (1.3ms)[0m  [1m[34mSELECT "friendships".* FROM "friendships" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2[0m  [["friend_id", 1], ["status", false]]
+  ↳ app/views/friendships/index.html.erb:2
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/friendships/index.html.erb:3
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", true]]
+  ↳ app/views/friendships/index.html.erb:9
+  Rendered friendships/index.html.erb within layouts/application (Duration: 21.1ms | Allocations: 8566)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 1.6ms | Allocations: 457)
+Completed 200 OK in 215ms (Views: 168.9ms | ActiveRecord: 10.5ms | Allocations: 62514)
+
+
+Started GET "/users" for 127.0.0.1 at 2020-02-20 19:26:35 +0300
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:11:in `index'
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2 AND "users"."id" = $3 LIMIT $4[0m  [["user_id", 1], ["status", true], ["id", 2], ["LIMIT", 1]]
+  ↳ app/models/user.rb:28:in `friend?'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."user_id" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2[0m  [["friend_id", 1], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  Rendered users/index.html.erb within layouts/application (Duration: 37.1ms | Allocations: 3603)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.3ms | Allocations: 167)
+Completed 200 OK in 64ms (Views: 48.2ms | ActiveRecord: 3.8ms | Allocations: 14700)
+
+
+Started GET "/posts" for 127.0.0.1 at 2020-02-20 19:26:37 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", true]]
+  ↳ app/controllers/posts_controller.rb:8:in `index'
+  Rendering posts/index.html.erb within layouts/application
+  Rendered posts/_new.html.erb (Duration: 3.3ms | Allocations: 3410)
+  [1m[36mPost Exists? (2.1ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:1
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = $1 ORDER BY "posts"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/views/posts/_timeline.html.erb:6
+  [1m[35m (1.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 5], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:14
+  [1m[36mComment Load (0.4ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 5]]
+  ↳ app/views/posts/_timeline.html.erb:23
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:25
+  Rendered posts/_new-comment.html.erb (Duration: 2.3ms | Allocations: 591)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 4], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:14
+  [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 4]]
+  ↳ app/views/posts/_timeline.html.erb:23
+  Rendered posts/_new-comment.html.erb (Duration: 1.2ms | Allocations: 383)
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 3], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:14
+  [1m[36mComment Load (0.4ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 3]]
+  ↳ app/views/posts/_timeline.html.erb:23
+  Rendered posts/_new-comment.html.erb (Duration: 1.5ms | Allocations: 383)
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 2], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:14
+  [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 2]]
+  ↳ app/views/posts/_timeline.html.erb:23
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:25
+  Rendered posts/_new-comment.html.erb (Duration: 2.3ms | Allocations: 383)
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 1], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:14
+  [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/_timeline.html.erb:23
+  Rendered posts/_new-comment.html.erb (Duration: 1.3ms | Allocations: 383)
+  Rendered posts/_timeline.html.erb (Duration: 77.6ms | Allocations: 22716)
+  Rendered posts/index.html.erb within layouts/application (Duration: 82.4ms | Allocations: 26730)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.3ms | Allocations: 166)
+Completed 200 OK in 134ms (Views: 91.6ms | ActiveRecord: 20.4ms | Allocations: 45458)
+
+
+Started GET "/" for 127.0.0.1 at 2020-02-20 19:26:38 +0300
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 1.6ms | Allocations: 198)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.2ms | Allocations: 166)
+Completed 200 OK in 50ms (Views: 39.7ms | ActiveRecord: 0.4ms | Allocations: 10665)
+
+
+Started GET "/posts" for 127.0.0.1 at 2020-02-20 19:26:39 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", true]]
+  ↳ app/controllers/posts_controller.rb:8:in `index'
+  Rendering posts/index.html.erb within layouts/application
+  Rendered posts/_new.html.erb (Duration: 2.2ms | Allocations: 934)
+  [1m[36mPost Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:1
+  [1m[36mPost Load (0.7ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = $1 ORDER BY "posts"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/views/posts/_timeline.html.erb:6
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 5], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:14
+  [1m[36mComment Load (0.5ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 5]]
+  ↳ app/views/posts/_timeline.html.erb:23
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:25
+  Rendered posts/_new-comment.html.erb (Duration: 1.1ms | Allocations: 391)
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 4], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:14
+  [1m[36mComment Load (0.4ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 4]]
+  ↳ app/views/posts/_timeline.html.erb:23
+  Rendered posts/_new-comment.html.erb (Duration: 1.5ms | Allocations: 383)
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 3], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:14
+  [1m[36mComment Load (0.9ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 3]]
+  ↳ app/views/posts/_timeline.html.erb:23
+  Rendered posts/_new-comment.html.erb (Duration: 1.5ms | Allocations: 383)
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 2], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:14
+  [1m[36mComment Load (0.5ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 2]]
+  ↳ app/views/posts/_timeline.html.erb:23
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:25
+  Rendered posts/_new-comment.html.erb (Duration: 1.6ms | Allocations: 383)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 1], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:14
+  [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/_timeline.html.erb:23
+  Rendered posts/_new-comment.html.erb (Duration: 0.7ms | Allocations: 383)
+  Rendered posts/_timeline.html.erb (Duration: 59.1ms | Allocations: 14455)
+  Rendered posts/index.html.erb within layouts/application (Duration: 61.9ms | Allocations: 15537)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.4ms | Allocations: 166)
+Completed 200 OK in 82ms (Views: 62.7ms | ActiveRecord: 10.1ms | Allocations: 26388)
+
+
+Started GET "/users" for 127.0.0.1 at 2020-02-20 19:26:40 +0300
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:11:in `index'
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2 AND "users"."id" = $3 LIMIT $4[0m  [["user_id", 1], ["status", true], ["id", 2], ["LIMIT", 1]]
+  ↳ app/models/user.rb:28:in `friend?'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."user_id" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2[0m  [["friend_id", 1], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  Rendered users/index.html.erb within layouts/application (Duration: 12.1ms | Allocations: 3311)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.4ms | Allocations: 167)
+Completed 200 OK in 34ms (Views: 24.7ms | ActiveRecord: 3.5ms | Allocations: 13641)
+
+
+Started GET "/users/2" for 127.0.0.1 at 2020-02-20 19:26:41 +0300
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:7:in `show'
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (Duration: 0.5ms | Allocations: 134)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/_show_page.html.erb:11
+  Rendered home/_show_page.html.erb (Duration: 2.8ms | Allocations: 1074)
+Completed 200 OK in 15ms (Views: 11.3ms | ActiveRecord: 0.8ms | Allocations: 10152)
+
+
+Started GET "/friendships" for 127.0.0.1 at 2020-02-20 19:26:43 +0300
+Processing by FriendshipsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:5:in `index'
+  Rendering friendships/index.html.erb within layouts/application
+  [1m[36mFriendship Load (1.7ms)[0m  [1m[34mSELECT "friendships".* FROM "friendships" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2[0m  [["friend_id", 1], ["status", false]]
+  ↳ app/views/friendships/index.html.erb:2
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/friendships/index.html.erb:3
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", true]]
+  ↳ app/views/friendships/index.html.erb:9
+  Rendered friendships/index.html.erb within layouts/application (Duration: 17.4ms | Allocations: 2885)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.3ms | Allocations: 166)
+Completed 200 OK in 36ms (Views: 28.9ms | ActiveRecord: 3.7ms | Allocations: 12180)
+
+
+Started POST "/friendships.1" for 127.0.0.1 at 2020-02-20 19:26:46 +0300
+Processing by FriendshipsController#create as 
+  Parameters: {"authenticity_token"=>"N/zdPkyIV89JBjRKibpraQtsyuTi8QoY9LURXWNqu5jtIGu90x4oU+TupxCMwZ7bht1cYg+dH6VzbQ3o4hfUdQ=="}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:10:in `create'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/friendships_controller.rb:10:in `create'
+  [1m[36mFriendship Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = $1 AND "friendships"."friend_id" IS NULL LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:10:in `create'
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/friendships_controller.rb:10:in `create'
+Redirected to http://127.0.0.1:3000/users
+Completed 302 Found in 16ms (ActiveRecord: 1.7ms | Allocations: 5479)
+
+
+Started GET "/users" for 127.0.0.1 at 2020-02-20 19:26:46 +0300
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:11:in `index'
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2 AND "users"."id" = $3 LIMIT $4[0m  [["user_id", 1], ["status", true], ["id", 2], ["LIMIT", 1]]
+  ↳ app/models/user.rb:28:in `friend?'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."user_id" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2[0m  [["friend_id", 1], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  Rendered users/index.html.erb within layouts/application (Duration: 9.1ms | Allocations: 3308)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.3ms | Allocations: 161)
+Completed 200 OK in 24ms (Views: 17.0ms | ActiveRecord: 2.1ms | Allocations: 13623)
+
+
+Started GET "/users" for 127.0.0.1 at 2020-02-20 19:26:48 +0300
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:11:in `index'
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2 AND "users"."id" = $3 LIMIT $4[0m  [["user_id", 1], ["status", true], ["id", 2], ["LIMIT", 1]]
+  ↳ app/models/user.rb:28:in `friend?'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."user_id" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2[0m  [["friend_id", 1], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  Rendered users/index.html.erb within layouts/application (Duration: 7.7ms | Allocations: 3304)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.3ms | Allocations: 161)
+Completed 200 OK in 25ms (Views: 16.1ms | ActiveRecord: 2.2ms | Allocations: 13628)
+
+
+Started GET "/posts" for 127.0.0.1 at 2020-02-20 19:26:50 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", true]]
+  ↳ app/controllers/posts_controller.rb:8:in `index'
+  Rendering posts/index.html.erb within layouts/application
+  Rendered posts/_new.html.erb (Duration: 1.7ms | Allocations: 930)
+  [1m[36mPost Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:1
+  [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = $1 ORDER BY "posts"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/views/posts/_timeline.html.erb:6
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 5], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:14
+  [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 5]]
+  ↳ app/views/posts/_timeline.html.erb:23
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:25
+  Rendered posts/_new-comment.html.erb (Duration: 1.2ms | Allocations: 391)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 4], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:14
+  [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 4]]
+  ↳ app/views/posts/_timeline.html.erb:23
+  Rendered posts/_new-comment.html.erb (Duration: 0.7ms | Allocations: 383)
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 3], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:14
+  [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 3]]
+  ↳ app/views/posts/_timeline.html.erb:23
+  Rendered posts/_new-comment.html.erb (Duration: 1.5ms | Allocations: 383)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 2], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:14
+  [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 2]]
+  ↳ app/views/posts/_timeline.html.erb:23
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:25
+  Rendered posts/_new-comment.html.erb (Duration: 0.7ms | Allocations: 383)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 1], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:14
+  [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/_timeline.html.erb:23
+  Rendered posts/_new-comment.html.erb (Duration: 0.7ms | Allocations: 383)
+  Rendered posts/_timeline.html.erb (Duration: 41.7ms | Allocations: 14458)
+  Rendered posts/index.html.erb within layouts/application (Duration: 44.2ms | Allocations: 15535)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.2ms | Allocations: 166)
+Completed 200 OK in 65ms (Views: 47.2ms | ActiveRecord: 7.6ms | Allocations: 26366)
+
+
+Started GET "/posts" for 127.0.0.1 at 2020-02-20 19:26:53 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", true]]
+  ↳ app/controllers/posts_controller.rb:8:in `index'
+  Rendering posts/index.html.erb within layouts/application
+  Rendered posts/_new.html.erb (Duration: 1.0ms | Allocations: 920)
+  [1m[36mPost Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:1
+  [1m[36mPost Load (0.9ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = $1 ORDER BY "posts"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/views/posts/_timeline.html.erb:6
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 5], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:14
+  [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 5]]
+  ↳ app/views/posts/_timeline.html.erb:23
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:25
+  Rendered posts/_new-comment.html.erb (Duration: 0.7ms | Allocations: 391)
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 4], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:14
+  [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 4]]
+  ↳ app/views/posts/_timeline.html.erb:23
+  Rendered posts/_new-comment.html.erb (Duration: 0.9ms | Allocations: 383)
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 3], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:14
+  [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 3]]
+  ↳ app/views/posts/_timeline.html.erb:23
+  Rendered posts/_new-comment.html.erb (Duration: 0.7ms | Allocations: 383)
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 2], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:14
+  [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 2]]
+  ↳ app/views/posts/_timeline.html.erb:23
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:25
+  Rendered posts/_new-comment.html.erb (Duration: 0.7ms | Allocations: 383)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 1], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:14
+  [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/_timeline.html.erb:23
+  Rendered posts/_new-comment.html.erb (Duration: 0.7ms | Allocations: 383)
+  Rendered posts/_timeline.html.erb (Duration: 37.5ms | Allocations: 14444)
+  Rendered posts/index.html.erb within layouts/application (Duration: 39.0ms | Allocations: 15510)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.2ms | Allocations: 160)
+Completed 200 OK in 55ms (Views: 41.9ms | ActiveRecord: 6.6ms | Allocations: 26331)
+
+
+Started GET "/users" for 127.0.0.1 at 2020-02-20 19:26:53 +0300
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:11:in `index'
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2 AND "users"."id" = $3 LIMIT $4[0m  [["user_id", 1], ["status", true], ["id", 2], ["LIMIT", 1]]
+  ↳ app/models/user.rb:28:in `friend?'
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."user_id" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2[0m  [["friend_id", 1], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  Rendered users/index.html.erb within layouts/application (Duration: 36.4ms | Allocations: 3305)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.4ms | Allocations: 161)
+Completed 200 OK in 61ms (Views: 51.1ms | ActiveRecord: 3.9ms | Allocations: 13625)
+
+
+Started GET "/friendships" for 127.0.0.1 at 2020-02-20 19:26:54 +0300
+Processing by FriendshipsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:5:in `index'
+  Rendering friendships/index.html.erb within layouts/application
+  [1m[36mFriendship Load (0.5ms)[0m  [1m[34mSELECT "friendships".* FROM "friendships" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2[0m  [["friend_id", 1], ["status", false]]
+  ↳ app/views/friendships/index.html.erb:2
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/friendships/index.html.erb:3
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", true]]
+  ↳ app/views/friendships/index.html.erb:9
+  Rendered friendships/index.html.erb within layouts/application (Duration: 10.1ms | Allocations: 2880)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 1.0ms | Allocations: 161)
+Completed 200 OK in 29ms (Views: 23.0ms | ActiveRecord: 2.3ms | Allocations: 12163)
+
+
+Started POST "/friendships.1" for 127.0.0.1 at 2020-02-20 19:26:56 +0300
+Processing by FriendshipsController#create as 
+  Parameters: {"authenticity_token"=>"yQVlz2xPUxNEGnRsYg9aeOprwaOCfSw0aoYmnmpPuesT2dNM89ksj+ny5zZndK/KZ9pXJW8ROYntXjor6zLWBg=="}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:10:in `create'
+  [1m[35m (2.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/friendships_controller.rb:10:in `create'
+  [1m[36mFriendship Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = $1 AND "friendships"."friend_id" IS NULL LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:10:in `create'
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/friendships_controller.rb:10:in `create'
+Redirected to http://127.0.0.1:3000/users
+Completed 302 Found in 23ms (ActiveRecord: 3.8ms | Allocations: 5118)
+
+
+Started GET "/users" for 127.0.0.1 at 2020-02-20 19:26:56 +0300
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:11:in `index'
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Exists? (1.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2 AND "users"."id" = $3 LIMIT $4[0m  [["user_id", 1], ["status", true], ["id", 2], ["LIMIT", 1]]
+  ↳ app/models/user.rb:28:in `friend?'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."user_id" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2[0m  [["friend_id", 1], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  Rendered users/index.html.erb within layouts/application (Duration: 12.0ms | Allocations: 3304)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.4ms | Allocations: 161)
+Completed 200 OK in 38ms (Views: 25.8ms | ActiveRecord: 3.2ms | Allocations: 13613)
+
+
+Started GET "/users/2" for 127.0.0.1 at 2020-02-20 19:27:00 +0300
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:7:in `show'
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (Duration: 0.1ms | Allocations: 9)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/_show_page.html.erb:11
+  Rendered home/_show_page.html.erb (Duration: 2.5ms | Allocations: 1064)
+Completed 200 OK in 21ms (Views: 17.0ms | ActiveRecord: 1.6ms | Allocations: 9767)
+
+
+Started GET "/friendships" for 127.0.0.1 at 2020-02-20 19:27:01 +0300
+Processing by FriendshipsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:5:in `index'
+  Rendering friendships/index.html.erb within layouts/application
+  [1m[36mFriendship Load (1.2ms)[0m  [1m[34mSELECT "friendships".* FROM "friendships" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2[0m  [["friend_id", 1], ["status", false]]
+  ↳ app/views/friendships/index.html.erb:2
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/friendships/index.html.erb:3
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", true]]
+  ↳ app/views/friendships/index.html.erb:9
+  Rendered friendships/index.html.erb within layouts/application (Duration: 9.9ms | Allocations: 2880)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.3ms | Allocations: 161)
+Completed 200 OK in 27ms (Views: 21.9ms | ActiveRecord: 2.4ms | Allocations: 12158)
+
+
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT pg_try_advisory_lock(333164765143615230)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddDefaultToFriendships (20200220163153)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(333164765143615230)[0m
+  [1m[35m (33.3ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (13.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(333164765143615230)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(333164765143615230)[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(333164765143615230)[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to DeviseCreateUsers (20200201000137)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (26.2ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  [1m[35m (3.2ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  [1m[36mprimary::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200201000137"]]
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePosts (20200201000413)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (10.8ms)[0m  [1m[35mCREATE TABLE "posts" ("id" bigserial primary key, "content" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200201000413"]]
+  [1m[35m (2.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddNameToUsers (20200201002128)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "name" character varying[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200201002128"]]
+  [1m[35m (2.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddUserIdToPosts (20200201002855)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "posts" ADD "user_id" bigint NOT NULL[0m
+  [1m[35m (5.0ms)[0m  [1m[35mCREATE  INDEX  "index_posts_on_user_id" ON "posts"  ("user_id")[0m
+  [1m[35m (1.5ms)[0m  [1m[35mALTER TABLE "posts" ADD CONSTRAINT "fk_rails_5b5ddfd518"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200201002855"]]
+  [1m[35m (2.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateComments (20200207190342)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (14.1ms)[0m  [1m[35mCREATE TABLE "comments" ("id" bigserial primary key, "user_id" bigint NOT NULL, "post_id" bigint NOT NULL, "content" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_03de2dc08c"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_2fd19c0db7"
+FOREIGN KEY ("post_id")
+  REFERENCES "posts" ("id")
+)[0m
+  [1m[35m (5.0ms)[0m  [1m[35mCREATE  INDEX  "index_comments_on_user_id" ON "comments"  ("user_id")[0m
+  [1m[35m (5.0ms)[0m  [1m[35mCREATE  INDEX  "index_comments_on_post_id" ON "comments"  ("post_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200207190342"]]
+  [1m[35m (2.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateLikes (20200207191625)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (11.8ms)[0m  [1m[35mCREATE TABLE "likes" ("id" bigserial primary key, "likable_type" character varying, "likable_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (5.3ms)[0m  [1m[35mCREATE  INDEX  "index_likes_on_likable_type_and_likable_id" ON "likes"  ("likable_type", "likable_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200207191625"]]
+  [1m[35m (2.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddUserToLikes (20200207192319)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "likes" ADD "user_id" bigint[0m
+  [1m[35m (5.3ms)[0m  [1m[35mCREATE  INDEX  "index_likes_on_user_id" ON "likes"  ("user_id")[0m
+  [1m[35m (1.4ms)[0m  [1m[35mALTER TABLE "likes" ADD CONSTRAINT "fk_rails_1e09b5dabf"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[36mprimary::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200207192319"]]
+  [1m[35m (2.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddPostIdToLikes (20200211200700)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "likes" ADD "post_id" bigint NOT NULL[0m
+  [1m[35m (4.1ms)[0m  [1m[35mCREATE  INDEX  "index_likes_on_post_id" ON "likes"  ("post_id")[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "likes" ADD CONSTRAINT "fk_rails_87a8aac469"
+FOREIGN KEY ("post_id")
+  REFERENCES "posts" ("id")
+[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200211200700"]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateFriendships (20200217192032)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.4ms)[0m  [1m[35mCREATE TABLE "friendships" ("id" bigserial primary key, "user_id" bigint, "friend_id" bigint, "status" boolean DEFAULT TRUE, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_e3733b59b7"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE  INDEX  "index_friendships_on_user_id" ON "friendships"  ("user_id")[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE  INDEX  "index_friendships_on_friend_id" ON "friendships"  ("friend_id")[0m
+  [1m[35m (1.3ms)[0m  [1m[35mALTER TABLE "friendships" ADD CONSTRAINT "fk_rails_d78dc9c7fd"
+FOREIGN KEY ("friend_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200217192032"]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddDefaultToFriendships (20200220163153)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "friendships" ALTER COLUMN "status" SET DEFAULT FALSE[0m
+  [1m[36mprimary::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200220163153"]]
+  [1m[35m (2.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-02-20 16:38:39.044058"], ["updated_at", "2020-02-20 16:38:39.044058"]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(333164765143615230)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for 127.0.0.1 at 2020-02-20 19:38:54 +0300
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Completed 401 Unauthorized in 20ms (ActiveRecord: 7.4ms | Allocations: 3906)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2020-02-20 19:38:54 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 2.3ms | Allocations: 645)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 11.0ms | Allocations: 3114)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 1.7ms | Allocations: 534)
+Completed 200 OK in 184ms (Views: 171.2ms | ActiveRecord: 0.0ms | Allocations: 51218)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2020-02-20 19:39:00 +0300
+Processing by Users::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 1.1ms | Allocations: 215)
+  Rendered devise/shared/_links.html.erb (Duration: 0.3ms | Allocations: 124)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 5.4ms | Allocations: 2286)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.4ms | Allocations: 248)
+Completed 200 OK in 44ms (Views: 41.9ms | ActiveRecord: 0.0ms | Allocations: 12421)
+
+
+Started POST "/users" for 127.0.0.1 at 2020-02-20 19:39:24 +0300
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"authenticity_token"=>"lfkofylY9t29JmqPmysMfhmwxvbQZpEz4iDWnPSsQmfmK4aa2o866mZsRtnFWnQsrTbJuiO+QyAnZZGWOu0mLQ==", "user"=>{"name"=>"John doe", "email"=>"test@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users/registrations_controller.rb:14:in `create'
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users/registrations_controller.rb:14:in `create'
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "test@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users/registrations_controller.rb:14:in `create'
+  [1m[36mUser Create (1.0ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "name") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["email", "test@gmail.com"], ["encrypted_password", "$2a$11$gWN.KPsg7jC4HngW7WPbT..pvVTsVb/pecr7YFLkkroXuMgO0Lnoq"], ["created_at", "2020-02-20 16:39:24.492686"], ["updated_at", "2020-02-20 16:39:24.492686"], ["name", "John doe"]]
+  ↳ app/controllers/users/registrations_controller.rb:14:in `create'
+  [1m[35m (3.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users/registrations_controller.rb:14:in `create'
+Redirected to http://127.0.0.1:3000/
+Completed 302 Found in 176ms (ActiveRecord: 6.7ms | Allocations: 9090)
+
+
+Started GET "/" for 127.0.0.1 at 2020-02-20 19:39:24 +0300
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.6ms | Allocations: 198)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.3ms | Allocations: 169)
+Completed 200 OK in 33ms (Views: 20.3ms | ActiveRecord: 2.9ms | Allocations: 15573)
+
+
+Started GET "/posts" for 127.0.0.1 at 2020-02-20 19:39:28 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", true]]
+  ↳ app/controllers/posts_controller.rb:8:in `index'
+  Rendering posts/index.html.erb within layouts/application
+  Rendered posts/_new.html.erb (Duration: 4.9ms | Allocations: 1767)
+  [1m[36mPost Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:1
+  Rendered posts/_timeline.html.erb (Duration: 4.3ms | Allocations: 1244)
+  Rendered posts/index.html.erb within layouts/application (Duration: 12.7ms | Allocations: 3603)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 1.2ms | Allocations: 170)
+Completed 200 OK in 96ms (Views: 36.6ms | ActiveRecord: 8.5ms | Allocations: 25068)
+
+
+Started POST "/posts" for 127.0.0.1 at 2020-02-20 19:39:38 +0300
+Processing by PostsController#create as JS
+  Parameters: {"authenticity_token"=>"YVNi9MfgVLnYp+h8+vY0EEQoqamQe5d/e8mvkZD5rwjlaGGrgpAn0Jpg8h9B9hic9ci/flGvAAe/XFdxwKfbfA==", "content"=>"post article one", "commit"=>"Save "}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[31mUnpermitted parameters: :authenticity_token, :commit[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:24:in `create'
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/posts_controller.rb:25:in `create'
+  [1m[36mPost Create (2.0ms)[0m  [1m[32mINSERT INTO "posts" ("content", "created_at", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["content", "post article one"], ["created_at", "2020-02-20 16:39:38.290427"], ["updated_at", "2020-02-20 16:39:38.290427"], ["user_id", 1]]
+  ↳ app/controllers/posts_controller.rb:25:in `create'
+  [1m[35m (2.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/posts_controller.rb:25:in `create'
+Redirected to http://127.0.0.1:3000/posts
+Completed 200 OK in 17ms (ActiveRecord: 5.5ms | Allocations: 6214)
+
+
+Started GET "/posts" for 127.0.0.1 at 2020-02-20 19:39:38 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", true]]
+  ↳ app/controllers/posts_controller.rb:8:in `index'
+  Rendering posts/index.html.erb within layouts/application
+  Rendered posts/_new.html.erb (Duration: 1.6ms | Allocations: 927)
+  [1m[36mPost Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:1
+  [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = $1 ORDER BY "posts"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/views/posts/_timeline.html.erb:6
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 1], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:14
+  [1m[36mComment Load (1.4ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/_timeline.html.erb:23
+  Rendered posts/_new-comment.html.erb (Duration: 1.5ms | Allocations: 589)
+  Rendered posts/_timeline.html.erb (Duration: 22.5ms | Allocations: 6596)
+  Rendered posts/index.html.erb within layouts/application (Duration: 24.8ms | Allocations: 7670)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.3ms | Allocations: 167)
+Completed 200 OK in 45ms (Views: 32.3ms | ActiveRecord: 5.6ms | Allocations: 18502)
+
+
+Started POST "/comments" for 127.0.0.1 at 2020-02-20 19:39:46 +0300
+Processing by CommentsController#create as HTML
+  Parameters: {"authenticity_token"=>"R9Cvzctva2M2DqQ0ooErUo1vzDMChQvQnW+QdIqQBX4hYlFOUmiA+pjOipMwPJuCh92pdfwAU7hQbvy6+wdEsQ==", "comment"=>{"post_id"=>"1", "content"=>"comment article one"}, "commit"=>"Create Comment"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/comments_controller.rb:10:in `create'
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/comments_controller.rb:12:in `create'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/comments_controller.rb:12:in `create'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/comments_controller.rb:13:in `create'
+  [1m[36mComment Create (1.1ms)[0m  [1m[32mINSERT INTO "comments" ("user_id", "post_id", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 1], ["post_id", 1], ["content", "comment article one"], ["created_at", "2020-02-20 16:39:46.660596"], ["updated_at", "2020-02-20 16:39:46.660596"]]
+  ↳ app/controllers/comments_controller.rb:13:in `create'
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/comments_controller.rb:13:in `create'
+Redirected to http://127.0.0.1:3000/posts
+Completed 302 Found in 22ms (ActiveRecord: 4.1ms | Allocations: 6745)
+
+
+Started GET "/posts" for 127.0.0.1 at 2020-02-20 19:39:46 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", true]]
+  ↳ app/controllers/posts_controller.rb:8:in `index'
+  Rendering posts/index.html.erb within layouts/application
+  Rendered posts/_new.html.erb (Duration: 1.0ms | Allocations: 924)
+  [1m[36mPost Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:1
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = $1 ORDER BY "posts"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/views/posts/_timeline.html.erb:6
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 1], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:14
+  [1m[36mComment Load (0.6ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/_timeline.html.erb:23
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:25
+  Rendered posts/_new-comment.html.erb (Duration: 0.9ms | Allocations: 391)
+  Rendered posts/_timeline.html.erb (Duration: 15.2ms | Allocations: 4467)
+  Rendered posts/index.html.erb within layouts/application (Duration: 16.7ms | Allocations: 5539)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.3ms | Allocations: 160)
+Completed 200 OK in 34ms (Views: 24.2ms | ActiveRecord: 3.6ms | Allocations: 16365)
+
+
+Started GET "/posts" for 127.0.0.1 at 2020-02-20 19:39:51 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", true]]
+  ↳ app/controllers/posts_controller.rb:8:in `index'
+  Rendering posts/index.html.erb within layouts/application
+  Rendered posts/_new.html.erb (Duration: 1.4ms | Allocations: 921)
+  [1m[36mPost Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:1
+  [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = $1 ORDER BY "posts"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/views/posts/_timeline.html.erb:6
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 1], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:14
+  [1m[36mComment Load (0.4ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/_timeline.html.erb:23
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:25
+  Rendered posts/_new-comment.html.erb (Duration: 0.6ms | Allocations: 391)
+  Rendered posts/_timeline.html.erb (Duration: 13.5ms | Allocations: 4451)
+  Rendered posts/index.html.erb within layouts/application (Duration: 15.4ms | Allocations: 5518)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.2ms | Allocations: 160)
+Completed 200 OK in 40ms (Views: 30.1ms | ActiveRecord: 3.4ms | Allocations: 16350)
+
+
+Started GET "/users" for 127.0.0.1 at 2020-02-20 19:39:53 +0300
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:11:in `index'
+  Rendering users/index.html.erb within layouts/application
+  Rendered users/index.html.erb within layouts/application (Duration: 1.5ms | Allocations: 215)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.3ms | Allocations: 181)
+Completed 200 OK in 28ms (Views: 18.6ms | ActiveRecord: 2.3ms | Allocations: 11295)
+
+
+Started GET "/friendships" for 127.0.0.1 at 2020-02-20 19:39:54 +0300
+Processing by FriendshipsController#index as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:5:in `index'
+  Rendering friendships/index.html.erb within layouts/application
+  [1m[36mFriendship Load (0.3ms)[0m  [1m[34mSELECT "friendships".* FROM "friendships" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2[0m  [["friend_id", 1], ["status", false]]
+  ↳ app/views/friendships/index.html.erb:2
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", true]]
+  ↳ app/views/friendships/index.html.erb:9
+  Rendered friendships/index.html.erb within layouts/application (Duration: 6.3ms | Allocations: 2237)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.3ms | Allocations: 181)
+Completed 200 OK in 24ms (Views: 18.2ms | ActiveRecord: 1.9ms | Allocations: 12178)
+
+
+Started GET "/" for 127.0.0.1 at 2020-02-20 19:39:57 +0300
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.3ms | Allocations: 65)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.4ms | Allocations: 166)
+Completed 200 OK in 20ms (Views: 16.4ms | ActiveRecord: 0.4ms | Allocations: 9832)
+
+
+Started GET "/friendships" for 127.0.0.1 at 2020-02-20 19:39:58 +0300
+Processing by FriendshipsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:5:in `index'
+  Rendering friendships/index.html.erb within layouts/application
+  [1m[36mFriendship Load (2.7ms)[0m  [1m[34mSELECT "friendships".* FROM "friendships" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2[0m  [["friend_id", 1], ["status", false]]
+  ↳ app/views/friendships/index.html.erb:2
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", true]]
+  ↳ app/views/friendships/index.html.erb:9
+  Rendered friendships/index.html.erb within layouts/application (Duration: 8.4ms | Allocations: 1947)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.4ms | Allocations: 170)
+Completed 200 OK in 27ms (Views: 18.9ms | ActiveRecord: 3.9ms | Allocations: 11250)
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2020-02-20 19:40:01 +0300
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"ta0TxryINmpz8gH5gRiN5/rFtag94QpR+Fsh5BxC0vJvcaVFIx5J9t4akqOEY3hVd3QjLtCNH+x/gz1RnT+9Hw=="}
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Redirected to http://127.0.0.1:3000/
+Completed 302 Found in 11ms (ActiveRecord: 1.9ms | Allocations: 2838)
+
+
+Started GET "/" for 127.0.0.1 at 2020-02-20 19:40:01 +0300
+Processing by HomeController#index as HTML
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms | Allocations: 433)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2020-02-20 19:40:01 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.2ms | Allocations: 134)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 1.7ms | Allocations: 1136)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.5ms | Allocations: 248)
+Completed 200 OK in 13ms (Views: 11.9ms | ActiveRecord: 0.0ms | Allocations: 9790)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2020-02-20 19:40:04 +0300
+Processing by Users::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.1ms | Allocations: 15)
+  Rendered devise/shared/_links.html.erb (Duration: 0.3ms | Allocations: 79)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 5.5ms | Allocations: 1367)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.5ms | Allocations: 248)
+Completed 200 OK in 22ms (Views: 21.0ms | ActiveRecord: 0.0ms | Allocations: 10013)
+
+
+Started POST "/users" for 127.0.0.1 at 2020-02-20 19:40:23 +0300
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"authenticity_token"=>"6ciy4eiFJONlMjNwqnuZzzYjwIZJHBYPfXX5qpJ33C59FsvIe8iApzo/sNMvmY4HDcgYAf+JrDGjPZYvCOovZw==", "user"=>{"name"=>"Jane Doe", "email"=>"jane@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users/registrations_controller.rb:14:in `create'
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "jane@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users/registrations_controller.rb:14:in `create'
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "jane@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users/registrations_controller.rb:14:in `create'
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "name") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["email", "jane@gmail.com"], ["encrypted_password", "$2a$11$2RJwp5Q3WP91co8K6OnCcOdyxHHAzN78lL5G83HVnn9wnw7FDKHG2"], ["created_at", "2020-02-20 16:40:23.945598"], ["updated_at", "2020-02-20 16:40:23.945598"], ["name", "Jane Doe"]]
+  ↳ app/controllers/users/registrations_controller.rb:14:in `create'
+  [1m[35m (1.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users/registrations_controller.rb:14:in `create'
+Redirected to http://127.0.0.1:3000/
+Completed 302 Found in 166ms (ActiveRecord: 3.1ms | Allocations: 5870)
+
+
+Started GET "/" for 127.0.0.1 at 2020-02-20 19:40:23 +0300
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.2ms | Allocations: 58)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.3ms | Allocations: 161)
+Completed 200 OK in 14ms (Views: 10.4ms | ActiveRecord: 0.3ms | Allocations: 9818)
+
+
+Started GET "/posts" for 127.0.0.1 at 2020-02-20 19:40:26 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 2], ["status", true]]
+  ↳ app/controllers/posts_controller.rb:8:in `index'
+  Rendering posts/index.html.erb within layouts/application
+  Rendered posts/_new.html.erb (Duration: 1.2ms | Allocations: 933)
+  [1m[36mPost Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."user_id" = $1 LIMIT $2[0m  [["user_id", 2], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:1
+  Rendered posts/_timeline.html.erb (Duration: 2.9ms | Allocations: 633)
+  Rendered posts/index.html.erb within layouts/application (Duration: 4.8ms | Allocations: 1713)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.2ms | Allocations: 167)
+Completed 200 OK in 30ms (Views: 21.5ms | ActiveRecord: 1.5ms | Allocations: 12552)
+
+
+Started POST "/posts" for 127.0.0.1 at 2020-02-20 19:40:34 +0300
+Processing by PostsController#create as JS
+  Parameters: {"authenticity_token"=>"XHnQKgnCeKx/N6qLOuOzRe8vvlxeZvnJ5VHGBtzbv1RZnmrPeXt4XeD8xaSzA/NageSWzZaBlkJrFcj6WfYYhw==", "content"=>"Post article two", "commit"=>"Save "}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[31mUnpermitted parameters: :authenticity_token, :commit[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:24:in `create'
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/posts_controller.rb:25:in `create'
+  [1m[36mPost Create (0.5ms)[0m  [1m[32mINSERT INTO "posts" ("content", "created_at", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["content", "Post article two"], ["created_at", "2020-02-20 16:40:34.889705"], ["updated_at", "2020-02-20 16:40:34.889705"], ["user_id", 2]]
+  ↳ app/controllers/posts_controller.rb:25:in `create'
+  [1m[35m (1.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/posts_controller.rb:25:in `create'
+Redirected to http://127.0.0.1:3000/posts
+Completed 200 OK in 18ms (ActiveRecord: 3.9ms | Allocations: 5109)
+
+
+Started GET "/posts" for 127.0.0.1 at 2020-02-20 19:40:34 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 2], ["status", true]]
+  ↳ app/controllers/posts_controller.rb:8:in `index'
+  Rendering posts/index.html.erb within layouts/application
+  Rendered posts/_new.html.erb (Duration: 0.9ms | Allocations: 921)
+  [1m[36mPost Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."user_id" = $1 LIMIT $2[0m  [["user_id", 2], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:1
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = $1 ORDER BY "posts"."created_at" DESC[0m  [["user_id", 2]]
+  ↳ app/views/posts/_timeline.html.erb:6
+  [1m[35m (1.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 2], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:14
+  [1m[36mComment Load (0.5ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 2]]
+  ↳ app/views/posts/_timeline.html.erb:23
+  Rendered posts/_new-comment.html.erb (Duration: 0.8ms | Allocations: 391)
+  Rendered posts/_timeline.html.erb (Duration: 11.4ms | Allocations: 3606)
+  Rendered posts/index.html.erb within layouts/application (Duration: 12.8ms | Allocations: 4673)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.2ms | Allocations: 160)
+Completed 200 OK in 30ms (Views: 18.7ms | ActiveRecord: 4.0ms | Allocations: 15493)
+
+
+Started POST "/comments" for 127.0.0.1 at 2020-02-20 19:40:48 +0300
+Processing by CommentsController#create as HTML
+  Parameters: {"authenticity_token"=>"ImmYB03zc4OfXFhsFA2avCG9ETrOFkODSUqvb9t1814muJTCm6MzxN9gQG1AqZ0Mb/EbCfuD2cZN3GW49ZoaDA==", "comment"=>{"post_id"=>"2", "content"=>"comment article two"}, "commit"=>"Create Comment"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/comments_controller.rb:10:in `create'
+  [1m[36mPost Load (0.6ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/comments_controller.rb:12:in `create'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/comments_controller.rb:12:in `create'
+  [1m[35m (1.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/comments_controller.rb:13:in `create'
+  [1m[36mComment Create (0.9ms)[0m  [1m[32mINSERT INTO "comments" ("user_id", "post_id", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 2], ["post_id", 2], ["content", "comment article two"], ["created_at", "2020-02-20 16:40:48.028327"], ["updated_at", "2020-02-20 16:40:48.028327"]]
+  ↳ app/controllers/comments_controller.rb:13:in `create'
+  [1m[35m (2.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/comments_controller.rb:13:in `create'
+Redirected to http://127.0.0.1:3000/posts
+Completed 302 Found in 20ms (ActiveRecord: 6.3ms | Allocations: 5314)
+
+
+Started GET "/posts" for 127.0.0.1 at 2020-02-20 19:40:48 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 2], ["status", true]]
+  ↳ app/controllers/posts_controller.rb:8:in `index'
+  Rendering posts/index.html.erb within layouts/application
+  Rendered posts/_new.html.erb (Duration: 0.8ms | Allocations: 922)
+  [1m[36mPost Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."user_id" = $1 LIMIT $2[0m  [["user_id", 2], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:1
+  [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = $1 ORDER BY "posts"."created_at" DESC[0m  [["user_id", 2]]
+  ↳ app/views/posts/_timeline.html.erb:6
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 2], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:14
+  [1m[36mComment Load (0.4ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 2]]
+  ↳ app/views/posts/_timeline.html.erb:23
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:25
+  Rendered posts/_new-comment.html.erb (Duration: 1.1ms | Allocations: 391)
+  Rendered posts/_timeline.html.erb (Duration: 15.1ms | Allocations: 4453)
+  Rendered posts/index.html.erb within layouts/application (Duration: 16.3ms | Allocations: 5521)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.2ms | Allocations: 160)
+Completed 200 OK in 50ms (Views: 41.6ms | ActiveRecord: 3.8ms | Allocations: 16344)
+
+
+Started GET "/posts" for 127.0.0.1 at 2020-02-20 19:40:51 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 2], ["status", true]]
+  ↳ app/controllers/posts_controller.rb:8:in `index'
+  Rendering posts/index.html.erb within layouts/application
+  Rendered posts/_new.html.erb (Duration: 1.4ms | Allocations: 923)
+  [1m[36mPost Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."user_id" = $1 LIMIT $2[0m  [["user_id", 2], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:1
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = $1 ORDER BY "posts"."created_at" DESC[0m  [["user_id", 2]]
+  ↳ app/views/posts/_timeline.html.erb:6
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 2], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:14
+  [1m[36mComment Load (0.4ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 2]]
+  ↳ app/views/posts/_timeline.html.erb:23
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:25
+  Rendered posts/_new-comment.html.erb (Duration: 0.6ms | Allocations: 391)
+  Rendered posts/_timeline.html.erb (Duration: 12.1ms | Allocations: 4451)
+  Rendered posts/index.html.erb within layouts/application (Duration: 14.1ms | Allocations: 5520)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.3ms | Allocations: 160)
+Completed 200 OK in 32ms (Views: 20.9ms | ActiveRecord: 3.9ms | Allocations: 16349)
+
+
+Started GET "/friendships" for 127.0.0.1 at 2020-02-20 19:40:52 +0300
+Processing by FriendshipsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:5:in `index'
+  Rendering friendships/index.html.erb within layouts/application
+  [1m[36mFriendship Load (0.5ms)[0m  [1m[34mSELECT "friendships".* FROM "friendships" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2[0m  [["friend_id", 2], ["status", false]]
+  ↳ app/views/friendships/index.html.erb:2
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 2], ["status", true]]
+  ↳ app/views/friendships/index.html.erb:9
+  Rendered friendships/index.html.erb within layouts/application (Duration: 9.0ms | Allocations: 1948)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.5ms | Allocations: 170)
+Completed 200 OK in 31ms (Views: 25.7ms | ActiveRecord: 1.3ms | Allocations: 11250)
+
+
+Started GET "/users" for 127.0.0.1 at 2020-02-20 19:40:53 +0300
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:11:in `index'
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2 AND "users"."id" = $3 LIMIT $4[0m  [["user_id", 2], ["status", true], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:28:in `friend?'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."user_id" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2[0m  [["friend_id", 2], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 2], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  Rendered users/index.html.erb within layouts/application (Duration: 11.6ms | Allocations: 3420)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.3ms | Allocations: 166)
+Completed 200 OK in 31ms (Views: 23.3ms | ActiveRecord: 3.2ms | Allocations: 13748)
+
+
+Started POST "/friendships?friend_id=1" for 127.0.0.1 at 2020-02-20 19:40:56 +0300
+Processing by FriendshipsController#create as HTML
+  Parameters: {"authenticity_token"=>"XYlk/qiY/OyTkAvPMwlSoI3Rqs9CRPXiCJHSH9nUnL1V6zLZ+r2AR4WLDZZPWuVvR68bm0f350vy3mVnZg0tXQ==", "friend_id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:10:in `create'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/friendships_controller.rb:10:in `create'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:10:in `create'
+  [1m[36mFriendship Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = $1 AND "friendships"."friend_id" = $2 LIMIT $3[0m  [["user_id", 2], ["friend_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:10:in `create'
+  [1m[36mFriendship Create (0.8ms)[0m  [1m[32mINSERT INTO "friendships" ("user_id", "friend_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 2], ["friend_id", 1], ["created_at", "2020-02-20 16:40:56.724693"], ["updated_at", "2020-02-20 16:40:56.724693"]]
+  ↳ app/controllers/friendships_controller.rb:10:in `create'
+  [1m[35m (1.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/friendships_controller.rb:10:in `create'
+Redirected to http://127.0.0.1:3000/users
+Completed 302 Found in 23ms (ActiveRecord: 5.7ms | Allocations: 9808)
+
+
+Started GET "/users" for 127.0.0.1 at 2020-02-20 19:40:56 +0300
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:11:in `index'
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2 AND "users"."id" = $3 LIMIT $4[0m  [["user_id", 2], ["status", true], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:28:in `friend?'
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."user_id" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2[0m  [["friend_id", 2], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 2], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  Rendered users/index.html.erb within layouts/application (Duration: 8.8ms | Allocations: 3306)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.2ms | Allocations: 161)
+Completed 200 OK in 21ms (Views: 15.1ms | ActiveRecord: 2.3ms | Allocations: 13618)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2020-02-20 19:40:58 +0300
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:7:in `show'
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (Duration: 0.7ms | Allocations: 134)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/_show_page.html.erb:11
+  Rendered home/_show_page.html.erb (Duration: 2.3ms | Allocations: 1074)
+Completed 200 OK in 21ms (Views: 17.2ms | ActiveRecord: 0.7ms | Allocations: 10152)
+
+
+Started GET "/" for 127.0.0.1 at 2020-02-20 19:41:01 +0300
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.3ms | Allocations: 64)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.4ms | Allocations: 166)
+Completed 200 OK in 20ms (Views: 16.5ms | ActiveRecord: 0.3ms | Allocations: 9812)
+
+
+Started GET "/posts" for 127.0.0.1 at 2020-02-20 19:41:02 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 2], ["status", true]]
+  ↳ app/controllers/posts_controller.rb:8:in `index'
+  Rendering posts/index.html.erb within layouts/application
+  Rendered posts/_new.html.erb (Duration: 1.3ms | Allocations: 930)
+  [1m[36mPost Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."user_id" = $1 LIMIT $2[0m  [["user_id", 2], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:1
+  [1m[36mPost Load (1.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = $1 ORDER BY "posts"."created_at" DESC[0m  [["user_id", 2]]
+  ↳ app/views/posts/_timeline.html.erb:6
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 2], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:14
+  [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 2]]
+  ↳ app/views/posts/_timeline.html.erb:23
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:25
+  Rendered posts/_new-comment.html.erb (Duration: 0.9ms | Allocations: 391)
+  Rendered posts/_timeline.html.erb (Duration: 18.2ms | Allocations: 4461)
+  Rendered posts/index.html.erb within layouts/application (Duration: 20.0ms | Allocations: 5538)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.2ms | Allocations: 166)
+Completed 200 OK in 38ms (Views: 25.9ms | ActiveRecord: 4.8ms | Allocations: 16367)
+
+
+Started GET "/users" for 127.0.0.1 at 2020-02-20 19:41:03 +0300
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (2.8ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:11:in `index'
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2 AND "users"."id" = $3 LIMIT $4[0m  [["user_id", 2], ["status", true], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:28:in `friend?'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."user_id" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2[0m  [["friend_id", 2], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 2], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  Rendered users/index.html.erb within layouts/application (Duration: 17.3ms | Allocations: 3306)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.4ms | Allocations: 161)
+Completed 200 OK in 47ms (Views: 32.6ms | ActiveRecord: 5.4ms | Allocations: 13632)
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2020-02-20 19:41:04 +0300
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"1payYwlH2badO/I8ugwju2PAOcCS+VvXp2qCwWTwv0be9OREW2KlHYsg9GXGX5R0qb6IlJdKSX5dJTW52ykOpg=="}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+Redirected to http://127.0.0.1:3000/
+Completed 302 Found in 6ms (ActiveRecord: 0.4ms | Allocations: 2292)
+
+
+Started GET "/" for 127.0.0.1 at 2020-02-20 19:41:04 +0300
+Processing by HomeController#index as HTML
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms | Allocations: 441)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2020-02-20 19:41:04 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.2ms | Allocations: 134)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 2.0ms | Allocations: 1135)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.6ms | Allocations: 248)
+Completed 200 OK in 13ms (Views: 12.0ms | ActiveRecord: 0.0ms | Allocations: 9791)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2020-02-20 19:41:18 +0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"KrBRUuM81NTbxgDPrUE4yB3fuYzUNy+hOC8syZwCrWpUtDUJfQ/aTO5sD/6ejNpC406tvKEptPuqfAujKmG5NQ==", "user"=>{"email"=>"test@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "test@gmail.com"], ["LIMIT", 1]]
+Redirected to http://127.0.0.1:3000/
+Completed 302 Found in 167ms (ActiveRecord: 0.4ms | Allocations: 5430)
+
+
+Started GET "/" for 127.0.0.1 at 2020-02-20 19:41:18 +0300
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.2ms | Allocations: 58)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.2ms | Allocations: 161)
+Completed 200 OK in 13ms (Views: 10.1ms | ActiveRecord: 0.3ms | Allocations: 9811)
+
+
+Started GET "/posts" for 127.0.0.1 at 2020-02-20 19:41:24 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", true]]
+  ↳ app/controllers/posts_controller.rb:8:in `index'
+  Rendering posts/index.html.erb within layouts/application
+  Rendered posts/_new.html.erb (Duration: 0.9ms | Allocations: 923)
+  [1m[36mPost Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:1
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = $1 ORDER BY "posts"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/views/posts/_timeline.html.erb:6
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 1], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:14
+  [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/_timeline.html.erb:23
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:25
+  Rendered posts/_new-comment.html.erb (Duration: 1.5ms | Allocations: 391)
+  Rendered posts/_timeline.html.erb (Duration: 13.7ms | Allocations: 4451)
+  Rendered posts/index.html.erb within layouts/application (Duration: 15.0ms | Allocations: 5520)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.3ms | Allocations: 160)
+Completed 200 OK in 57ms (Views: 22.1ms | ActiveRecord: 4.0ms | Allocations: 16348)
+
+
+Started GET "/users" for 127.0.0.1 at 2020-02-20 19:41:26 +0300
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:11:in `index'
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2 AND "users"."id" = $3 LIMIT $4[0m  [["user_id", 1], ["status", true], ["id", 2], ["LIMIT", 1]]
+  ↳ app/models/user.rb:28:in `friend?'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."user_id" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2[0m  [["friend_id", 1], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  Rendered users/index.html.erb within layouts/application (Duration: 11.0ms | Allocations: 3304)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.2ms | Allocations: 161)
+Completed 200 OK in 30ms (Views: 20.7ms | ActiveRecord: 2.7ms | Allocations: 13624)
+
+
+Started GET "/friendships" for 127.0.0.1 at 2020-02-20 19:41:27 +0300
+Processing by FriendshipsController#index as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:5:in `index'
+  Rendering friendships/index.html.erb within layouts/application
+  [1m[36mFriendship Load (0.5ms)[0m  [1m[34mSELECT "friendships".* FROM "friendships" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2[0m  [["friend_id", 1], ["status", false]]
+  ↳ app/views/friendships/index.html.erb:2
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/friendships/index.html.erb:3
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", true]]
+  ↳ app/views/friendships/index.html.erb:9
+  Rendered friendships/index.html.erb within layouts/application (Duration: 11.7ms | Allocations: 3047)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 1.2ms | Allocations: 166)
+Completed 200 OK in 29ms (Views: 22.8ms | ActiveRecord: 2.2ms | Allocations: 12339)
+
+
+Started POST "/friendships.1" for 127.0.0.1 at 2020-02-20 19:41:29 +0300
+Processing by FriendshipsController#create as 
+  Parameters: {"authenticity_token"=>"9TkibkVRqo78Bi3IJ8njt8vbBMoGCOczWnneMDFtgeYcCZvAAsRkd5+zqUzHO/aX5Ku5dqASwBbXFZNwZlOvcw=="}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:10:in `create'
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/friendships_controller.rb:10:in `create'
+  [1m[36mFriendship Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = $1 AND "friendships"."friend_id" IS NULL LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:10:in `create'
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/friendships_controller.rb:10:in `create'
+Redirected to http://127.0.0.1:3000/users
+Completed 302 Found in 12ms (ActiveRecord: 1.7ms | Allocations: 5240)
+
+
+Started GET "/users" for 127.0.0.1 at 2020-02-20 19:41:29 +0300
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:11:in `index'
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2 AND "users"."id" = $3 LIMIT $4[0m  [["user_id", 1], ["status", true], ["id", 2], ["LIMIT", 1]]
+  ↳ app/models/user.rb:28:in `friend?'
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."user_id" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2[0m  [["friend_id", 1], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  Rendered users/index.html.erb within layouts/application (Duration: 8.6ms | Allocations: 3304)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.2ms | Allocations: 161)
+Completed 200 OK in 21ms (Views: 14.9ms | ActiveRecord: 2.2ms | Allocations: 13615)
+
+
+Started GET "/friendships" for 127.0.0.1 at 2020-02-20 19:41:31 +0300
+Processing by FriendshipsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:5:in `index'
+  Rendering friendships/index.html.erb within layouts/application
+  [1m[36mFriendship Load (0.5ms)[0m  [1m[34mSELECT "friendships".* FROM "friendships" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2[0m  [["friend_id", 1], ["status", false]]
+  ↳ app/views/friendships/index.html.erb:2
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/friendships/index.html.erb:3
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", true]]
+  ↳ app/views/friendships/index.html.erb:9
+  Rendered friendships/index.html.erb within layouts/application (Duration: 10.1ms | Allocations: 2880)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.5ms | Allocations: 161)
+Completed 200 OK in 30ms (Views: 23.6ms | ActiveRecord: 2.1ms | Allocations: 12167)
+
+
+Started GET "/users" for 127.0.0.1 at 2020-02-20 19:41:33 +0300
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:11:in `index'
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2 AND "users"."id" = $3 LIMIT $4[0m  [["user_id", 1], ["status", true], ["id", 2], ["LIMIT", 1]]
+  ↳ app/models/user.rb:28:in `friend?'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."user_id" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2[0m  [["friend_id", 1], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  Rendered users/index.html.erb within layouts/application (Duration: 10.0ms | Allocations: 3304)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.2ms | Allocations: 161)
+Completed 200 OK in 27ms (Views: 17.2ms | ActiveRecord: 3.9ms | Allocations: 13619)
+
+
+Started GET "/posts" for 127.0.0.1 at 2020-02-20 19:41:35 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", true]]
+  ↳ app/controllers/posts_controller.rb:8:in `index'
+  Rendering posts/index.html.erb within layouts/application
+  Rendered posts/_new.html.erb (Duration: 1.3ms | Allocations: 920)
+  [1m[36mPost Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:1
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = $1 ORDER BY "posts"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/views/posts/_timeline.html.erb:6
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 1], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:14
+  [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/_timeline.html.erb:23
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:25
+  Rendered posts/_new-comment.html.erb (Duration: 1.0ms | Allocations: 391)
+  Rendered posts/_timeline.html.erb (Duration: 15.5ms | Allocations: 4451)
+  Rendered posts/index.html.erb within layouts/application (Duration: 17.3ms | Allocations: 5517)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.4ms | Allocations: 160)
+Completed 200 OK in 38ms (Views: 29.0ms | ActiveRecord: 2.9ms | Allocations: 16342)
+
+
+Started GET "/users" for 127.0.0.1 at 2020-02-20 19:41:37 +0300
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:11:in `index'
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2 AND "users"."id" = $3 LIMIT $4[0m  [["user_id", 1], ["status", true], ["id", 2], ["LIMIT", 1]]
+  ↳ app/models/user.rb:28:in `friend?'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."user_id" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2[0m  [["friend_id", 1], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  Rendered users/index.html.erb within layouts/application (Duration: 13.2ms | Allocations: 3304)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.2ms | Allocations: 161)
+Completed 200 OK in 36ms (Views: 25.5ms | ActiveRecord: 4.0ms | Allocations: 13622)
+
+
+Started GET "/" for 127.0.0.1 at 2020-02-20 19:41:38 +0300
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.3ms | Allocations: 58)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.5ms | Allocations: 161)
+Completed 200 OK in 22ms (Views: 16.5ms | ActiveRecord: 0.4ms | Allocations: 9803)
+
+
+Started GET "/users" for 127.0.0.1 at 2020-02-20 19:41:40 +0300
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:11:in `index'
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Exists? (1.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2 AND "users"."id" = $3 LIMIT $4[0m  [["user_id", 1], ["status", true], ["id", 2], ["LIMIT", 1]]
+  ↳ app/models/user.rb:28:in `friend?'
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."user_id" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2[0m  [["friend_id", 1], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  Rendered users/index.html.erb within layouts/application (Duration: 12.4ms | Allocations: 3304)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.3ms | Allocations: 161)
+Completed 200 OK in 33ms (Views: 22.6ms | ActiveRecord: 4.9ms | Allocations: 13625)
+
+
+Started GET "/friendships" for 127.0.0.1 at 2020-02-20 19:41:41 +0300
+Processing by FriendshipsController#index as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:5:in `index'
+  Rendering friendships/index.html.erb within layouts/application
+  [1m[36mFriendship Load (0.7ms)[0m  [1m[34mSELECT "friendships".* FROM "friendships" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2[0m  [["friend_id", 1], ["status", false]]
+  ↳ app/views/friendships/index.html.erb:2
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/friendships/index.html.erb:3
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", true]]
+  ↳ app/views/friendships/index.html.erb:9
+  Rendered friendships/index.html.erb within layouts/application (Duration: 11.7ms | Allocations: 2879)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.2ms | Allocations: 161)
+Completed 200 OK in 33ms (Views: 25.6ms | ActiveRecord: 3.5ms | Allocations: 12159)
+
+
+Started POST "/friendships.1" for 127.0.0.1 at 2020-02-20 19:41:43 +0300
+Processing by FriendshipsController#create as 
+  Parameters: {"authenticity_token"=>"HHMEmKYMT80ROnJDYW6xqWoCs36xbcHlDFeClkR88GX1Q7024ZmBNHKP9seBnKSJRXIOwhd35sCBO8/WE0Le8A=="}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:10:in `create'
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/friendships_controller.rb:10:in `create'
+  [1m[36mFriendship Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = $1 AND "friendships"."friend_id" IS NULL LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:10:in `create'
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/friendships_controller.rb:10:in `create'
+Redirected to http://127.0.0.1:3000/users
+Completed 302 Found in 13ms (ActiveRecord: 1.6ms | Allocations: 5114)
+
+
+Started GET "/users" for 127.0.0.1 at 2020-02-20 19:41:43 +0300
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:11:in `index'
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2 AND "users"."id" = $3 LIMIT $4[0m  [["user_id", 1], ["status", true], ["id", 2], ["LIMIT", 1]]
+  ↳ app/models/user.rb:28:in `friend?'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."user_id" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2[0m  [["friend_id", 1], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  Rendered users/index.html.erb within layouts/application (Duration: 7.8ms | Allocations: 3304)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.2ms | Allocations: 161)
+Completed 200 OK in 20ms (Views: 14.9ms | ActiveRecord: 1.8ms | Allocations: 13620)
+
+
+Started GET "/users/2" for 127.0.0.1 at 2020-02-20 19:41:45 +0300
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:7:in `show'
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (Duration: 0.1ms | Allocations: 9)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/_show_page.html.erb:11
+  Rendered home/_show_page.html.erb (Duration: 2.5ms | Allocations: 1064)
+Completed 200 OK in 21ms (Views: 16.8ms | ActiveRecord: 1.9ms | Allocations: 9763)
+
+
+Started GET "/friendships" for 127.0.0.1 at 2020-02-20 19:41:47 +0300
+Processing by FriendshipsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:5:in `index'
+  Rendering friendships/index.html.erb within layouts/application
+  [1m[36mFriendship Load (1.7ms)[0m  [1m[34mSELECT "friendships".* FROM "friendships" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2[0m  [["friend_id", 1], ["status", false]]
+  ↳ app/views/friendships/index.html.erb:2
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/friendships/index.html.erb:3
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", true]]
+  ↳ app/views/friendships/index.html.erb:9
+  Rendered friendships/index.html.erb within layouts/application (Duration: 12.5ms | Allocations: 2879)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.3ms | Allocations: 161)
+Completed 200 OK in 32ms (Views: 24.4ms | ActiveRecord: 3.0ms | Allocations: 12160)
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2020-02-20 19:41:48 +0300
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"k1QFTqZ85xTCg6xtO3UvmxATnZowQyisleuJRTnW2il6ZLzg4ekp7aE2KOnbhzq7P2MgJpZZD4kYh8QFbuj0vA=="}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Redirected to http://127.0.0.1:3000/
+Completed 302 Found in 5ms (ActiveRecord: 0.4ms | Allocations: 2291)
+
+
+Started GET "/" for 127.0.0.1 at 2020-02-20 19:41:48 +0300
+Processing by HomeController#index as HTML
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms | Allocations: 435)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2020-02-20 19:41:48 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.2ms | Allocations: 134)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 1.9ms | Allocations: 1126)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.5ms | Allocations: 238)
+Completed 200 OK in 12ms (Views: 10.4ms | ActiveRecord: 0.0ms | Allocations: 9760)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2020-02-20 19:41:57 +0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"2fr3HdQHwONHgWKL1Q7CsKcn+6HbEdnzVvVxLOOMeE64e1YntSrQLc6bQLvPBEID7oXZW52wOmyHUHuPTPyyMw==", "user"=>{"email"=>"jane@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "jane@gmail.com"], ["LIMIT", 1]]
+Redirected to http://127.0.0.1:3000/
+Completed 302 Found in 159ms (ActiveRecord: 0.6ms | Allocations: 2776)
+
+
+Started GET "/" for 127.0.0.1 at 2020-02-20 19:41:57 +0300
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.3ms | Allocations: 58)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.2ms | Allocations: 161)
+Completed 200 OK in 13ms (Views: 9.8ms | ActiveRecord: 0.3ms | Allocations: 9812)
+
+
+Started GET "/users" for 127.0.0.1 at 2020-02-20 19:42:01 +0300
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:11:in `index'
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2 AND "users"."id" = $3 LIMIT $4[0m  [["user_id", 2], ["status", true], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:28:in `friend?'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."user_id" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2[0m  [["friend_id", 2], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 2], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  Rendered users/index.html.erb within layouts/application (Duration: 10.7ms | Allocations: 3304)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.2ms | Allocations: 161)
+Completed 200 OK in 30ms (Views: 22.8ms | ActiveRecord: 2.9ms | Allocations: 13622)
+
+
+Started GET "/friendships" for 127.0.0.1 at 2020-02-20 19:42:03 +0300
+Processing by FriendshipsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:5:in `index'
+  Rendering friendships/index.html.erb within layouts/application
+  [1m[36mFriendship Load (1.5ms)[0m  [1m[34mSELECT "friendships".* FROM "friendships" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2[0m  [["friend_id", 2], ["status", false]]
+  ↳ app/views/friendships/index.html.erb:2
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 2], ["status", true]]
+  ↳ app/views/friendships/index.html.erb:9
+  Rendered friendships/index.html.erb within layouts/application (Duration: 8.3ms | Allocations: 1946)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.3ms | Allocations: 170)
+Completed 200 OK in 30ms (Views: 23.3ms | ActiveRecord: 3.1ms | Allocations: 11241)
+
+
+Started GET "/friendships" for 127.0.0.1 at 2020-02-20 19:42:05 +0300
+Processing by FriendshipsController#index as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:5:in `index'
+  Rendering friendships/index.html.erb within layouts/application
+  [1m[36mFriendship Load (0.7ms)[0m  [1m[34mSELECT "friendships".* FROM "friendships" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2[0m  [["friend_id", 2], ["status", false]]
+  ↳ app/views/friendships/index.html.erb:2
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 2], ["status", true]]
+  ↳ app/views/friendships/index.html.erb:9
+  Rendered friendships/index.html.erb within layouts/application (Duration: 5.8ms | Allocations: 1946)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.2ms | Allocations: 170)
+Completed 200 OK in 20ms (Views: 13.2ms | ActiveRecord: 1.6ms | Allocations: 11233)
+
+
+Started GET "/posts" for 127.0.0.1 at 2020-02-20 19:42:07 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 2], ["status", true]]
+  ↳ app/controllers/posts_controller.rb:8:in `index'
+  Rendering posts/index.html.erb within layouts/application
+  Rendered posts/_new.html.erb (Duration: 1.2ms | Allocations: 923)
+  [1m[36mPost Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."user_id" = $1 LIMIT $2[0m  [["user_id", 2], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:1
+  [1m[36mPost Load (0.6ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = $1 ORDER BY "posts"."created_at" DESC[0m  [["user_id", 2]]
+  ↳ app/views/posts/_timeline.html.erb:6
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 2], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:14
+  [1m[36mComment Load (0.5ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 2]]
+  ↳ app/views/posts/_timeline.html.erb:23
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:25
+  Rendered posts/_new-comment.html.erb (Duration: 1.1ms | Allocations: 391)
+  Rendered posts/_timeline.html.erb (Duration: 15.5ms | Allocations: 4451)
+  Rendered posts/index.html.erb within layouts/application (Duration: 17.3ms | Allocations: 5520)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.4ms | Allocations: 160)
+Completed 200 OK in 40ms (Views: 29.9ms | ActiveRecord: 4.0ms | Allocations: 16342)
+
+
+Started GET "/" for 127.0.0.1 at 2020-02-20 19:42:08 +0300
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.4ms | Allocations: 58)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.4ms | Allocations: 161)
+Completed 200 OK in 26ms (Views: 20.7ms | ActiveRecord: 0.7ms | Allocations: 9799)
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2020-02-20 19:42:10 +0300
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"YWYvbDtU+2o7An1BvpMju+U2Yaht6/ubkiOYNLmyp20EishXcq51xRJdIq/+XEe4CmpTt1lKbupWLkxEFTXceA=="}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+Redirected to http://127.0.0.1:3000/
+Completed 302 Found in 6ms (ActiveRecord: 0.4ms | Allocations: 2291)
+
+
+Started GET "/" for 127.0.0.1 at 2020-02-20 19:42:10 +0300
+Processing by HomeController#index as HTML
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms | Allocations: 441)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2020-02-20 19:42:10 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.2ms | Allocations: 134)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 1.8ms | Allocations: 1126)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.7ms | Allocations: 238)
+Completed 200 OK in 27ms (Views: 26.1ms | ActiveRecord: 0.0ms | Allocations: 9760)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2020-02-20 19:42:22 +0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"M73RLjd0qhChv/oFKyBrRg0mWYaYv3OsMbKe+XkqHLTmuuVVG/uWJ263nUkWCxn/DwteM2U5xR6K+JKpQiu1cw==", "user"=>{"email"=>"test@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "test@gmail.com"], ["LIMIT", 1]]
+Redirected to http://127.0.0.1:3000/
+Completed 302 Found in 158ms (ActiveRecord: 0.5ms | Allocations: 2776)
+
+
+Started GET "/" for 127.0.0.1 at 2020-02-20 19:42:22 +0300
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.3ms | Allocations: 58)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.2ms | Allocations: 161)
+Completed 200 OK in 13ms (Views: 8.8ms | ActiveRecord: 0.3ms | Allocations: 9812)
+
+
+Started GET "/" for 127.0.0.1 at 2020-02-20 20:05:36 +0300
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.8ms | Allocations: 341)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 1.1ms | Allocations: 457)
+Completed 200 OK in 178ms (Views: 140.7ms | ActiveRecord: 8.4ms | Allocations: 55868)
+
+
+Started GET "/posts" for 127.0.0.1 at 2020-02-20 20:05:39 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", true]]
+  ↳ app/controllers/posts_controller.rb:8:in `index'
+  Rendering posts/index.html.erb within layouts/application
+  Rendered posts/_new.html.erb (Duration: 4.5ms | Allocations: 3411)
+  [1m[36mPost Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:1
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = $1 ORDER BY "posts"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/views/posts/_timeline.html.erb:6
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 1], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:14
+  [1m[36mComment Load (0.4ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/_timeline.html.erb:23
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:25
+  Rendered posts/_new-comment.html.erb (Duration: 1.3ms | Allocations: 591)
+  Rendered posts/_timeline.html.erb (Duration: 23.0ms | Allocations: 10374)
+  Rendered posts/index.html.erb within layouts/application (Duration: 29.2ms | Allocations: 14389)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.3ms | Allocations: 167)
+Completed 200 OK in 110ms (Views: 35.6ms | ActiveRecord: 10.7ms | Allocations: 36064)
+
+
+Started GET "/users" for 127.0.0.1 at 2020-02-20 20:05:42 +0300
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:11:in `index'
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2 AND "users"."id" = $3 LIMIT $4[0m  [["user_id", 1], ["status", true], ["id", 2], ["LIMIT", 1]]
+  ↳ app/models/user.rb:28:in `friend?'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."user_id" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2[0m  [["friend_id", 1], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  Rendered users/index.html.erb within layouts/application (Duration: 14.4ms | Allocations: 3609)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 1.0ms | Allocations: 167)
+Completed 200 OK in 45ms (Views: 36.3ms | ActiveRecord: 3.1ms | Allocations: 14704)
+
+
+Started GET "/friendships" for 127.0.0.1 at 2020-02-20 20:05:44 +0300
+Processing by FriendshipsController#index as HTML
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:5:in `index'
+  Rendering friendships/index.html.erb within layouts/application
+  [1m[36mFriendship Load (0.6ms)[0m  [1m[34mSELECT "friendships".* FROM "friendships" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2[0m  [["friend_id", 1], ["status", false]]
+  ↳ app/views/friendships/index.html.erb:2
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/friendships/index.html.erb:3
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", true]]
+  ↳ app/views/friendships/index.html.erb:9
+  Rendered friendships/index.html.erb within layouts/application (Duration: 29.1ms | Allocations: 6625)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.2ms | Allocations: 166)
+Completed 200 OK in 63ms (Views: 48.9ms | ActiveRecord: 5.1ms | Allocations: 16680)
+
+
+Started POST "/friendships.1" for 127.0.0.1 at 2020-02-20 20:05:46 +0300
+Processing by FriendshipsController#create as 
+  Parameters: {"authenticity_token"=>"ODj7XFNfQSuq2WwyLyaEm4mYpS6WYjXdxjAMzcg0dVFI0B0B2IIIPQXO6rMHo4XRJpR5uLFanTTN1eWoP0+WeA=="}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:10:in `create'
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/friendships_controller.rb:10:in `create'
+  [1m[36mFriendship Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = $1 AND "friendships"."friend_id" IS NULL LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:10:in `create'
+  [1m[35m (1.0ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/friendships_controller.rb:10:in `create'
+Redirected to http://127.0.0.1:3000/users
+Completed 302 Found in 25ms (ActiveRecord: 2.4ms | Allocations: 5505)
+
+
+Started GET "/users" for 127.0.0.1 at 2020-02-20 20:05:46 +0300
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:11:in `index'
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2 AND "users"."id" = $3 LIMIT $4[0m  [["user_id", 1], ["status", true], ["id", 2], ["LIMIT", 1]]
+  ↳ app/models/user.rb:28:in `friend?'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."user_id" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2[0m  [["friend_id", 1], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  Rendered users/index.html.erb within layouts/application (Duration: 9.1ms | Allocations: 3318)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.2ms | Allocations: 167)
+Completed 200 OK in 23ms (Views: 16.6ms | ActiveRecord: 2.3ms | Allocations: 13651)
+
+
+Started GET "/users" for 127.0.0.1 at 2020-02-20 20:05:49 +0300
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:11:in `index'
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2 AND "users"."id" = $3 LIMIT $4[0m  [["user_id", 1], ["status", true], ["id", 2], ["LIMIT", 1]]
+  ↳ app/models/user.rb:28:in `friend?'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."user_id" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2[0m  [["friend_id", 1], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  Rendered users/index.html.erb within layouts/application (Duration: 8.1ms | Allocations: 3305)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.3ms | Allocations: 161)
+Completed 200 OK in 25ms (Views: 16.5ms | ActiveRecord: 2.6ms | Allocations: 13624)
+
+
+Started GET "/users" for 127.0.0.1 at 2020-02-20 20:05:51 +0300
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:11:in `index'
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2 AND "users"."id" = $3 LIMIT $4[0m  [["user_id", 1], ["status", true], ["id", 2], ["LIMIT", 1]]
+  ↳ app/models/user.rb:28:in `friend?'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."user_id" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2[0m  [["friend_id", 1], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", false]]
+  ↳ app/models/user.rb:32:in `request_sent?'
+  Rendered users/index.html.erb within layouts/application (Duration: 12.0ms | Allocations: 3304)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.4ms | Allocations: 161)
+Completed 200 OK in 30ms (Views: 21.1ms | ActiveRecord: 3.8ms | Allocations: 13621)
+
+
+Started GET "/posts" for 127.0.0.1 at 2020-02-20 20:05:53 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (3.6ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", true]]
+  ↳ app/controllers/posts_controller.rb:8:in `index'
+  Rendering posts/index.html.erb within layouts/application
+  Rendered posts/_new.html.erb (Duration: 5.7ms | Allocations: 933)
+  [1m[36mPost Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:1
+  [1m[36mPost Load (1.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = $1 ORDER BY "posts"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/views/posts/_timeline.html.erb:6
+  [1m[35m (2.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 1], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:14
+  [1m[36mComment Load (1.8ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/_timeline.html.erb:23
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:25
+  Rendered posts/_new-comment.html.erb (Duration: 2.8ms | Allocations: 391)
+  Rendered posts/_timeline.html.erb (Duration: 33.8ms | Allocations: 4462)
+  Rendered posts/index.html.erb within layouts/application (Duration: 43.2ms | Allocations: 5542)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.4ms | Allocations: 166)
+Completed 200 OK in 81ms (Views: 56.6ms | ActiveRecord: 11.7ms | Allocations: 16376)
+
+
+Started GET "/" for 127.0.0.1 at 2020-02-20 20:05:54 +0300
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.3ms | Allocations: 64)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.2ms | Allocations: 166)
+Completed 200 OK in 33ms (Views: 13.6ms | ActiveRecord: 0.5ms | Allocations: 9816)
+
+
+Started GET "/posts" for 127.0.0.1 at 2020-02-20 20:05:55 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (2.6ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", true]]
+  ↳ app/controllers/posts_controller.rb:8:in `index'
+  Rendering posts/index.html.erb within layouts/application
+  Rendered posts/_new.html.erb (Duration: 1.4ms | Allocations: 924)
+  [1m[36mPost Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:1
+  [1m[36mPost Load (0.7ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = $1 ORDER BY "posts"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/views/posts/_timeline.html.erb:6
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 1], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:14
+  [1m[36mComment Load (0.5ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/_timeline.html.erb:23
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:25
+  Rendered posts/_new-comment.html.erb (Duration: 0.9ms | Allocations: 391)
+  Rendered posts/_timeline.html.erb (Duration: 18.2ms | Allocations: 4451)
+  Rendered posts/index.html.erb within layouts/application (Duration: 20.2ms | Allocations: 5521)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.3ms | Allocations: 160)
+Completed 200 OK in 44ms (Views: 28.1ms | ActiveRecord: 7.1ms | Allocations: 16338)
+
+
+Started POST "/posts" for 127.0.0.1 at 2020-02-20 20:06:02 +0300
+Processing by PostsController#create as JS
+  Parameters: {"authenticity_token"=>"+tBfS5pE/Xt0NzKoP5wtaZuvYmS4dSbXJRIgS8sJJejHk7XetrgKXITothawZWMHFHp4Ac5hSx5dV025ipcx/w==", "content"=>"post three", "commit"=>"Save "}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[31mUnpermitted parameters: :authenticity_token, :commit[0m
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:24:in `create'
+  [1m[35m (0.9ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/posts_controller.rb:25:in `create'
+  [1m[36mPost Create (1.1ms)[0m  [1m[32mINSERT INTO "posts" ("content", "created_at", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["content", "post three"], ["created_at", "2020-02-20 17:06:02.206440"], ["updated_at", "2020-02-20 17:06:02.206440"], ["user_id", 1]]
+  ↳ app/controllers/posts_controller.rb:25:in `create'
+  [1m[35m (3.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/posts_controller.rb:25:in `create'
+Redirected to http://127.0.0.1:3000/posts
+Completed 200 OK in 20ms (ActiveRecord: 6.2ms | Allocations: 5492)
+
+
+Started GET "/posts" for 127.0.0.1 at 2020-02-20 20:06:02 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", true]]
+  ↳ app/controllers/posts_controller.rb:8:in `index'
+  Rendering posts/index.html.erb within layouts/application
+  Rendered posts/_new.html.erb (Duration: 1.4ms | Allocations: 922)
+  [1m[36mPost Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:1
+  [1m[36mPost Load (0.6ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = $1 ORDER BY "posts"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/views/posts/_timeline.html.erb:6
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 3], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:14
+  [1m[36mComment Load (0.4ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 3]]
+  ↳ app/views/posts/_timeline.html.erb:23
+  Rendered posts/_new-comment.html.erb (Duration: 0.7ms | Allocations: 391)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 1], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:14
+  [1m[36mComment Load (0.5ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/_timeline.html.erb:23
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:25
+  Rendered posts/_new-comment.html.erb (Duration: 0.7ms | Allocations: 383)
+  Rendered posts/_timeline.html.erb (Duration: 20.6ms | Allocations: 6759)
+  Rendered posts/index.html.erb within layouts/application (Duration: 22.6ms | Allocations: 7827)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.2ms | Allocations: 160)
+Completed 200 OK in 39ms (Views: 27.5ms | ActiveRecord: 4.4ms | Allocations: 18650)
+
+
+Started POST "/comments" for 127.0.0.1 at 2020-02-20 20:06:09 +0300
+Processing by CommentsController#create as HTML
+  Parameters: {"authenticity_token"=>"Z2x807KcOTx0nxB5Sgg9fsgFHGOOmBP6a9LoJBKKWa11ZOTB6vY3ZwC4i98qC9D97G4tt0OA1XYpY33I/PP1Sg==", "comment"=>{"post_id"=>"3", "content"=>"comment three"}, "commit"=>"Create Comment"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/comments_controller.rb:10:in `create'
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/comments_controller.rb:12:in `create'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/comments_controller.rb:12:in `create'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/comments_controller.rb:13:in `create'
+  [1m[36mComment Create (1.9ms)[0m  [1m[32mINSERT INTO "comments" ("user_id", "post_id", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 1], ["post_id", 3], ["content", "comment three"], ["created_at", "2020-02-20 17:06:09.491626"], ["updated_at", "2020-02-20 17:06:09.491626"]]
+  ↳ app/controllers/comments_controller.rb:13:in `create'
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/comments_controller.rb:13:in `create'
+Redirected to http://127.0.0.1:3000/posts
+Completed 302 Found in 17ms (ActiveRecord: 4.4ms | Allocations: 5607)
+
+
+Started GET "/posts" for 127.0.0.1 at 2020-02-20 20:06:09 +0300
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", true]]
+  ↳ app/controllers/posts_controller.rb:8:in `index'
+  Rendering posts/index.html.erb within layouts/application
+  Rendered posts/_new.html.erb (Duration: 1.0ms | Allocations: 919)
+  [1m[36mPost Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:1
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = $1 ORDER BY "posts"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/views/posts/_timeline.html.erb:6
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 3], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:14
+  [1m[36mComment Load (0.4ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 3]]
+  ↳ app/views/posts/_timeline.html.erb:23
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:25
+  Rendered posts/_new-comment.html.erb (Duration: 0.8ms | Allocations: 391)
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."likable_id" = $1 AND "likes"."likable_type" = $2[0m  [["likable_id", 1], ["likable_type", "Post"]]
+  ↳ app/views/posts/_timeline.html.erb:14
+  [1m[36mComment Load (0.4ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/_timeline.html.erb:23
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/posts/_timeline.html.erb:25
+  Rendered posts/_new-comment.html.erb (Duration: 0.7ms | Allocations: 383)
+  Rendered posts/_timeline.html.erb (Duration: 21.4ms | Allocations: 7520)
+  Rendered posts/index.html.erb within layouts/application (Duration: 22.9ms | Allocations: 8585)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.5ms | Allocations: 160)
+Completed 200 OK in 39ms (Views: 29.5ms | ActiveRecord: 4.1ms | Allocations: 19404)
+
+
