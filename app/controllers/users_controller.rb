@@ -3,14 +3,11 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: %i[create index]
 
-  def index
-    @users = User.all
+  def show
+    @user = User.find(params[:id])
   end
 
-  def show
-    @user = User.find_by(id: params[:id])
-    @posts = @user.posts.order(created_at: :DESC)
-    @post = Post.new
-    @comment = Comment.new
+  def index
+    @users = User.all - [current_user]
   end
 end

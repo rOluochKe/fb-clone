@@ -6,11 +6,15 @@
     <% @posts.each do |post| %>
       <small><%= link_to "#{post.user.name}", post_path(post.user) %></small><br>
       <%= post.content %><br>
+      <% if current_user == post.user %>
+        <%= link_to 'Edit', edit_post_path(post) %>  <%= link_to 'Delete', post_path(post), method: :delete %>
+      <% end %><br/>
       <div class="btn btn-success"> 
         <%= link_to post_likes_path(post), method: :post do%>
           <%= pluralize(post.likes.count, "like") %>
-        <%end%>
       </div>
+    <%end%>
+      
       <br />
       <br />
       

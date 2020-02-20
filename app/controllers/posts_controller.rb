@@ -4,8 +4,9 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @posts = Post.all.order(created_at: :DESC)
-    @post = Post.new
+    @posts = current_user.posts
+    current_user.friends.each { |friend| @posts = @posts.or(friend.posts) }
+    @posts = @posts.order(created_at: :desc)
     @comment = Comment.new
   end
 
@@ -53,6 +54,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:content, :user_id)
+    params.permit(:content, :user_id)
   end
 end

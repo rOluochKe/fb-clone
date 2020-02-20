@@ -3,6 +3,10 @@
 </a>
 <%= link_to 'Home', root_path, class: "navbar-item"%>
 <%= link_to 'Posts', posts_path, class: "navbar-item"%>
+ <%= link_to 'Users',users_path, class:'navbar-item' %>
+
+<%= link_to 'Friend Requests',friendships_path, class:'navbar-item' %>
+
 
 <% if user_signed_in? %>
     <%= link_to('Logout', destroy_user_session_path, method: :delete) %>  
