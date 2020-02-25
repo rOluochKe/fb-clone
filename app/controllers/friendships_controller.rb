@@ -17,4 +17,9 @@ class FriendshipsController < ApplicationController
     current_user.friendships.create(friend: friendship.user, status: true)
     redirect_to friendships_path
   end
+
+  def destroy
+    current_user.remove_friend(@friend)
+    head :no_content
+  end
 end
