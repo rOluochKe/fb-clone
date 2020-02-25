@@ -31,8 +31,4 @@ class User < ApplicationRecord
   def request_sent?(user)
     (received_requests_users + sent_requests).include?(user)
   end
-
-  def remove_friend(friend)
-    current_user.friends.destroy(friend)
-  end
 end

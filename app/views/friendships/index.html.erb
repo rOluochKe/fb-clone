@@ -1,13 +1,13 @@
 <h3 class='text-dark'>Friend requests</h3>
 <% @friendship_requests.each do |request| %>
   <%= link_to request.user.name, users_path(request.user) %>
-  <%= link_to 'Confirm', friendships_path(request.user.id), method: :update, class: "btn btn-info" %> 
-  <%= link_to 'Delete', friendships_path(request.user.id), method: :destroy, class: "btn btn-warning" %><br><br>
+  <%= link_to 'Confirm', friendship_path(request.user.id), method: :put, class: "btn btn-info" %> 
+  <%= link_to 'Delete', friendship_path(request.user.id), method: :delete, class: "btn btn-warning" %><br><br>
 <% end %>
 <br>
 Friends: <br>
 <% @friends.each do |friend| %>
   <%= link_to friend.name, users_path(friend) %> <br>
-  <%= link_to 'Unfriend', friendships_path(request), method: :destroy, class: "btn btn-warning" %>
+  <%= link_to 'Unfriend', friendship_path(request), method: :unfriend, class: "btn btn-warning" %>
 <% end %>
 </ul>
