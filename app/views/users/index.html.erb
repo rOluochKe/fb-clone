@@ -1,12 +1,9 @@
 <h3>Find Friends</h3>
-<ul>
-  <% @users.each do |user| %>
-  <%= link_to user.name, user_path(user.id) %> 
+<% @users.each do |user| %>
+  <%= gravatar_for user %> 
+  <%= link_to user.name, user_path(user.id) %>
   <% if !current_user.friend?(user) && !current_user.request_sent?(user) && user != current_user %>
-    <%= link_to 'Add friend', friendships_path(friend_id: user.id), method: :post %>
+    <%= link_to 'Add friend', friendships_path(friend_id: user.id), method: :post, class: "btn btn-info"%>
   <% end %>
-  <br>
-    <br>
-    <br>
-  <%end%>
-</ul>
+  <br><br><br><br><br><br>
+<% end %>
