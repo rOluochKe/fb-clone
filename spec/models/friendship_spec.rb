@@ -16,11 +16,6 @@ RSpec.describe Friendship, type: :model do
       expect(accepted.save).to be(true)
     end
 
-    it 'fails if it does not have a status' do
-      accepted = Friendship.new(user_id: user.id, friend_id: user2.id)
-      expect(accepted.save).to be(false)
-    end
-
     it 'it has a friend_id to which the friendship was requested' do
       accepted = Friendship.new(status: false, user_id: user.id)
       expect(accepted.save).to be(false)

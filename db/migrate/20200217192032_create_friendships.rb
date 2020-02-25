@@ -3,11 +3,11 @@
 class CreateFriendships < ActiveRecord::Migration[6.0]
   def change
     create_table :friendships do |t|
-      t.boolean  :status, default: 'new'
-      t.integer  :user_id
-      t.integer  :friend_id
-
+      t.references :user, index: true, foreign_key: true
+      t.references :friend, index: true
+      t.boolean :status, default: 'new'
       t.timestamps
     end
+    add_foreign_key :friendships, :users, column: :friend_id
   end
 end
