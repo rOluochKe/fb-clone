@@ -44889,3 +44889,138 @@ Processing by FriendshipsController#index as HTML
 Completed 200 OK in 278ms (Views: 187.9ms | ActiveRecord: 18.4ms | Allocations: 57981)
 
 
+Started GET "/" for ::1 at 2020-02-26 03:20:27 -0600
+  [1m[35m (31.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (33.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 23.2ms | Allocations: 341)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 2.2ms | Allocations: 459)
+Completed 200 OK in 2534ms (Views: 2197.9ms | ActiveRecord: 110.5ms | Allocations: 86201)
+
+
+Started GET "/friendships" for ::1 at 2020-02-26 03:20:35 -0600
+Processing by FriendshipsController#index as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:5:in `index'
+  Rendering friendships/index.html.erb within layouts/application
+  [1m[36mFriendship Load (30.4ms)[0m  [1m[34mSELECT "friendships".* FROM "friendships" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2[0m  [["friend_id", 1], ["status", false]]
+  ↳ app/views/friendships/index.html.erb:2
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/views/friendships/index.html.erb:3
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/views/friendships/index.html.erb:3
+  [1m[36mUser Load (27.1ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", true]]
+  ↳ app/views/friendships/index.html.erb:9
+  Rendered friendships/index.html.erb within layouts/application (Duration: 191.8ms | Allocations: 9244)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 2.6ms | Allocations: 166)
+Completed 200 OK in 372ms (Views: 194.4ms | ActiveRecord: 71.2ms | Allocations: 22753)
+
+
+Started PUT "/friendships/4" for ::1 at 2020-02-26 03:20:38 -0600
+Processing by FriendshipsController#update as HTML
+  Parameters: {"authenticity_token"=>"i4k+beO8WHWMjKN3rDYAaDYby/qgs96jDSVNDrSdGi8JUaWQqXeMmCRT9dP8L/smtZPxfZ8ZUxLIovYbw3nziw==", "id"=>"4"}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:15:in `update'
+  [1m[36mFriendship Load (0.8ms)[0m  [1m[34mSELECT "friendships".* FROM "friendships" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2 AND "friendships"."user_id" = $3 LIMIT $4[0m  [["friend_id", 1], ["status", false], ["user_id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:15:in `update'
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/friendships_controller.rb:16:in `update'
+  [1m[36mFriendship Update (1.6ms)[0m  [1m[33mUPDATE "friendships" SET "status" = $1, "updated_at" = $2 WHERE "friendships"."id" = $3[0m  [["status", true], ["updated_at", "2020-02-26 09:20:38.165436"], ["id", 4]]
+  ↳ app/controllers/friendships_controller.rb:16:in `update'
+  [1m[35m (17.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/friendships_controller.rb:16:in `update'
+  [1m[35m (4.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/friendships_controller.rb:17:in `update'
+  [1m[36mUser Load (4.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:17:in `update'
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:17:in `update'
+  [1m[36mFriendship Exists? (1.5ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = $1 AND "friendships"."friend_id" = $2 LIMIT $3[0m  [["user_id", 1], ["friend_id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:17:in `update'
+  [1m[36mFriendship Create (55.3ms)[0m  [1m[32mINSERT INTO "friendships" ("status", "user_id", "friend_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["status", true], ["user_id", 1], ["friend_id", 4], ["created_at", "2020-02-26 09:20:38.267101"], ["updated_at", "2020-02-26 09:20:38.267101"]]
+  ↳ app/controllers/friendships_controller.rb:17:in `update'
+  [1m[35m (14.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/friendships_controller.rb:17:in `update'
+Redirected to http://localhost:3000/friendships
+Completed 302 Found in 217ms (ActiveRecord: 101.6ms | Allocations: 10235)
+
+
+Started GET "/friendships" for ::1 at 2020-02-26 03:20:38 -0600
+Processing by FriendshipsController#index as HTML
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:5:in `index'
+  Rendering friendships/index.html.erb within layouts/application
+  [1m[36mFriendship Load (5.1ms)[0m  [1m[34mSELECT "friendships".* FROM "friendships" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2[0m  [["friend_id", 1], ["status", false]]
+  ↳ app/views/friendships/index.html.erb:2
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/views/friendships/index.html.erb:3
+  [1m[36mUser Load (2.4ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", true]]
+  ↳ app/views/friendships/index.html.erb:9
+  Rendered friendships/index.html.erb within layouts/application (Duration: 53.4ms | Allocations: 2952)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.8ms | Allocations: 161)
+Completed 200 OK in 147ms (Views: 111.7ms | ActiveRecord: 11.1ms | Allocations: 12297)
+
+
+Started PUT "/friendships/5" for ::1 at 2020-02-26 03:20:41 -0600
+Processing by FriendshipsController#update as HTML
+  Parameters: {"authenticity_token"=>"RwgR5Xl5Vs6mo5tRkzerGT/N/XOf7cBIzFQfmVtbSOPF0IoYM7KCIw58zfXDLlBXvEXH9KBHTfkJ06SMLL+hRw==", "id"=>"5"}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:15:in `update'
+  [1m[36mFriendship Load (3.6ms)[0m  [1m[34mSELECT "friendships".* FROM "friendships" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2 AND "friendships"."user_id" = $3 LIMIT $4[0m  [["friend_id", 1], ["status", false], ["user_id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:15:in `update'
+  [1m[35m (4.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/friendships_controller.rb:16:in `update'
+  [1m[36mFriendship Update (1.7ms)[0m  [1m[33mUPDATE "friendships" SET "status" = $1, "updated_at" = $2 WHERE "friendships"."id" = $3[0m  [["status", true], ["updated_at", "2020-02-26 09:20:41.619177"], ["id", 7]]
+  ↳ app/controllers/friendships_controller.rb:16:in `update'
+  [1m[35m (11.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/friendships_controller.rb:16:in `update'
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/friendships_controller.rb:17:in `update'
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:17:in `update'
+  [1m[36mUser Load (2.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:17:in `update'
+  [1m[36mFriendship Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = $1 AND "friendships"."friend_id" = $2 LIMIT $3[0m  [["user_id", 1], ["friend_id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:17:in `update'
+  [1m[36mFriendship Create (1.5ms)[0m  [1m[32mINSERT INTO "friendships" ("status", "user_id", "friend_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["status", true], ["user_id", 1], ["friend_id", 5], ["created_at", "2020-02-26 09:20:41.685363"], ["updated_at", "2020-02-26 09:20:41.685363"]]
+  ↳ app/controllers/friendships_controller.rb:17:in `update'
+  [1m[35m (8.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/friendships_controller.rb:17:in `update'
+Redirected to http://localhost:3000/friendships
+Completed 302 Found in 130ms (ActiveRecord: 37.5ms | Allocations: 9699)
+
+
+Started GET "/friendships" for ::1 at 2020-02-26 03:20:41 -0600
+Processing by FriendshipsController#index as HTML
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:5:in `index'
+  Rendering friendships/index.html.erb within layouts/application
+  [1m[36mFriendship Load (1.2ms)[0m  [1m[34mSELECT "friendships".* FROM "friendships" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2[0m  [["friend_id", 1], ["status", false]]
+  ↳ app/views/friendships/index.html.erb:2
+  [1m[36mUser Load (2.6ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", true]]
+  ↳ app/views/friendships/index.html.erb:9
+  Rendered friendships/index.html.erb within layouts/application (Duration: 21.0ms | Allocations: 2199)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.7ms | Allocations: 161)
+Completed 200 OK in 67ms (Views: 52.0ms | ActiveRecord: 5.1ms | Allocations: 11542)
+
+
+Started GET "/friendships" for ::1 at 2020-02-26 03:21:27 -0600
+Processing by FriendshipsController#index as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/friendships_controller.rb:5:in `index'
+  Rendering friendships/index.html.erb within layouts/application
+  [1m[36mFriendship Load (1.3ms)[0m  [1m[34mSELECT "friendships".* FROM "friendships" WHERE "friendships"."friend_id" = $1 AND "friendships"."status" = $2[0m  [["friend_id", 1], ["status", false]]
+  ↳ app/views/friendships/index.html.erb:2
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = $1 AND "friendships"."status" = $2[0m  [["user_id", 1], ["status", true]]
+  ↳ app/views/friendships/index.html.erb:9
+  Rendered friendships/index.html.erb within layouts/application (Duration: 24.3ms | Allocations: 2468)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 2.7ms | Allocations: 434)
+Completed 200 OK in 87ms (Views: 69.3ms | ActiveRecord: 3.6ms | Allocations: 13439)
+
+

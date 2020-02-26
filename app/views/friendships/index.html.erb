@@ -8,6 +8,6 @@
 Friends: <br>
 <% @friends.each do |friend| %>
   <%= link_to friend.name, users_path(friend) %> <br>
-  <%= link_to 'Unfriend', friendship_path(request), method: :unfriend, class: "btn btn-warning" %>
+  <%= link_to 'Unfriend', friendship_path(request), method: :unfriend, class: "btn btn-warning" %><br><br>
 <% end %>
 </ul>
