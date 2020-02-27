@@ -78,3 +78,6 @@ Layout/DefEndAlignment:
 
 Lint/AssignmentInCondition:
   Enabled: No
+
+Style/GuardClause:
+  Enabled: No
