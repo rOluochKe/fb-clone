@@ -75,3 +75,6 @@ Lint/UselessAssignment:
 
 Layout/DefEndAlignment:
   AutoCorrect: false
+
+Lint/AssignmentInCondition:
+  Enabled: No
