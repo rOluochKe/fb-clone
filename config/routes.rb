@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  devise_for :users, controllers: { registrations: 'users/registrations' }
+  devise_for :users, controllers: {  :omniauth_callbacks => 'users/omniauth_callbacks',registrations: 'users/registrations' }
   root to: 'home#index'
   resources :users
   resources :friendships, only: %i[index create update destroy unfriend]

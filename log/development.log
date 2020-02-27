@@ -44889,3 +44889,321 @@ Processing by FriendshipsController#index as HTML
 Completed 200 OK in 278ms (Views: 187.9ms | ActiveRecord: 18.4ms | Allocations: 57981)
 
 
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT pg_try_advisory_lock(333164765143615230)[0m
+  [1m[35m (2.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddOmniauthToUsers (20200226230415)
+  [1m[35m (1.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (9.2ms)[0m  [1m[35mALTER TABLE "users" ADD "provider" character varying[0m
+  [1m[35m (1.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (3.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(333164765143615230)[0m
+  [1m[35m (3.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (2.7ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (309.5ms)[0m  [1m[35mDROP DATABASE IF EXISTS "facebook_clone"[0m
+  [1m[35m (267.9ms)[0m  [1m[35mDROP DATABASE IF EXISTS "facebook_clone_test"[0m
+  [1m[35m (1261.9ms)[0m  [1m[35mCREATE DATABASE "facebook_clone" ENCODING = 'utf8'[0m
+  [1m[35m (620.5ms)[0m  [1m[35mCREATE DATABASE "facebook_clone_test" ENCODING = 'utf8'[0m
+  [1m[35mSQL (0.9ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.7ms)[0m  [1m[35mDROP TABLE IF EXISTS "comments" CASCADE[0m
+  [1m[35m (134.9ms)[0m  [1m[35mCREATE TABLE "comments" ("id" bigserial primary key, "user_id" bigint NOT NULL, "post_id" bigint NOT NULL, "content" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (45.0ms)[0m  [1m[35mCREATE  INDEX  "index_comments_on_post_id" ON "comments"  ("post_id")[0m
+  [1m[35m (43.1ms)[0m  [1m[35mCREATE  INDEX  "index_comments_on_user_id" ON "comments"  ("user_id")[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "friendships" CASCADE[0m
+  [1m[35m (41.3ms)[0m  [1m[35mCREATE TABLE "friendships" ("id" bigserial primary key, "user_id" bigint, "friend_id" bigint, "status" boolean DEFAULT FALSE, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (34.8ms)[0m  [1m[35mCREATE  INDEX  "index_friendships_on_friend_id" ON "friendships"  ("friend_id")[0m
+  [1m[35m (35.0ms)[0m  [1m[35mCREATE  INDEX  "index_friendships_on_user_id" ON "friendships"  ("user_id")[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "likes" CASCADE[0m
+  [1m[35m (76.3ms)[0m  [1m[35mCREATE TABLE "likes" ("id" bigserial primary key, "likable_type" character varying, "likable_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "user_id" bigint, "post_id" bigint NOT NULL)[0m
+  [1m[35m (50.7ms)[0m  [1m[35mCREATE  INDEX  "index_likes_on_likable_type_and_likable_id" ON "likes"  ("likable_type", "likable_id")[0m
+  [1m[35m (43.0ms)[0m  [1m[35mCREATE  INDEX  "index_likes_on_post_id" ON "likes"  ("post_id")[0m
+  [1m[35m (42.9ms)[0m  [1m[35mCREATE  INDEX  "index_likes_on_user_id" ON "likes"  ("user_id")[0m
+  [1m[35m (0.8ms)[0m  [1m[35mDROP TABLE IF EXISTS "posts" CASCADE[0m
+  [1m[35m (85.2ms)[0m  [1m[35mCREATE TABLE "posts" ("id" bigserial primary key, "content" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "user_id" bigint NOT NULL)[0m
+  [1m[35m (43.2ms)[0m  [1m[35mCREATE  INDEX  "index_posts_on_user_id" ON "posts"  ("user_id")[0m
+  [1m[35m (0.7ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (82.5ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "name" character varying)[0m
+  [1m[35m (50.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  [1m[35m (41.5ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  [1m[35m (20.9ms)[0m  [1m[35mALTER TABLE "comments" ADD CONSTRAINT "fk_rails_2fd19c0db7"
+FOREIGN KEY ("post_id")
+  REFERENCES "posts" ("id")
+[0m
+  [1m[35m (13.3ms)[0m  [1m[35mALTER TABLE "comments" ADD CONSTRAINT "fk_rails_03de2dc08c"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (12.0ms)[0m  [1m[35mALTER TABLE "friendships" ADD CONSTRAINT "fk_rails_e3733b59b7"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (13.3ms)[0m  [1m[35mALTER TABLE "friendships" ADD CONSTRAINT "fk_rails_d78dc9c7fd"
+FOREIGN KEY ("friend_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (11.6ms)[0m  [1m[35mALTER TABLE "likes" ADD CONSTRAINT "fk_rails_87a8aac469"
+FOREIGN KEY ("post_id")
+  REFERENCES "posts" ("id")
+[0m
+  [1m[35m (9.9ms)[0m  [1m[35mALTER TABLE "likes" ADD CONSTRAINT "fk_rails_1e09b5dabf"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (5.1ms)[0m  [1m[35mALTER TABLE "posts" ADD CONSTRAINT "fk_rails_5b5ddfd518"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (86.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (7.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20200220163153)[0m
+  [1m[35m (4.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20200201000137),
+(20200201000413),
+(20200201002128),
+(20200201002855),
+(20200207190342),
+(20200207191625),
+(20200207192319),
+(20200211200700),
+(20200217192032);
+
+[0m
+  [1m[35m (77.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.6ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-02-26 23:10:49.317503"], ["updated_at", "2020-02-26 23:10:49.317503"]]
+  [1m[35m (6.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "e2524a2b1e0f21aa151b9cebe2d4ad281bcf8656"], ["created_at", "2020-02-26 23:10:49.365080"], ["updated_at", "2020-02-26 23:10:49.365080"]]
+  [1m[35m (3.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.7ms)[0m  [1m[35mDROP TABLE IF EXISTS "comments" CASCADE[0m
+  [1m[35m (86.1ms)[0m  [1m[35mCREATE TABLE "comments" ("id" bigserial primary key, "user_id" bigint NOT NULL, "post_id" bigint NOT NULL, "content" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (43.0ms)[0m  [1m[35mCREATE  INDEX  "index_comments_on_post_id" ON "comments"  ("post_id")[0m
+  [1m[35m (38.0ms)[0m  [1m[35mCREATE  INDEX  "index_comments_on_user_id" ON "comments"  ("user_id")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "friendships" CASCADE[0m
+  [1m[35m (49.2ms)[0m  [1m[35mCREATE TABLE "friendships" ("id" bigserial primary key, "user_id" bigint, "friend_id" bigint, "status" boolean DEFAULT FALSE, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (40.1ms)[0m  [1m[35mCREATE  INDEX  "index_friendships_on_friend_id" ON "friendships"  ("friend_id")[0m
+  [1m[35m (46.1ms)[0m  [1m[35mCREATE  INDEX  "index_friendships_on_user_id" ON "friendships"  ("user_id")[0m
+  [1m[35m (0.7ms)[0m  [1m[35mDROP TABLE IF EXISTS "likes" CASCADE[0m
+  [1m[35m (86.8ms)[0m  [1m[35mCREATE TABLE "likes" ("id" bigserial primary key, "likable_type" character varying, "likable_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "user_id" bigint, "post_id" bigint NOT NULL)[0m
+  [1m[35m (51.1ms)[0m  [1m[35mCREATE  INDEX  "index_likes_on_likable_type_and_likable_id" ON "likes"  ("likable_type", "likable_id")[0m
+  [1m[35m (46.7ms)[0m  [1m[35mCREATE  INDEX  "index_likes_on_post_id" ON "likes"  ("post_id")[0m
+  [1m[35m (44.6ms)[0m  [1m[35mCREATE  INDEX  "index_likes_on_user_id" ON "likes"  ("user_id")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "posts" CASCADE[0m
+  [1m[35m (101.9ms)[0m  [1m[35mCREATE TABLE "posts" ("id" bigserial primary key, "content" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "user_id" bigint NOT NULL)[0m
+  [1m[35m (46.7ms)[0m  [1m[35mCREATE  INDEX  "index_posts_on_user_id" ON "posts"  ("user_id")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (85.7ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "name" character varying)[0m
+  [1m[35m (49.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  [1m[35m (46.2ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  [1m[35m (10.7ms)[0m  [1m[35mALTER TABLE "comments" ADD CONSTRAINT "fk_rails_2fd19c0db7"
+FOREIGN KEY ("post_id")
+  REFERENCES "posts" ("id")
+[0m
+  [1m[35m (11.8ms)[0m  [1m[35mALTER TABLE "comments" ADD CONSTRAINT "fk_rails_03de2dc08c"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (11.3ms)[0m  [1m[35mALTER TABLE "friendships" ADD CONSTRAINT "fk_rails_e3733b59b7"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (7.4ms)[0m  [1m[35mALTER TABLE "friendships" ADD CONSTRAINT "fk_rails_d78dc9c7fd"
+FOREIGN KEY ("friend_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (7.8ms)[0m  [1m[35mALTER TABLE "likes" ADD CONSTRAINT "fk_rails_87a8aac469"
+FOREIGN KEY ("post_id")
+  REFERENCES "posts" ("id")
+[0m
+  [1m[35m (11.9ms)[0m  [1m[35mALTER TABLE "likes" ADD CONSTRAINT "fk_rails_1e09b5dabf"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (12.3ms)[0m  [1m[35mALTER TABLE "posts" ADD CONSTRAINT "fk_rails_5b5ddfd518"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (74.3ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (4.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20200220163153)[0m
+  [1m[35m (5.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20200201000137),
+(20200201000413),
+(20200201002128),
+(20200201002855),
+(20200207190342),
+(20200207191625),
+(20200207192319),
+(20200211200700),
+(20200217192032);
+
+[0m
+  [1m[35m (87.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-02-26 23:10:50.899665"], ["updated_at", "2020-02-26 23:10:50.899665"]]
+  [1m[35m (6.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (2.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Update (0.8ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = $1, "updated_at" = $2 WHERE "ar_internal_metadata"."key" = $3[0m  [["value", "test"], ["updated_at", "2020-02-26 23:10:50.929266"], ["key", "environment"]]
+  [1m[35m (7.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.9ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "e2524a2b1e0f21aa151b9cebe2d4ad281bcf8656"], ["created_at", "2020-02-26 23:10:50.961900"], ["updated_at", "2020-02-26 23:10:50.961900"]]
+  [1m[35m (2.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT pg_try_advisory_lock(333164765143615230)[0m
+  [1m[35m (2.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddOmniauthToUsers (20200226230415)
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.5ms)[0m  [1m[35mALTER TABLE "users" ADD "provider" character varying[0m
+  [1m[35m (1.0ms)[0m  [1m[35mALTER TABLE "users" ADD "uid" character varying[0m
+  [1m[35m (6.2ms)[0m  [1m[35mALTER TABLE "users" ADD "name" character varying[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT pg_advisory_unlock(333164765143615230)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT pg_try_advisory_lock(333164765143615230)[0m
+  [1m[35m (1.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddOmniauthToUsers (20200226230415)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (6.8ms)[0m  [1m[35mALTER TABLE "users" ADD "provider" character varying[0m
+  [1m[35m (1.0ms)[0m  [1m[35mALTER TABLE "users" ADD "uid" character varying[0m
+  [1m[35m (16.9ms)[0m  [1m[35mALTER TABLE "users" ADD "name" character varying[0m
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(333164765143615230)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT pg_try_advisory_lock(333164765143615230)[0m
+  [1m[35m (2.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddOmniauthToUsers (20200226230415)
+  [1m[35m (3.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.5ms)[0m  [1m[35mALTER TABLE "users" ADD "provider" character varying[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "users" ADD "uid" character varying[0m
+  [1m[35m (1.0ms)[0m  [1m[35mALTER TABLE "users" ADD "image" text[0m
+  [1m[36mprimary::SchemaMigration Create (1.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200226230415"]]
+  [1m[35m (241.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT pg_advisory_unlock(333164765143615230)[0m
+  [1m[35m (2.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/users/sign_up" for ::1 at 2020-02-27 04:38:49 -0600
+  [1m[35m (2.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Users::RegistrationsController#new as HTML
+Completed 500 Internal Server Error in 158ms (ActiveRecord: 16.6ms | Allocations: 13815)
+
+
+  
+NameError (undefined local variable or method `“devise' for #<Class:0x000056089121ac88>
+Did you mean?  devise):
+  
+app/models/user.rb:38:in `block in new_with_session'
+app/models/user.rb:37:in `tap'
+app/models/user.rb:37:in `new_with_session'
+app/controllers/users/registrations_controller.rb:9:in `new'
+Started GET "/users/sign_up" for ::1 at 2020-02-27 04:39:59 -0600
+Processing by Users::RegistrationsController#new as HTML
+Completed 500 Internal Server Error in 105ms (ActiveRecord: 17.5ms | Allocations: 13085)
+
+
+  
+NameError (undefined local variable or method `“devise' for #<Class:0x0000560891954738>
+Did you mean?  devise):
+  
+app/models/user.rb:38:in `block in new_with_session'
+app/models/user.rb:37:in `tap'
+app/models/user.rb:37:in `new_with_session'
+app/controllers/users/registrations_controller.rb:9:in `new'
+Started GET "/users/sign_up" for ::1 at 2020-02-27 04:40:03 -0600
+Processing by Users::RegistrationsController#new as HTML
+Completed 500 Internal Server Error in 51ms (ActiveRecord: 0.0ms | Allocations: 5693)
+
+
+  
+NameError (undefined local variable or method `“devise' for #<Class:0x0000560891954738>
+Did you mean?  devise):
+  
+app/models/user.rb:38:in `block in new_with_session'
+app/models/user.rb:37:in `tap'
+app/models/user.rb:37:in `new_with_session'
+app/controllers/users/registrations_controller.rb:9:in `new'
+Started GET "/users/sign_up" for ::1 at 2020-02-27 04:41:07 -0600
+Processing by Users::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 2.0ms | Allocations: 216)
+  Rendered devise/shared/_links.html.erb (Duration: 3.8ms | Allocations: 657)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 205.3ms | Allocations: 6062)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 9.2ms | Allocations: 708)
+Completed 200 OK in 2489ms (Views: 2419.0ms | ActiveRecord: 21.1ms | Allocations: 89787)
+
+
+Started POST "/users/auth/facebook" for ::1 at 2020-02-27 04:41:16 -0600
+Started GET "/users/sign_up" for ::1 at 2020-02-27 04:42:23 -0600
+Processing by Users::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 1.8ms | Allocations: 206)
+  Rendered devise/shared/_links.html.erb (Duration: 3.8ms | Allocations: 563)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 23.3ms | Allocations: 2723)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 3.8ms | Allocations: 685)
+Completed 200 OK in 99ms (Views: 89.7ms | ActiveRecord: 0.0ms | Allocations: 14333)
+
+
+Started GET "/users/sign_up" for ::1 at 2020-02-27 04:42:42 -0600
+Processing by Users::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 1.5ms | Allocations: 206)
+  Rendered devise/shared/_links.html.erb (Duration: 2.7ms | Allocations: 563)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 19.9ms | Allocations: 2721)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 3.7ms | Allocations: 596)
+Completed 200 OK in 79ms (Views: 76.0ms | ActiveRecord: 0.0ms | Allocations: 14215)
+
+
+Started GET "/users/auth/facebook" for ::1 at 2020-02-27 04:43:07 -0600
+Started GET "/users/auth/facebook" for ::1 at 2020-02-27 04:43:08 -0600
+Started GET "/users/sign_up" for ::1 at 2020-02-27 04:45:14 -0600
+Processing by Users::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 1.2ms | Allocations: 206)
+  Rendered devise/shared/_links.html.erb (Duration: 3.4ms | Allocations: 573)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 15.7ms | Allocations: 2732)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 3.3ms | Allocations: 596)
+Completed 200 OK in 100ms (Views: 96.3ms | ActiveRecord: 0.0ms | Allocations: 14235)
+
+
+Started GET "/users/sign_up" for ::1 at 2020-02-27 04:45:38 -0600
+Processing by Users::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 4.3ms | Allocations: 206)
+  Rendered devise/shared/_links.html.erb (Duration: 2.9ms | Allocations: 573)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 34.5ms | Allocations: 2732)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 3.2ms | Allocations: 596)
+Completed 200 OK in 125ms (Views: 118.3ms | ActiveRecord: 0.0ms | Allocations: 14237)
+
+
+Started GET "/users/sign_up" for ::1 at 2020-02-27 04:46:15 -0600
+Processing by Users::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 1.3ms | Allocations: 206)
+  Rendered devise/shared/_links.html.erb (Duration: 3.4ms | Allocations: 584)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 23.0ms | Allocations: 2743)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 3.8ms | Allocations: 596)
+Completed 200 OK in 79ms (Views: 75.2ms | ActiveRecord: 0.0ms | Allocations: 14251)
+
+
+Started GET "/users/sign_up" for ::1 at 2020-02-27 04:47:15 -0600
+Processing by Users::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 1.6ms | Allocations: 206)
+  Rendered devise/shared/_links.html.erb (Duration: 3.0ms | Allocations: 583)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 24.7ms | Allocations: 2742)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 3.4ms | Allocations: 596)
+Completed 200 OK in 96ms (Views: 89.1ms | ActiveRecord: 0.0ms | Allocations: 14236)
+
+
