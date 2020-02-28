@@ -4,7 +4,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+<<<<<<< HEAD
   devise :omniauthable, omniauth_providers: [:facebook]
+=======
+  devise :omniauthable, :omniauth_providers => [:facebook]
+>>>>>>> 90f05d58a252165f4aaa28221ab7064c4e6e9c1d
 
   before_save { self.email = email.downcase }
   validates :name, presence: true, length: { maximum: 20 }
@@ -33,7 +37,10 @@ class User < ApplicationRecord
   def request_sent?(user)
     (received_requests_users + sent_requests).include?(user)
   end
+<<<<<<< HEAD
 
+=======
+>>>>>>> 90f05d58a252165f4aaa28221ab7064c4e6e9c1d
   def self.new_with_session(params, session)
     super.tap do |user|
       if data = session['devise.facebook_data'] && session['devise.facebook_data']['extra']['raw_info']
@@ -45,7 +52,11 @@ class User < ApplicationRecord
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
+<<<<<<< HEAD
       user.password = Devise.friendly_token[0, 20]
+=======
+      user.password = Devise.friendly_token[0,20]
+>>>>>>> 90f05d58a252165f4aaa28221ab7064c4e6e9c1d
       user.name = auth.info.name # assuming the user model has a name
       user.image = auth.info.image # assuming the user model has an image
     end
