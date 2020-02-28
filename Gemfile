@@ -39,6 +39,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'bootstrap-sass'
 gem 'font-awesome-sass'
 gem 'jquery-rails'
+gem 'parser'
 gem 'rails_12factor', group: :production
 
 group :development, :test do

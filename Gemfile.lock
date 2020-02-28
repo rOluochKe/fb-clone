@@ -58,6 +58,7 @@ GEM
       zeitwerk (~> 2.2)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
+    ast (2.4.0)
     autoprefixer-rails (9.7.4)
       execjs
     bcrypt (3.1.13)
@@ -211,6 +212,8 @@ GEM
       oauth2 (~> 1.1)
       omniauth (~> 1.9)
     orm_adapter (0.5.0)
+    parser (2.7.0.2)
+      ast (~> 2.4.0)
     pg (1.2.2)
     pg (1.2.2-x64-mingw32)
     pg (1.2.2-x86-mingw32)
@@ -398,6 +401,7 @@ DEPENDENCIES
   omniauth
   omniauth-facebook
   omniauth-github
+  parser
   pg
   pry-byebug
   pry-rails
