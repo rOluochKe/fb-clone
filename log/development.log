@@ -45673,3 +45673,29 @@ Completed 200 OK in 189ms (Views: 145.8ms | ActiveRecord: 4.8ms | Allocations: 5
 
 Started GET "/users/auth/facebook" for 127.0.0.1 at 2020-02-28 19:31:27 +0300
 Started GET "/users/auth/facebook" for 127.0.0.1 at 2020-02-28 19:31:27 +0300
+Started GET "/users/sign_in" for 127.0.0.1 at 2020-03-02 01:44:33 +0300
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 1.2ms | Allocations: 763)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 8.6ms | Allocations: 5724)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 1.4ms | Allocations: 626)
+Completed 200 OK in 183ms (Views: 159.4ms | ActiveRecord: 5.2ms | Allocations: 70189)
+
+
+Started GET "/users/auth/facebook" for 127.0.0.1 at 2020-03-02 01:44:35 +0300
+Started GET "/users/auth/facebook" for 127.0.0.1 at 2020-03-02 01:44:36 +0300
+Started GET "/users/sign_in" for 127.0.0.1 at 2020-03-02 02:00:41 +0300
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 1.1ms | Allocations: 766)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 7.8ms | Allocations: 5130)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 1.5ms | Allocations: 621)
+Completed 200 OK in 165ms (Views: 141.0ms | ActiveRecord: 4.5ms | Allocations: 56142)
+
+
+Started GET "/users/auth/facebook" for 127.0.0.1 at 2020-03-02 02:00:43 +0300
+Started GET "/users/auth/facebook" for 127.0.0.1 at 2020-03-02 02:00:43 +0300
