@@ -45699,3 +45699,50 @@ Completed 200 OK in 165ms (Views: 141.0ms | ActiveRecord: 4.5ms | Allocations: 5
 
 Started GET "/users/auth/facebook" for 127.0.0.1 at 2020-03-02 02:00:43 +0300
 Started GET "/users/auth/facebook" for 127.0.0.1 at 2020-03-02 02:00:43 +0300
+Started GET "/" for 127.0.0.1 at 2020-03-02 20:51:51 +0300
+  [1m[35m (2.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+Completed 401 Unauthorized in 17ms (ActiveRecord: 0.0ms | Allocations: 1400)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2020-03-02 20:51:51 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 2.8ms | Allocations: 766)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 12.5ms | Allocations: 3235)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 3.0ms | Allocations: 621)
+Completed 200 OK in 248ms (Views: 211.3ms | ActiveRecord: 14.7ms | Allocations: 54475)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2020-03-02 20:56:02 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.4ms | Allocations: 215)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 2.6ms | Allocations: 1211)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.7ms | Allocations: 273)
+Completed 200 OK in 16ms (Views: 14.3ms | ActiveRecord: 0.0ms | Allocations: 9961)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2020-03-02 21:36:21 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.3ms | Allocations: 214)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 2.7ms | Allocations: 1202)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 0.6ms | Allocations: 273)
+Completed 200 OK in 52ms (Views: 50.2ms | ActiveRecord: 0.0ms | Allocations: 9955)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2020-03-02 23:06:02 +0300
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 6.3ms | Allocations: 766)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 32.5ms | Allocations: 5115)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 4.2ms | Allocations: 621)
+Completed 200 OK in 371ms (Views: 319.7ms | ActiveRecord: 9.1ms | Allocations: 56432)
+
+
