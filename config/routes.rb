@@ -17,4 +17,12 @@ Rails.application.routes.draw do
   resources :comments, only: %i[create destroy update edit] do
     resources :likes, only: %i[create destroy]
   end
+
+  authenticated :user do
+    root 'posts#index'
+  end
+
+  devise_scope :user do
+    root to: 'devise/sessions#new', as: :sign_up_root
+  end
 end
