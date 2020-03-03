@@ -45746,3 +45746,15 @@ Processing by Devise::SessionsController#new as HTML
 Completed 200 OK in 371ms (Views: 319.7ms | ActiveRecord: 9.1ms | Allocations: 56432)
 
 
+Started GET "/" for 127.0.0.1 at 2020-03-03 16:26:02 +0300
+  [1m[35m (1.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 2.0ms | Allocations: 766)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 26.0ms | Allocations: 5115)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered home/_show_page.html.erb (Duration: 1.4ms | Allocations: 597)
+Completed 200 OK in 228ms (Views: 191.0ms | ActiveRecord: 15.7ms | Allocations: 56013)
+
+
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
