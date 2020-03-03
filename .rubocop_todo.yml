@@ -1,6 +1,7 @@
 # Offense count: 1
 Metrics/AbcSize:
   Max: 17
+  Enabled: false
 
 # Offense count: 1
 Metrics/CyclomaticComplexity:
@@ -71,3 +72,12 @@ Lint/AmbiguousBlockAssociation:
 
 Lint/UselessAssignment:
   Enabled: false
+
+Layout/DefEndAlignment:
+  AutoCorrect: false
+
+Lint/AssignmentInCondition:
+  Enabled: No
+
+Style/GuardClause:
+  Enabled: No

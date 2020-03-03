@@ -3,9 +3,11 @@
 </a>
 <%= link_to 'Home', root_path, class: "navbar-item"%>
 <%= link_to 'Posts', posts_path, class: "navbar-item"%>
+ <%= link_to 'Users',users_path, class:'navbar-item' %>
 
 <% if user_signed_in? %>
-    <%= link_to 'Sign out', destroy_user_session_path, class: "button-primary", method: :delete %>
+    <%= link_to 'Friend Requests' ,friendships_path, class:'navbar-item' %>
+    <%= link_to('Logout', destroy_user_session_path, method: :delete) %>  
 <% else %>
     <strong>
       <%= link_to 'Sign up', new_user_registration_path, class: "button-primary" %>
@@ -13,4 +15,7 @@
     <strong>
       <%= link_to 'Sign in', new_user_session_path, class: "button-light" %>
     </strong>
+    <% unless current_user %>
+      <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class: 'btn btn-info' %>
+    <% end %>
 <% end %>

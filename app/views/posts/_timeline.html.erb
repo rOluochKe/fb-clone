@@ -1,0 +1,42 @@
+<% if @posts.empty? %>
+  <h4>You don't have any posts yet!</h4>
+<% else  %>
+  <div>
+  <h4>Posts Timeline</h4>
+    <% @posts.each do |post| %>
+      <small><%= link_to "#{post.user.name}", post_path(post.user) %></small><br>
+      <%= post.content %><br>
+      <% if current_user == post.user %>
+        <%= link_to 'Edit', edit_post_path(post) %>  <%= link_to 'Delete', post_path(post), method: :delete %>
+      <% end %><br/>
+      <div class="btn btn-success"> 
+        <%= link_to post_likes_path(post), method: :post do%>
+          <%= pluralize(post.likes.count, "like") %>
+      </div>
+    <%end%>
+      
+      <br />
+      <br />
+      
+      <h4>Comments</h4>
+      <div id='comment_div'>
+        <% post.comments.each do |comment| %>
+          <small>
+            <%= link_to "#{comment.user.name}", post_path(comment.user) %>:<%= comment.content %>
+            <br>
+            <% if current_user == comment.user %>
+                <%= link_to 'Edit', edit_comment_path(comment) %><%= link_to 'Delete', comment_path(comment), method: :delete %>
+            <% end %>
+          </small><br>
+        <% end  %>
+      </div><br>
+
+      <%= form_for(@comment) do |f| %>
+        <%= f.hidden_field :post_id, value: post.id  %>
+      <%= render 'posts/new-comment' %>
+      <% end  %><br>
+      
+    <% end %>
+  </div>
+
+<% end %>

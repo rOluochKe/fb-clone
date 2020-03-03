@@ -7,6 +7,7 @@ ruby '2.6.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'devise'
+gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.2'
 gem 'mini_racer'
 gem 'omniauth'
 gem 'omniauth-facebook'
@@ -38,29 +39,34 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'bootstrap-sass'
 gem 'font-awesome-sass'
 gem 'jquery-rails'
+gem 'parser'
+gem 'rails_12factor', group: :production
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'database_cleaner'
   gem 'factory_bot_rails'
+  gem 'pry-byebug'
+  gem 'rails-controller-testing'
   gem 'rspec-rails'
 end
 
 group :development do
-  # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
+  gem 'guard-livereload', '~> 2.5', require: false
   gem 'listen', '>= 3.0.5', '< 3.2'
-  gem 'web-console', '>= 3.3.0'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'pry-rails'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'web-console', '>= 3.3.0'
 end
 
 group :test do
-  # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
+  gem 'faker'
+  gem 'launchy'
+  gem 'rspec-html-matchers'
   gem 'selenium-webdriver'
-  # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
 end
 
