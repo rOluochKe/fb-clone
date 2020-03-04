@@ -2,6 +2,8 @@
 
 We are building a facebook like application by putting together some of the core features of the platform – users, profiles, “friending”, posts, news feed, and “liking”. We will also implement sign-in with the real Facebook by using Omniauth and Devise. [facebook](htts://facebook.com)
 
+## [Live Link](https://thawing-hollows-85431.herokuapp.com/)
+
 
 ## Technologies
 
@@ -40,7 +42,7 @@ $ rails db:migrate
 Finally, run the test suite to verify that everything is working correctly:
 
 ```
-$ rails test
+$ rspec
 ```
 
 > If the test suite passes, you'll be ready to run the app in a local server:
